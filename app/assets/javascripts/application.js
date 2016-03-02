@@ -10,7 +10,15 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require angular
 //= require jquery
-//= require jquery_ujs
-//= require bootstrap-sprockets
+//= require AngularDevise
+//= require angular-rails-templates
+//= require angular-ui-router
+//= require ng-tags-input
+//= require moment
+//= require moment-timezone
+//= require angular-ui-calendar
+//= require underscore
+//= require fullcalendar
 //= require_tree .

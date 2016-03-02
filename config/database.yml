@@ -14,7 +14,7 @@ development:
   reconnect: false
   database: smart-meeting_development
   pool: 5
-  username: smart-meeting
+  username: root
   password:
   host: localhost
 
@@ -27,7 +27,7 @@ test:
   reconnect: false
   database: smart-meeting_test
   pool: 5
-  username: smart-meeting
+  username: root
   password:
   host: localhost
 
