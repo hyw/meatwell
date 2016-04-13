@@ -47,10 +47,8 @@ angular.module('smartMeeting')
         };
 
         $scope.goToMeeting = function(meeting) {
-            console.log(meeting);
             var meetingUrl = "/a/meetings/" + meeting.id;
             $location.url(meetingUrl);
-            // window.location.href = "/a/meetings/" + meeting.id;
         };
     }
 ]);
