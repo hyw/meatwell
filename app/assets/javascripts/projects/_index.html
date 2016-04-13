@@ -16,8 +16,11 @@
 
 <form ng-submit="createProject()" style="margin-top:30px;">
   <h3>Create a Project</h3>
+
+  <div data-ng-show="formError" ng-class="{fade:doFade}" class="alert alert-danger"><strong>Error:</strong> {{errorMessage}}</div>
+
   <div class="form-group">
-    <input type="text" class="form-control" placeholder="Title" ng-model="title"></input>
+    <input type="text" class="form-control" placeholder="Title" ng-model="title"></input><br/>
     <tags-input ng-model="members" display-property="username" add-from-autocomplete-only="true" placeholder="Add members">
       <auto-complete source="autocompleteUsers($query)"></auto-complete>
     </tags-input>
