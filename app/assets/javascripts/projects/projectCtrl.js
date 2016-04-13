@@ -17,7 +17,10 @@ angular.module('smartMeeting')
 			meetings.create({
 				project_id: $scope.project.id,
 				title: $scope.title,
-				attendees: $scope.attendees
+				attendees: $scope.attendees,
+				duration: $scope.duration,
+				location: $scope.location,
+				description: $scope.description
 			}).success(function(meeting){
 				$scope.project.meetings.push(meeting);
 			});
@@ -41,44 +44,6 @@ angular.module('smartMeeting')
 		$scope.leaveProject = function(project){
 			projects.leave(project)
 		};
-
-
-		// eventpromise = users.getCalendars();
-		// eventpromise.then(function(result) {
-		// 	$scope.events = result;
-		// 	_.each($scope.events, function(event) {
-		// 		debugger;
-		// 			uiCalendarConfig.calendars.userCalendar.fullCalendar( 'addEventSource', event );
-		// 	});
-		// });
-
-		// $scope.eventSources = [];
-
-		// $scope.uiConfig = {
-	 //  		calendar:{
-	 //        editable: true,
-	 //        selectable: true,
-	 //        selectHelper: true,
-	 //        fixedWeekCount: false,
-	 //        header:{
-	 //          left: 'month agendaWeek agendaDay',
-	 //          center: 'title',
-	 //          right: 'today prev,next'
-	 //        },
-	 //  			dayClick: function(date, jsEvent, view) {
-	 //          if(view.type != 'agendaDay'){
-	 //          	uiCalendarConfig.calendars.userCalendar.fullCalendar('changeView', 'agendaDay')
-	 //          	uiCalendarConfig.calendars.userCalendar.fullCalendar('gotoDate', date);
-	 //          	$scope.setEvents();
-
-	 //          }else{
-	 //          	alert(date);
-	 //          }
-		// 			},
-	 //      	eventDrop: $scope.alertOnDrop,
-	 //      	eventResize: $scope.alertOnResize
-	 //    	}
-  //  		};
 
 	}
 ]);
