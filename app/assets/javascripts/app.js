@@ -72,9 +72,18 @@ angular.module('smartMeeting', ['ui.router', 'templates', 'Devise', 'ngTagsInput
         resolve: {
           project: ['$stateParams','projects', 'currentUser', function($stateParams, projects, currentUser){
               projects.setCurrentUser(currentUser);
-              return projects.get($stateParams.id);  
-            }
-          ]
+              return projects.get($stateParams.id);
+          }]
+        }
+      })
+      .state('logged-in.meeting', {
+        url: '/a/meetings/{id}',
+        templateUrl: 'meetings/_show.html',
+        controller: 'MeetingCtrl',
+        resolve: {
+          meeting: ['$stateParams', 'meetings', 'currentUser', function($stateParams, meetings, currentUser){
+            return meetings.get($stateParams.id);
+          }]
         }
       });
  
@@ -84,7 +93,7 @@ angular.module('smartMeeting', ['ui.router', 'templates', 'Devise', 'ngTagsInput
 .run(['$rootScope', '$state', 'Auth', function($rootScope, $state, Auth) {
   $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
     var requireLogin = toState.data.requireLogin;
-    var requireLogout = toState.data.requireLogout
+    var requireLogout = toState.data.requireLogout;
     if(requireLogin){
       if(!Auth.isAuthenticated()){
         $state.go('neutral.home');
@@ -95,4 +104,4 @@ angular.module('smartMeeting', ['ui.router', 'templates', 'Devise', 'ngTagsInput
       }
     }
   });
-}])
+}]);

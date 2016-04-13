@@ -23,11 +23,11 @@ angular.module('smartMeeting')
 		};
 
 		$scope.joinProject = function(project){
-			projects.join(project)
+			projects.join(project);
 		};
 
 		$scope.leaveProject = function(project){
-			projects.leave(project)
+			projects.leave(project);
 		};
 	}
 ]);
