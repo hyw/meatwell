@@ -34,6 +34,8 @@ Members:
 
 <h3>Schedule a Meeting</h3>
 
+<div data-ng-show="formError" ng-class="{fade:doFade}" class="alert alert-danger"><strong>Error:</strong> {{errorMessage}}</div>
+
 <form ng-submit="createMeeting()" style="margin-top:30px;">
   <div class="row">
 	  <fieldset class="form-group col-md-6">
