@@ -1,6 +1,7 @@
 angular.module('smartMeeting')
 .controller('ProjectCtrl', [
   '$scope',
+  '$location',
   'project',
   'users',
   'meetings',
@@ -8,7 +9,7 @@ angular.module('smartMeeting')
   'projects',
   'uiCalendarConfig',
   '$timeout',
-  function($scope, project, users, meetings, Auth, projects, uiCalendarConfig, $timeout){
+  function($scope, $location, project, users, meetings, Auth, projects, uiCalendarConfig, $timeout){
     $scope.project = project;
 
     $scope.createMeeting = function(){
@@ -69,6 +70,9 @@ angular.module('smartMeeting')
       projects.leave(project);
     };
 
+    $scope.goToMeeting = function(meeting) {
+      var meetingUrl = "/a/meetings/" + meeting.id;
+      $location.url(meetingUrl);
+    };
   }
 ]);
-

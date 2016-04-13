@@ -21,7 +21,7 @@ Members:
 
 	<div ng-class="apt.name.length >= 15 ? 'col-md-12' : (apt.name.length >= 10 ? 'col-md-6' : 'col-md-4')">
 
-	<tr ng-repeat="meeting in project.meetings" ng-class="meeting.status == 1 ? 'success' : (meeting.status == 0 ? 'info' : 'active')" >
+	<tr ng-click="goToMeeting(meeting)" ng-repeat="meeting in project.meetings" ng-class="meeting.status == 1 ? 'success' : (meeting.status == 0 ? 'info' : 'active')" >
 		<td>{{meeting.title}}</td>
 		<td>{{meeting.created_at | date:'mediumDate'}} @ {{meeting.created_at | date:'shortTime'}}</td>
 		<td>{{meeting.location}}</td>
