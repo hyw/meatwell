@@ -1,4 +1,4 @@
-angular.module('smartMeeting', ['ui.router', 'templates', 'Devise', 'ngTagsInput', "ui.calendar"])
+angular.module('smartMeeting', ['ui.router', 'templates', 'Devise', 'ngTagsInput', "ui.calendar", "xeditable"])
 .config([
   '$stateProvider',
   '$urlRouterProvider',
@@ -43,7 +43,7 @@ angular.module('smartMeeting', ['ui.router', 'templates', 'Devise', 'ngTagsInput
             return posts.getAll();
           }]
         }
-      })  
+      })
       .state('logged-out.login', {
         url: '/login',
         templateUrl: 'auth/_login.html',
@@ -104,4 +104,7 @@ angular.module('smartMeeting', ['ui.router', 'templates', 'Devise', 'ngTagsInput
       }
     }
   });
-}]);
+}])
+.run(function(editableOptions) {
+  editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
+});
