@@ -4,6 +4,7 @@ class Meeting < ActiveRecord::Base
   friendly_id :title, use: :slugged
   has_many :attendees
   has_many :users, through: :attendees
+  has_many :agenda_items
 
   STATUS_LABELS = {
   	"0" => 'unstarted',
@@ -12,6 +13,6 @@ class Meeting < ActiveRecord::Base
   }
 
   def as_json(options = {})
-    	super(options.merge(include: [:users]))
+    	super(options.merge(include: [:users, :agenda_items]))
   end
 end

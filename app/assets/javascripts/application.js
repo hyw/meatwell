@@ -21,4 +21,6 @@
 //= require angular-ui-calendar
 //= require underscore
 //= require fullcalendar
+//= require angular-xeditable
+//= require app.js
 //= require_tree .
