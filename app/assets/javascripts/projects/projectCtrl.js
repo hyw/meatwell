@@ -11,6 +11,10 @@ angular.module('smartMeeting')
   '$timeout',
   function($scope, $location, project, users, meetings, Auth, projects, uiCalendarConfig, $timeout){
     $scope.project = project;
+    $scope.attendees = [
+      { username:project.owner.username } //include owner as default member of new meeting
+    ];
+    $scope.duration = 60;
 
     $scope.createMeeting = function(){
       if(!validateMeeting()){
@@ -47,6 +51,10 @@ angular.module('smartMeeting')
       }
       else if(!$scope.attendees || $scope.attendees === ''){
         showError('Must have at least one attendee');
+        return false;
+      }
+      else if(!$scope.duration){
+        showError('Meeting must have a duration');
         return false;
       }
       else{
