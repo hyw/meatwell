@@ -35,8 +35,8 @@ production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: smart-meeting_production
+  database: <%= ENV['RDS_DB_NAME'] %>
   pool: 5
-  username: smart-meeting
-  password:
-  host: localhost
+  username: <%= ENV['RDS_USERNAME'] %>
+  password: <%= ENV['RDS_PASSWORD'] %>
+  host: <%= ENV['RDS_HOSTNAME'] %>
