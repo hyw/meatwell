@@ -1,0 +1,18 @@
+<link rel="stylesheet" media="screen" href="/assets/meetings/show-f88956a3d5047ced86f1a259b925df257e70dd58e0b8408e0afdbd0699599114.css" />
+<div class="page-header">
+	<h3>{{meeting.title}}</h3>
+	<p class="text-muted">{{meeting.description}}</p>
+</div>
+
+<div>When: <span>{{meeting.created_at | date:'mediumDate'}} @ {{meeting.created_at | date:'shortTime'}}</span></div>
+<div>Duration: <span>{{meeting.duration}} mins.</span></div>
+<div>Location: <span>{{meeting.location}}</span></div>
+
+<hr></hr>
+
+Attendees:
+<ul>
+	<li ng-repeat="attendee in meeting.users">{{attendee.username}}</li>
+</ul>
+
+<hr></hr>
