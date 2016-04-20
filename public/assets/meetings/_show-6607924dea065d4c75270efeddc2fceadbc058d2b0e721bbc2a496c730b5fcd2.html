@@ -1,0 +1,34 @@
+<link rel="stylesheet" media="screen" href="/assets/meetings/show-767d110796db3a31822c2c117324c3066c159ef7a33d3b1230163190b8542397.css" />
+<div class="page-header">
+	<h3>{{meeting.title}}</h3>
+	<p class="text-muted">{{meeting.description}}</p>
+</div>
+
+<div>When: <span>{{meeting.created_at | date:'mediumDate'}} @ {{meeting.created_at | date:'shortTime'}}</span></div>
+<div>Duration: <span>{{meeting.duration}} mins.</span></div>
+<div>Location: <span>{{meeting.location}}</span></div>
+
+<hr></hr>
+
+Attendees:
+<ul>
+	<li ng-repeat="attendee in meeting.users">{{attendee.username}}</li>
+</ul>
+
+<hr></hr>
+
+<h3>Agenda:</h3>
+<ol>
+	<li ng-repeat="item in meeting.agenda_items">
+		<span ng-click="removeAgendaItem(item)" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+		(<a href="#" onaftersave="saveAgendaItem(item)" buttons="no" editable-number="item.duration">{{item.duration}}</a>) min.
+		<a href="#" onaftersave="saveAgendaItem(item)" buttons="no" editable-text="item.title">{{item.title}}</a>
+	</li>
+	<li>
+		<form>
+			<input type="text" style="width:60%; display:inline-block;" class="form-control" id="title" placeholder="Agenda item title" ng-model="title">
+			<input style="width:43px; display:inline-block;" input type="number" id="item-duration" class="form-control ng-pristine ng-untouched ng-valid ng-empty" placeholder="15" ng-model="duration"> min. 
+			<button type="submit" class="btn btn-primary" ng-click="createAgendaItem()">Save</button>
+		</form>
+	</li>
+</ol>
