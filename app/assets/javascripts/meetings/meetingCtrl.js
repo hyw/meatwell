@@ -18,8 +18,8 @@ angular.module('smartMeeting')
           $scope.meeting.agenda_items.push(agendaitem);
           $('#title').focus();
         });
-      $scope.title = '';
-
+        $scope.title = '';
+        $scope.duration = '';
       }
     };
 
