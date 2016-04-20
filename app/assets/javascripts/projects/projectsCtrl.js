@@ -17,6 +17,7 @@ angular.module('smartMeeting')
         members: $scope.members
       });
       $scope.title = '';
+      $scope.members = [];
     };
 
     $scope.autocompleteUsers = function(query){
