@@ -34,11 +34,10 @@ angular.module('smartMeeting')
       }
     };
 
-    $scope.removeAgendaItem = function(agendaitem){
-      agendaItems.deleteItem(agendaitem)
+    $scope.removeAgendaItem = function(removedagendaitem){
+      agendaItems.deleteItem(removedagendaitem)
       .success(function(item){
-        var index = $scope.meeting.agenda_items.indexOf(agendaitem);
-        $scope.meeting.agenda_items.splice(index, 1);
+        $scope.meeting.agenda_items = _.reject($scope.meeting.agenda_items, function(agenda_item){ return agenda_item.id == removedagendaitem.id; });
       });
     };
   }
