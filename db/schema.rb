@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160413050437) do
+ActiveRecord::Schema.define(version: 20160420145803) do
 
   create_table "agenda_items", force: :cascade do |t|
     t.string   "title",      limit: 255
@@ -103,6 +103,23 @@ ActiveRecord::Schema.define(version: 20160413050437) do
   add_index "meetings", ["leader"], name: "index_meetings_on_leader", using: :btree
   add_index "meetings", ["project_id"], name: "index_meetings_on_project_id", using: :btree
 
+  create_table "organization_users", force: :cascade do |t|
+    t.integer  "user_id",         limit: 4
+    t.integer  "organization_id", limit: 4
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "organization_users", ["organization_id"], name: "index_organization_users_on_organization_id", using: :btree
+  add_index "organization_users", ["user_id"], name: "index_organization_users_on_user_id", using: :btree
+
+  create_table "organizations", force: :cascade do |t|
+    t.string   "name",       limit: 255, null: false
+    t.string   "code",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string   "title",      limit: 255
     t.string   "link",       limit: 255
@@ -154,6 +171,8 @@ ActiveRecord::Schema.define(version: 20160413050437) do
   add_foreign_key "committee_members", "projects"
   add_foreign_key "committee_members", "users"
   add_foreign_key "meetings", "projects"
+  add_foreign_key "organization_users", "organizations"
+  add_foreign_key "organization_users", "users"
   add_foreign_key "posts", "users"
   add_foreign_key "projects", "users"
 end

@@ -1,10 +1,10 @@
 class Project < ActiveRecord::Base
 	extend FriendlyId
-  	has_many :committee_members
   	belongs_to :owner, foreign_key: "user_id", class_name: "User"
-  	has_many :users, through: :committee_members
-  	friendly_id :title, use: :slugged
+  	has_and_belongs_to_many :users, join_table: "committee_members"
   	has_many :meetings
+
+  	friendly_id :title, use: :slugged
 
   	def as_json(options = {})
     	super(options.merge(include: [:owner, :users, :meetings]))

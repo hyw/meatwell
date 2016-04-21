@@ -3,7 +3,7 @@ class ProjectsController < ApplicationController
 	before_filter :authenticate_user!, only: [:create]
 
 	def index
-		respond_with Project.all
+		respond_with current_user.organizations.first.projects.uniq
 	end
 
 	def member_projects
@@ -25,9 +25,8 @@ class ProjectsController < ApplicationController
 	end
 
 	def join
-		committee_member = CommitteeMember.create(:project_id => params[:id], :user_id => current_user.id)
+		CommitteeMember.create(:project_id => params[:id], :user_id => current_user.id)
 		respond_with Project.friendly.find(params[:id])
-
 	end
 
 	def leave

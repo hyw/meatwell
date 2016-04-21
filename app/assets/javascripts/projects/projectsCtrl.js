@@ -7,6 +7,7 @@ angular.module('smartMeeting')
   function($scope, projects, users, $timeout){
     $scope.projects = projects.projects;
     $scope.memberprojects = projects.memberprojects;
+    $scope.members = [{ username:projects.current_user.username }];
 
     $scope.createProject = function(){
       if(!validateProject()){
@@ -17,7 +18,7 @@ angular.module('smartMeeting')
         members: $scope.members
       });
       $scope.title = '';
-      $scope.members = [];
+      $scope.members = [{ username:projects.current_user.username }];
     };
 
     $scope.autocompleteUsers = function(query){
