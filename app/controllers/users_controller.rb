@@ -2,7 +2,8 @@ require 'google/api_client'
 
 class UsersController < ApplicationController
   def search
-  	query_match = "email LIKE '%#{params[:query]}%' OR username LIKE '%#{params[:query]}%'"
+    organization_user_ids = current_user.organizations.first.users.pluck(:id).join(",")
+  	query_match = "(email LIKE '%#{params[:query]}%' OR username LIKE '%#{params[:query]}%') AND id IN (#{organization_user_ids}) "
 
   	if params[:project_id]
   		respond_with Project.find(params[:project_id]).users.where(query_match).pluck(:username)
