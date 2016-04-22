@@ -67,7 +67,7 @@ angular.module('smartMeeting')
     };
 
     $scope.autocompleteUsers = function(query){
-      return users.searchByProject(query, $scope.project.id);
+      return users.search(query);
     };
 
     $scope.joinProject = function(project){
