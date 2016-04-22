@@ -5,7 +5,7 @@
 	<p class="text-muted">{{meeting.description}}</p>
 </div>
 
-<div>When: <span>{{meeting.created_at | date:'mediumDate'}} @ {{meeting.created_at | date:'shortTime'}}</span></div>
+<div>When: <span>{{meeting.date | date:'mediumDate'}} @ {{meeting.date | date:'shortTime'}}</span></div>
 <div>Duration: <span>{{meeting.duration}} mins.</span></div>
 <div>Location: <span>{{meeting.location}}</span></div>
 
