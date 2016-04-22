@@ -19,16 +19,26 @@ Attendees:
 <hr></hr>
 
 <h3>Agenda:</h3>
-<ol>
-	<li ng-repeat="item in meeting.agenda_items">
+<ol class="agenda-items">
+	<li class="agenda-item" ng-click="makeActive(item)" ng-class="{'active': item.active}" ng-repeat="item in meeting.agenda_items">
 		<span ng-click="removeAgendaItem(item)" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 		(<a href="#" onaftersave="saveAgendaItem(item)" buttons="no" editable-number="item.duration">{{item.duration}}</a>) min.
-		<a href="#" onaftersave="saveAgendaItem(item)" buttons="no" editable-text="item.title">{{item.title}}</a>
+		<a href="#" onaftersave="saveAgendaItem(item)" buttons="no" editable-text="item.title">
+			{{item.title}}
+		</a>
+		<ul class="agenda-notes">
+			<li ng-repeat="note in item.agenda_notes"> 
+				<agenda-note-list-item agenda-note="note" agenda-item="item"></agenda-note-list-item>
+			</li>
+			<li ng-class="item.active ? 'active' : 'hidden'">
+				<agenda-note-form agenda-item="item"></agenda-note-form>
+			</li>
+		</ul>
 	</li>
-	<li>
+	<li class="agenda-item agenda-item-form">
 		<form>
-			<input type="text" style="width:60%; display:inline-block;" class="form-control" id="title" placeholder="Agenda item title" ng-model="title">
-			<input style="width:43px; display:inline-block;" input type="number" id="item-duration" class="form-control ng-pristine ng-untouched ng-valid ng-empty" placeholder="15" ng-model="duration"> min. 
+			<input type="text" class="form-control title" placeholder="Agenda item title" ng-model="title">
+			<input input type="number" class="duration form-control ng-pristine ng-untouched ng-valid ng-empty" placeholder="15" ng-model="duration"> min. 
 			<button type="submit" class="btn btn-primary" ng-click="createAgendaItem()">Save</button>
 		</form>
 	</li>

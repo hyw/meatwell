@@ -8,6 +8,11 @@ angular.module('smartMeeting')
   function($scope, meetings, meeting, users, agendaItems){
     $scope.meeting = meeting;
 
+    $scope.makeActive= function(item){
+      _.each($scope.meeting.agenda_items, function(item){item.active = false;});
+      item.active = true;
+    };
+
     $scope.createAgendaItem = function(){
       if($scope.title && $scope.title !== ''){
         agendaItems.create({
@@ -16,7 +21,7 @@ angular.module('smartMeeting')
           duration: $scope.duration || 15
         }).success(function(agendaitem){
           $scope.meeting.agenda_items.push(agendaitem);
-          $('#title').focus();
+          $('.agenda-item-form .title').focus();
         });
         $scope.title = '';
         $scope.duration = '';
@@ -25,10 +30,7 @@ angular.module('smartMeeting')
 
     $scope.saveAgendaItem = function(item){
       if(item.title && item.title !== ''){
-        agendaItems.save({
-          id: item.id,
-          title: item.title
-        }).success(function(){
+        agendaItems.save(item).success(function(){
           return true;
         });
       }
