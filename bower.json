@@ -26,7 +26,8 @@
     "angular-ui-calendar": "^1.0.1",
     "fullcalendar": "^2.6.1",
     "angular-material": "^1.0.5",
-    "angular-xeditable": "^0.1.12"
+    "angular-xeditable": "^0.1.12",
+    "angular-bootstrap-datetimepicker": "^1.0.1"
   },
   "resolutions": {
     "angular": "^1.5.0"

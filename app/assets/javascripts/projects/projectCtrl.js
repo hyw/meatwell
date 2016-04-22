@@ -11,10 +11,18 @@ angular.module('smartMeeting')
   '$timeout',
   function($scope, $location, project, users, meetings, Auth, projects, uiCalendarConfig, $timeout){
     $scope.project = project;
-    $scope.attendees = [
-      { username:project.owner.username } //include owner as default member of new meeting
-    ];
-    $scope.duration = 60;
+    setDefaults();
+
+    function setDefaults(){
+      $scope.title = '';
+      $scope.attendees = [
+        { username:project.owner.username } //include owner as default member of new meeting
+      ];
+      $scope.date = '';
+      $scope.location = '';
+      $scope.description = '';
+      $scope.duration = 60;
+    }
 
     $scope.createMeeting = function(){
       if(!validateMeeting()){
@@ -27,11 +35,12 @@ angular.module('smartMeeting')
         attendees: $scope.attendees,
         duration: $scope.duration,
         location: $scope.location,
-        description: $scope.description
+        description: $scope.description,
+        date: $scope.datetime.toISOString()
       }).success(function(meeting){
         $scope.project.meetings.push(meeting);
       });
-      $scope.title = '';
+      setDefaults(); //cleans fields
     };
 
     function showError(message){
@@ -46,15 +55,18 @@ angular.module('smartMeeting')
 
     function validateMeeting(){
       if(!$scope.title || $scope.title === ''){
-        showError('Invalid Meeting Title');
+        showError('Invalid Meeting Title.');
         return false;
       }
       else if(!$scope.attendees || $scope.attendees === ''){
-        showError('Must have at least one attendee');
+        showError('Must have at least one attendee.');
         return false;
       }
-      else if(!$scope.duration){
-        showError('Meeting must have a duration');
+      else if(!$scope.datetime || $scope.datetime === '') {
+        showError('Must specify a date and time.');
+      }
+      else if(!$scope.duration || $scope.duration === ''){
+        showError('Meeting must have a duration.');
         return false;
       }
       else{
