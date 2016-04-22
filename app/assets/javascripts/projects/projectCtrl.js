@@ -40,7 +40,7 @@ angular.module('smartMeeting')
       }).success(function(meeting){
         $scope.project.meetings.push(meeting);
       });
-      initialize(); //cleans fields
+      setDefaults(); //cleans fields
     };
 
     function showError(message){
