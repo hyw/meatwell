@@ -11,10 +11,9 @@ angular.module('smartMeeting')
   '$timeout',
   function($scope, $location, project, users, meetings, Auth, projects, uiCalendarConfig, $timeout){
     $scope.project = project;
-    initialize();
+    setDefaults();
 
-    function initialize(){
-      debugger;
+    function setDefaults(){
       $scope.title = '';
       $scope.attendees = [
         { username:project.owner.username } //include owner as default member of new meeting
