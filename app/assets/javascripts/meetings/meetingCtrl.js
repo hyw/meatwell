@@ -30,10 +30,7 @@ angular.module('smartMeeting')
 
     $scope.saveAgendaItem = function(item){
       if(item.title && item.title !== ''){
-        agendaItems.save({
-          id: item.id,
-          title: item.title
-        }).success(function(){
+        agendaItems.save(item).success(function(){
           return true;
         });
       }
