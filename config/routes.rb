@@ -29,6 +29,8 @@ Rails.application.routes.draw do
 
   resources :meetings, only: [:create, :index, :show]
   resources :agenda_items, only: [:create, :index, :show, :update, :destroy]
+  resources :agenda_notes, only: [:create, :update, :destroy]
+
 
   get '*path', :to => redirect('/#/%{path}')
 
