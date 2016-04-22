@@ -23,7 +23,7 @@ Members:
 
     <tr ng-click="goToMeeting(meeting)" ng-repeat="meeting in project.meetings" ng-class="meeting.status == 1 ? 'success' : (meeting.status == 0 ? 'info' : 'active')" >
         <td>{{meeting.title}}</td>
-        <td>{{meeting.created_at | date:'mediumDate'}} @ {{meeting.created_at | date:'shortTime'}}</td>
+        <td>{{meeting.date | date:'mediumDate'}} @ {{meeting.date | date:'shortTime'}}</td>
         <td>{{meeting.location}}</td>
         <td>{{meeting.duration}} mins.</td>
         <td width="30%">
@@ -50,6 +50,21 @@ Members:
             </tags-input>
         </fieldset>
     </div>
+
+    <fieldset class="form-group">
+        <label for="meeting-datetime">When</label>
+        <div class="dropdown">
+            <a class="dropdown-toggle" id="meeting-datetime" role="button" data-toggle="dropdown" data-target="#" href="#">
+                <div class="input-group">
+                    <input type="text" placeholder="When is this meeting?" class="form-control" data-ng-model="datetime">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                </div>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+                <datetimepicker data-ng-model="datetime" data-datetimepicker-config="{ dropdownSelector: '#meeting-datetime' }"/>
+            </ul>
+        </div>
+    </fieldset>
 
     <fieldset class="form-group">
         <label for="meeting-location">Location</label>

@@ -12,6 +12,7 @@
 //
 //= require angular
 //= require jquery
+//= require bootstrap
 //= require AngularDevise
 //= require angular-rails-templates
 //= require angular-ui-router
@@ -22,5 +23,7 @@
 //= require underscore
 //= require fullcalendar
 //= require angular-xeditable
+//= require angular-bootstrap-datetimepicker/src/js/datetimepicker
+//= require angular-bootstrap-datetimepicker/src/js/datetimepicker_templates
 //= require app.js
 //= require_tree .
