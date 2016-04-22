@@ -1,0 +1,44 @@
+<link rel="stylesheet" media="screen" href="/assets/meetings/show-e7c5d268110bdba740e0c83655475759ad6f5f0b238e7f20fa97aefc87e898c0.css" />
+<div class="page-header">
+	<h3>{{meeting.title}}</h3>
+	<p class="text-muted">{{meeting.description}}</p>
+</div>
+
+<div>When: <span>{{meeting.created_at | date:'mediumDate'}} @ {{meeting.created_at | date:'shortTime'}}</span></div>
+<div>Duration: <span>{{meeting.duration}} mins.</span></div>
+<div>Location: <span>{{meeting.location}}</span></div>
+
+<hr></hr>
+
+Attendees:
+<ul>
+	<li ng-repeat="attendee in meeting.users">{{attendee.username}}</li>
+</ul>
+
+<hr></hr>
+
+<h3>Agenda:</h3>
+<ol class="agenda-items">
+	<li class="agenda-item" ng-click="makeActive(item)" ng-class="{'active': item.active}" ng-repeat="item in meeting.agenda_items">
+		<span ng-click="removeAgendaItem(item)" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+		(<a href="#" onaftersave="saveAgendaItem(item)" buttons="no" editable-number="item.duration">{{item.duration}}</a>) min.
+		<a href="#" onaftersave="saveAgendaItem(item)" buttons="no" editable-text="item.title">
+			{{item.title}}
+		</a>
+		<ul class="agenda-notes">
+			<li ng-repeat="note in item.agenda_notes"> 
+				<agenda-note-list-item agenda-note="note" agenda-item="item"></agenda-note-list-item>
+			</li>
+			<li ng-class="item.active ? 'active' : 'hidden'">
+				<agenda-note-form agenda-item="item"></agenda-note-form>
+			</li>
+		</ul>
+	</li>
+	<li class="agenda-item agenda-item-form">
+		<form>
+			<input type="text" class="form-control title" placeholder="Agenda item title" ng-model="title">
+			<input input type="number" class="duration form-control ng-pristine ng-untouched ng-valid ng-empty" placeholder="15" ng-model="duration"> min. 
+			<button type="submit" class="btn btn-primary" ng-click="createAgendaItem()">Save</button>
+		</form>
+	</li>
+</ol>

@@ -1,0 +1,23 @@
+.editable-number .form-control{
+    width:43px;
+}
+
+.agenda-item{
+	padding-top:20px;
+	padding-bottom:20px;
+	border-bottom: 1px dashed;
+}
+
+.agenda-item.active{
+	background: #dff0d8;
+}
+
+.agenda-item-form .title{
+	width:60%; 
+	display:inline-block;
+}
+
+.agenda-item-form .duration{
+	width:43px; 
+	display:inline-block;
+}
