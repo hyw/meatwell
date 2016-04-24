@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
     if organization_match
       self.organization_users.create(:organization_id => organization_match.id)
     else
-      organization = Organization.create(:code => domain_name)
+      organization = Organization.create(:code => domain_name, :name=> domain_name)
       self.organization_users.create(:organization_id => organization.id)
     end
   end
