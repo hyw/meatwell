@@ -14,6 +14,24 @@ angular.module('smartMeeting')
       {value: 4, text: 'DECISION'}
     ];
 
+    $scope.meeting.agenda_items = _.sortBy($scope.meeting.agenda_items, 'ordering');
+    $scope.sortableOptionItems = {
+      stop: function(e, ui) {
+        for (var index in $scope.meeting.agenda_items) {
+          $scope.meeting.agenda_items[index].ordering = index;
+          $scope.saveAgendaItem($scope.meeting.agenda_items[index]);
+        }
+      }
+    };
+
+    $scope.sortableOptionNotes = {
+      stop: function(e, ui) {
+        for (var index in $scope.meeting.agenda_items) {
+          $scope.meeting.agenda_items[index].ordering = index;
+          $scope.saveAgendaItem($scope.meeting.agenda_items[index]);
+        }
+      }
+    };
 
     $scope.makeActive= function(item){
       _.each($scope.meeting.agenda_items, function(item){item.active = false;});

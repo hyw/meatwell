@@ -19,15 +19,17 @@ Attendees:
 <hr></hr>
 
 <h3>Agenda:</h3>
-<ol class="agenda-items">
+<ol class="agenda-items" ui-sortable="sortableOptionItems" ng-model="meeting.agenda_items">
 	<li ng-repeat="item in meeting.agenda_items" class="agenda-item" ng-click="makeActive(item)" ng-class="{'active': item.active}" >
 		<span ng-click="removeAgendaItem(item)" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 		<a href="#" blur="submit" onaftersave="saveAgendaItem(item)" buttons="no" editable-text="item.title">
 			{{item.title}}
 		</a>
 		<table style="width:100%;" class="agenda-notes">
-			<tr agenda-note-list-item ng-repeat="note in item.agenda_notes" note-types="noteTypes" agenda-note="note" agenda-item="item"> 
-			</tr>
+			<tbody ui-sortable="sortableOptionNotes">
+				<tr agenda-note-list-item ng-repeat="note in item.agenda_notes" note-types="noteTypes" agenda-note="note" agenda-item="item"> 
+				</tr>
+			</tbody>
 		</table>
 		<div ng-class="item.active ? 'active' : 'hidden'">
 			<agenda-note-form agenda-item="item" note-types="noteTypes"></agenda-note-form>
