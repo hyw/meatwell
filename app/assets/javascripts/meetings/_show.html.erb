@@ -27,10 +27,8 @@ Attendees:
 			{{item.title}}
 		</a>
 		<table style="width:100%;" class="agenda-notes">
-			<tbody ui-sortable="sortableOptionNotes">
-				<tr agenda-note-list-item ng-repeat="note in item.agenda_notes" note-types="noteTypes" agenda-note="note" agenda-item="item"> 
-				</tr>
-			</tbody>
+			<tr agenda-note-list-item ng-repeat="note in item.agenda_notes" note-types="noteTypes" agenda-note="note" agenda-item="item"> 
+			</tr>
 		</table>
 		<div ng-class="item.active ? 'active' : 'hidden'">
 			<agenda-note-form agenda-item="item" note-types="noteTypes"></agenda-note-form>
