@@ -7,13 +7,12 @@ angular.module('smartMeeting')
             agendaItem: '=agendaItem',
             noteTypes: '=noteTypes'
         },
-        replace: true,
         template: '<tr>\
                     <td class="delete-icon">\
                         <span ng-click="removeAgendaNote()" class="glyphicon glyphicon-remove" aria-hidden="true"></span>\
                     </td>\
                     <td class="note-type-select">\
-                        <a href="#" onaftersave="saveAgendaNote()" buttons="no" editable-select="agendaNote.note_type" e-ng-options="t.value as t.text for t in noteTypes">{{note_type_label}}</a>\
+                        <a href="#" onaftersave="saveAgendaNote()" buttons="no" editable-select="agendaNote.note_type" e-ng-options="t.value as t.text for t in noteTypes">{{noteTypeLabel}}</a>\
                     </td>\
                     <td>\
                         <a href="#" blur="submit" onaftersave="saveAgendaNote()" buttons="no" editable-text="agendaNote.body">{{agendaNote.body}}</a>\
@@ -24,7 +23,7 @@ angular.module('smartMeeting')
 
             scope.updateNoteLabel = function(){
                 var selected = _.find(scope.noteTypes, function(option){ return option.value == scope.agendaNote.note_type; });
-                scope.note_type_label = (scope.agendaNote.note_type && selected) ? selected.text : 'Not set';
+                scope.noteTypeLabel = (scope.agendaNote.note_type && selected) ? selected.text : 'Not set';
             };
 
             scope.removeAgendaNote = function () {
