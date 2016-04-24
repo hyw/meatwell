@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160420145803) do
+ActiveRecord::Schema.define(version: 20160424181239) do
 
   create_table "agenda_items", force: :cascade do |t|
     t.string   "title",      limit: 255
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 20160420145803) do
     t.integer  "order",          limit: 4
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
-    t.integer  "type",           limit: 4
+    t.integer  "note_type",      limit: 4
   end
 
   add_index "agenda_notes", ["agenda_item_id"], name: "index_agenda_notes_on_agenda_item_id", using: :btree

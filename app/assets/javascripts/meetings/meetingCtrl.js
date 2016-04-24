@@ -7,6 +7,13 @@ angular.module('smartMeeting')
   'agendaItems',
   function($scope, meetings, meeting, users, agendaItems){
     $scope.meeting = meeting;
+    $scope.noteTypes = [
+      {value: 1, text: 'ACTION'},
+      {value: 2, text: 'INFO'},
+      {value: 3, text: 'IDEA'},
+      {value: 4, text: 'DECISION'}
+    ];
+
 
     $scope.makeActive= function(item){
       _.each($scope.meeting.agenda_items, function(item){item.active = false;});
