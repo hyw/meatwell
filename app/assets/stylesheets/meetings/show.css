@@ -1,14 +1,13 @@
-.editable-number .form-control{
-    width:43px;
+td{
+	padding-top:10px;
 }
 
 .agenda-item{
-	padding-top:20px;
-	padding-bottom:20px;
 	border-bottom: 1px dashed;
+	padding:20px;
 }
 
-.agenda-item.active{
+.active{
 	background: #dff0d8;
 }
 
@@ -20,4 +19,37 @@
 .agenda-item-form .duration{
 	width:43px; 
 	display:inline-block;
+}
+
+.delete-icon{
+	width:20px;
+}
+
+.note-type-select{
+	width:100px;
+}
+
+.new-agenda-note-form .note-type-select .form-control{
+	width:91px;
+}
+
+.note-submit{
+	width:60px;
+	padding-left:10px;
+}
+
+.editable-number .form-control{
+    width:43px;
+}
+
+.editable-text .form-control{
+    width:100%;
+}
+
+.editable-text .editable-controls{
+	width:100%;
+}
+
+.editable-text{
+	width:100%;
 }

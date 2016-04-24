@@ -22,6 +22,6 @@ class AgendaNotesController < ApplicationController
 	private
 
 	def agendanote_params 
-		params.require(:agenda_note).permit(:body, :agenda_item_id) 
+		params.require(:agenda_note).permit(:body, :agenda_item_id, :note_type) 
 	end
 end
