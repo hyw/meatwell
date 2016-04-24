@@ -29,6 +29,7 @@ angular.module('smartMeeting')
         }).success(function(agendaitem){
           $scope.meeting.agenda_items.push(agendaitem);
           $('.agenda-item-form .title').focus();
+          $scope.checkIfAgendaIsTooLong();
         });
         $scope.title = '';
         $scope.duration = '';
@@ -38,6 +39,7 @@ angular.module('smartMeeting')
     $scope.saveAgendaItem = function(item){
       if(item.title && item.title !== ''){
         agendaItems.save(item).success(function(){
+          $scope.checkIfAgendaIsTooLong();
           return true;
         });
       }
@@ -48,6 +50,15 @@ angular.module('smartMeeting')
       .success(function(item){
         $scope.meeting.agenda_items = _.reject($scope.meeting.agenda_items, function(agenda_item){ return agenda_item.id == removedagendaitem.id; });
       });
+    };
+
+    $scope.checkIfAgendaIsTooLong = function(){
+      var agenda_times = _.pluck($scope.meeting.agenda_items, 'duration');
+      var total = 0;
+      for(var i in agenda_times) { total += agenda_times[i]; }
+      if(total > $scope.meeting.duration){
+        alert('Your meeting agenda is currently overtime by ' + String(total-$scope.meeting.duration) + ' minutes.  Please reduce your agenda items.');
+      }
     };
   }
 ]);
