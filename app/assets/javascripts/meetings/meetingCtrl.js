@@ -14,7 +14,6 @@ angular.module('smartMeeting')
       {value: 4, text: 'DECISION'}
     ];
 
-
     $scope.makeActive= function(item){
       _.each($scope.meeting.agenda_items, function(item){item.active = false;});
       item.active = true;

@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   
   has_and_belongs_to_many :projects, join_table: "committee_members"
   has_and_belongs_to_many :organizations, join_table: "organization_users"
+  has_and_belongs_to_many :agenda_notes, join_table: "agenda_note_users"
   has_many :organization_users
   has_and_belongs_to_many :meetings, join_table: "attendees"
   after_create :assign_user_to_organization
