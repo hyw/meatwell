@@ -20,8 +20,9 @@ td{
 	width:100%;
 }
 
-.agenda-item-table .title{
-	padding-left:10px;
+
+.agenda-item-table .duration{
+	width:100px;
 }
 
 .active{

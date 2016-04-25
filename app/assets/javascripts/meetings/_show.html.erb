@@ -22,8 +22,8 @@ Attendees:
 <ol class="agenda-items">
 	<li ng-repeat="item in meeting.agenda_items" class="agenda-item" ng-click="makeActive(item)" ng-class="{'active': item.active}" >
 		<table class="agenda-item-table"><tr>
-			<td><span ng-click="removeAgendaItem(item)" class="delete-icon glyphicon glyphicon-remove" aria-hidden="true"></span></td>
-			<td>(<a href="#" onaftersave="saveAgendaItem(item)" blur="submit" buttons="no" editable-number="item.duration">{{item.duration}}</a>) min.</td>
+			<td class="delete-icon"><span ng-click="removeAgendaItem(item)" class="glyphicon glyphicon-remove" aria-hidden="true"></span></td>
+			<td class="duration">(<a href="#" onaftersave="saveAgendaItem(item)" blur="submit" buttons="no" editable-number="item.duration">{{item.duration}}</a>) min.</td>
 			<td class="title">
 				<a href="#" blur="submit" onaftersave="saveAgendaItem(item)" buttons="no" editable-text="item.title">
 					{{item.title}}
