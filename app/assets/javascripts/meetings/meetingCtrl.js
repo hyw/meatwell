@@ -134,6 +134,7 @@ angular.module('smartMeeting')
 
     $scope.saveAgendaItem = function(item){
       if(item.title && item.title !== ''){
+        item.countdown = item.duration * 60;
         agendaItems.save(item).success(function(){
           $scope.setUpCountdown(item);
           $scope.checkIfAgendaIsTooLong();
