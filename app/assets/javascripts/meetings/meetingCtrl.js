@@ -35,8 +35,6 @@ angular.module('smartMeeting')
       item.playing = false;
     };
 
-    //TODO: save start values, etc.
-
     $scope.finishMeeting = function(meeting){
       if (meeting.status !== meetingStatuses.finished) {
         meeting.playing = false;
