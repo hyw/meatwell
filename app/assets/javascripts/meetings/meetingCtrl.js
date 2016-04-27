@@ -20,8 +20,6 @@ angular.module('smartMeeting')
       {value: 3, text: 'IDEA'},
       {value: 4, text: 'DECISION'}
     ];
-    $scope.meeting = meeting;
-    $scope.meeting.agenda_items = _.sortBy($scope.meeting.agenda_items, 'ordering');
     $scope.sortableOption = {
       stop: function(e, ui) {
         _.each($scope.meeting.agenda_items, function(item, index, list){
