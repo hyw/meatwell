@@ -10,8 +10,9 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require angular
 //= require jquery
+//= require jquery-ui
+//= require angular
 //= require bootstrap
 //= require AngularDevise
 //= require angular-rails-templates
@@ -26,4 +27,5 @@
 //= require angular-bootstrap-datetimepicker/src/js/datetimepicker
 //= require angular-bootstrap-datetimepicker/src/js/datetimepicker_templates
 //= require app.js
+//= require angular-ui-sortable
 //= require_tree .
