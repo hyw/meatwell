@@ -36,9 +36,6 @@ angular.module('smartMeeting')
       $scope.refreshActionItems();
     }, true);
 
-    $scope.makeActive= function(item){
-      _.each($scope.meeting.agenda_items, function(item){item.active = false;});
-
     $scope.setUpCountdown = function(item){
       item.playing = false;
     };
