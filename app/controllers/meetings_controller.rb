@@ -17,7 +17,14 @@ class MeetingsController < ApplicationController
 	end
 
 	def show
-		respond_with Meeting.friendly.find(params[:id])
+		meeting = Meeting.friendly.find(params[:id])
+		previous_meeting = meeting.project.meetings.where('id < ?', meeting.id).last
+		if previous_meeting
+			meeting = meeting.as_json
+			meeting["previous_action_items"] =  previous_meeting.action_items
+		end
+
+		respond_with meeting
 	end
 
 	private
