@@ -4,6 +4,7 @@ class Meeting < ActiveRecord::Base
   friendly_id :title, use: :slugged
   has_and_belongs_to_many :users, join_table: "attendees"
   has_many :agenda_items
+  has_many :agenda_notes, :through => :agenda_items
 
   STATUS_LABELS = {
   	"0" => 'unstarted',
@@ -12,6 +13,11 @@ class Meeting < ActiveRecord::Base
   }
 
   def as_json(options = {})
-    	super(options.merge(include: [:users, :agenda_items => { :include => { :agenda_notes => { :include => :users } } } ] ) )
+    	super(options.merge(include: [:project, :users, :agenda_items => { :include => { :agenda_notes => { :include => :users } } } ] ) )
   end
+
+  def action_items
+    self.agenda_notes.where(:note_type => AgendaNote::ACTION_ITEM)
+  end
+
 end

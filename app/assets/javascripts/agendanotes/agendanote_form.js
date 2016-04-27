@@ -35,9 +35,14 @@ angular.module('smartMeeting')
               </form>',
 
     link: function ( scope, element, attrs ) {
+      scope.due_date = Date.now();
+      scope.agendaItem.agenda_notes = scope.agendaItem.agenda_notes || [];
+
       scope.createAgendaNote = function () {
         var users = scope.note_type == 1 ? scope.users : '';
         var due_date = scope.note_type == 1 ? scope.due_date : '';
+
+        if(!scope.body || scope.body === ''){ return; }
 
         agendaNotes.create({
           body: scope.body,
@@ -46,10 +51,10 @@ angular.module('smartMeeting')
           users: users,
           due_date: due_date
         }).success(function(agendanote){
-          scope.agendaItem.agenda_notes = scope.agendaItem.agenda_notes || [];
           scope.agendaItem.agenda_notes.push(agendanote);
           scope.body = '';
           scope.users = '';
+          scope.due_date = Date.now();
         });
       };
 

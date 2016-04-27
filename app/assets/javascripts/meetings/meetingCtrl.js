@@ -20,16 +20,19 @@ angular.module('smartMeeting')
       {value: 3, text: 'IDEA'},
       {value: 4, text: 'DECISION'}
     ];
-
     $scope.sortableOption = {
       stop: function(e, ui) {
         _.each($scope.meeting.agenda_items, function(item, index, list){
           list[index].ordering = index;
-          $scope.saveAgendaItem(list[index]);
+          agendaItems.save(list[index]);
         });
         $scope.pauseMeeting(meeting);
       }
     };
+
+    $scope.$watch("meeting", function(newValue, oldValue) {
+      $scope.refreshActionItems();
+    }, true);
 
     $scope.setUpCountdown = function(item){
       item.playing = false;
@@ -155,6 +158,10 @@ angular.module('smartMeeting')
       if(total > $scope.meeting.duration){
         alert('Your meeting agenda is currently overtime by ' + String(total-$scope.meeting.duration) + ' minutes.  Please reduce your agenda items.');
       }
+    };
+
+    $scope.refreshActionItems = function(){
+      $scope.action_items = _.flatten(_.map($scope.meeting.agenda_items, function(item){ return _.where(item.agenda_notes, {note_type: 1}); }));
     };
   }
 ]);
