@@ -6,7 +6,7 @@ angular.module('smartMeeting')
   'users',
   'agendaItems',
   function($scope, meetings, meeting, users, agendaItems){
-    $scope.meeting = meeting;
+
     $scope.noteTypes = [
       {value: 1, text: 'ACTION'},
       {value: 2, text: 'INFO'},
@@ -14,15 +14,20 @@ angular.module('smartMeeting')
       {value: 4, text: 'DECISION'}
     ];
 
+    $scope.meeting = meeting;
     $scope.meeting.agenda_items = _.sortBy($scope.meeting.agenda_items, 'ordering');
     $scope.sortableOption = {
       stop: function(e, ui) {
         _.each($scope.meeting.agenda_items, function(item, index, list){
           list[index].ordering = index;
-          $scope.saveAgendaItem(list[index]);
+          agendaItems.save(list[index]);
         });
       }
     };
+
+    $scope.$watch("meeting", function(newValue, oldValue) {
+      $scope.refreshActionItems();
+    }, true);
 
     $scope.makeActive= function(item){
       _.each($scope.meeting.agenda_items, function(item){item.active = false;});
@@ -66,6 +71,10 @@ angular.module('smartMeeting')
       if(total > $scope.meeting.duration){
         alert('Your meeting agenda is currently overtime by ' + String(total-$scope.meeting.duration) + ' minutes.  Please reduce your agenda items.');
       }
+    };
+
+    $scope.refreshActionItems = function(){
+      $scope.action_items = _.flatten(_.map($scope.meeting.agenda_items, function(item){ return _.where(item.agenda_notes, {note_type: 1}); }));
     };
   }
 ]);
