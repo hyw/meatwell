@@ -40,7 +40,6 @@ angular.module('smartMeeting')
     $scope.finishMeeting = function(meeting){
       if (meeting.status !== meetingStatuses.finished) {
         meeting.playing = false;
-        console.log("finish the meeting");
         meeting.status = meetingStatuses.finished;
         var now = new Date();
         meeting.ended_at = now.toISOString();
@@ -60,7 +59,6 @@ angular.module('smartMeeting')
     $scope.startMeeting = function(meeting){
       if (meeting.status !== meetingStatuses.finished) {
         meeting.playing = true;
-        console.log("start the meeting");
         if (meeting.status === meetingStatuses.unstarted) { // if this is the first time this meeting was started
           meeting.status = meetingStatuses.started;
           var now = new Date();
@@ -74,13 +72,11 @@ angular.module('smartMeeting')
 
     $scope.pauseMeeting = function(meeting){
       meeting.playing = false;
-      console.log("pause the meeting");
       $scope.makeAllInactive();
     };
 
     $scope.startItem = function(item){
       $scope.makeActive(item);
-      console.log(item);
       if (!item.playing && (meeting.status === meetingStatuses.started)) {
         if (item.status === agendaItemStatuses.unstarted) { // if this is the first time this item was started
           item.status = agendaItemStatuses.started;
