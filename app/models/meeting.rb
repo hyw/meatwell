@@ -7,8 +7,8 @@ class Meeting < ActiveRecord::Base
 
   STATUS_LABELS = {
   	"0" => 'unstarted',
-  	"1" => 'in-progress',
-  	"2" => 'completed'
+  	"1" => 'started',
+  	"2" => 'finished'
   }
 
   def as_json(options = {})

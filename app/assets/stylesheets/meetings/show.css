@@ -11,8 +11,15 @@ td{
 }
 
 .agenda-item{
+	position: relative;
+	width: 100%;
+	z-index: 1;
 	border-bottom: 1px dashed;
 	padding:20px;
+}
+
+.agenda-item-active{
+	background: #f5f5f5;
 }
 
 .agenda-item-table{
@@ -20,13 +27,8 @@ td{
 	width:100%;
 }
 
-
 .agenda-item-table .duration{
 	width:100px;
-}
-
-.active{
-	background: #dff0d8;
 }
 
 .agenda-item-form .title{
@@ -85,4 +87,27 @@ td{
 
 .editable-text{
 	width:100%;
+}
+
+.agenda-item-countdown {
+	position: absolute;
+	right: 20px; /* same value as padding on agenda-item */
+	color: #A9A9A9;
+}
+
+.agenda-item-countdown-overtime {
+	color: red;
+}
+
+.agenda-item-progress-bar {
+	background: #dff0d8;
+	position: absolute;
+	height: 100%;
+	top: 0;
+	left: 0;
+	z-index: -1;
+}
+
+.agenda-item-progress-overtime {
+	background: #f2dede;
 }
