@@ -20,9 +20,15 @@ class MeetingsController < ApplicationController
 		respond_with Meeting.friendly.find(params[:id])
 	end
 
+	def update
+		meeting = Meeting.find(params[:id])
+		meeting.update(meeting_params)
+		respond_with meeting
+	end
+
 	private
 
 	def meeting_params
-		params.require(:meeting).permit(:title, :project_id, :duration, :location, :description, :date) 
+		params.require(:meeting).permit(:title, :project_id, :duration, :location, :description, :date, :started_at, :ended_at, :status) 
 	end
 end

@@ -7,7 +7,7 @@ class AgendaItemsController < ApplicationController
 	end
 
 	def create
-		agendaitem = AgendaItem.create(agendaitem_params)
+		agendaitem = AgendaItem.create(agendaitem_params.merge({ countdown: agendaitem_params["duration"]*60 }))
 		respond_with agendaitem
 	end
 
@@ -30,6 +30,6 @@ class AgendaItemsController < ApplicationController
 	private
 
 	def agendaitem_params 
-		params.require(:agenda_item).permit(:title, :duration, :meeting_id) 
+		params.require(:agenda_item).permit(:title, :duration, :meeting_id, :started_at, :ended_at, :status, :countdown) 
 	end
 end
