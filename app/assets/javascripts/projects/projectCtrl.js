@@ -94,5 +94,11 @@ angular.module('smartMeeting')
       var meetingUrl = "/a/meetings/" + meeting.id;
       $location.url(meetingUrl);
     };
+
+    $scope.deleteMeeting = function(meeting){
+      meetings.delete(meeting.id).success(function(){
+        $scope.project.meetings = _.reject($scope.project.meetings, function(thismeeting){ return thismeeting.id == meeting.id; });
+      });
+    };
   }
 ]);

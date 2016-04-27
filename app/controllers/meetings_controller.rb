@@ -27,6 +27,12 @@ class MeetingsController < ApplicationController
 		respond_with meeting
 	end
 
+	def destroy
+		meeting = Meeting.find(params[:id])
+		meeting.destroy
+		respond_with "Deleted"
+	end
+
 	private
 
 	def meeting_params
