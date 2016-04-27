@@ -31,24 +31,35 @@ Attendees:
 </div>
 
 
-<h3>Agenda:</h3>
+<h3>Agenda:
+	<button class="btn" ng-class="{
+		'disabled': meeting.status === meetingStatuses.finished, 
+		'btn-success': meeting.playing === false, 
+		'btn-danger': meeting.playing === true 
+		}" ng-click="meeting.playing? pauseMeeting(meeting) : startMeeting(meeting)">
+			{{ meeting.playing? 'Pause' : 'Start' }}
+	</button>
+	<button class="btn btn-primary" ng-click="finishMeeting(meeting)">Finish</button>
+</h3>
 <ol class="agenda-items" ui-sortable="sortableOption" ng-model="meeting.agenda_items">
-	<li ng-repeat="item in meeting.agenda_items" class="agenda-item" ng-click="makeActive(item)" ng-class="{'active': item.active}" >
-		<table class="agenda-item-table"><tr>
-			<td class="delete-icon"><span ng-click="removeAgendaItem(item)" class="glyphicon glyphicon-remove" aria-hidden="true"></span></td>
-			<td class="duration">(<a href="#" onaftersave="saveAgendaItem(item)" blur="submit" buttons="no" editable-number="item.duration">{{item.duration}}</a>) min.</td>
-			<td class="title">
-				<a href="#" blur="submit" onaftersave="saveAgendaItem(item)" buttons="no" editable-text="item.title">
-					{{item.title}}
-				</a>
-			</td>
-		</tr></table>
-		<table class="agenda-notes">
-			<tr agenda-note-list-item ng-repeat="note in item.agenda_notes" note-types="noteTypes" agenda-note="note" agenda-item="item"> 
-			</tr>
-		</table>
-		<div ng-class="item.active ? 'active' : 'hidden'">
-			<agenda-note-form agenda-item="item" note-types="noteTypes"></agenda-note-form>
+	<li ng-repeat="item in meeting.agenda_items" class="agenda-item" ng-click="startItem(item)" ng-class="{ 'agenda-item-active': item.active }" >
+		<div class="agenda-item-progress-bar" ng-class="{'agenda-item-progress-overtime' : (item.countdown < 0) }" style="width: {{ item | secondsToWidthPercentage }}%"></div>
+		<div class="agenda-item-contents">
+			<span ng-click="removeAgendaItem(item)" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+			(<a href="#" onaftersave="saveAgendaItem(item)" buttons="no" editable-number="item.duration">{{item.duration}}</a>) min.
+			<a href="#" blur="submit" onaftersave="saveAgendaItem(item)" buttons="no" editable-text="item.title">
+				{{item.title}}
+			</a>
+			<span class="agenda-item-countdown" ng-class="{'agenda-item-countdown-overtime': (item.countdown < 0) }" ng-init="setUpCountdown(item)">
+				{{ item.countdown | secondsToTime }}
+			</span>
+			<table style="width:100%;" class="agenda-notes">
+				<tr agenda-note-list-item ng-repeat="note in item.agenda_notes" note-types="noteTypes" agenda-note="note" agenda-item="item"> 
+				</tr>
+			</table>
+			<div ng-class="item.active ? 'active' : 'hidden'">
+				<agenda-note-form agenda-item="item" note-types="noteTypes"></agenda-note-form>
+			</div>
 		</div>
 	</li>
 	<li class="agenda-item agenda-item-form">
