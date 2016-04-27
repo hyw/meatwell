@@ -17,6 +17,12 @@ angular.module('smartMeeting')
                     <td>\
                         <a href="#" blur="submit" onaftersave="saveAgendaNote()" buttons="no" editable-text="agendaNote.body">{{agendaNote.body}}</a>\
                     </td>\
+                    <td class="users" ng-show="agendaNote.note_type == 1">\
+                        <span ng-repeat="user in agendaNote.users">{{user.username}}, </span>\
+                    </td>\
+                    <td class="due-date" ng-show="agendaNote.note_type == 1">\
+                        {{agendaNote.due_date | date:\'shortDate\'}}\
+                    </td>\
                 </tr>',
 
         link: function ( scope, element, attrs ) {
