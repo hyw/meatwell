@@ -15,12 +15,12 @@ angular.module('smartMeeting')
     ];
 
     $scope.meeting.agenda_items = _.sortBy($scope.meeting.agenda_items, 'ordering');
-    $scope.sortableOptionsForItems = {
+    $scope.sortableOption = {
       stop: function(e, ui) {
-        for (var index in $scope.meeting.agenda_items) {
-          $scope.meeting.agenda_items[index].ordering = index;
-          $scope.saveAgendaItem($scope.meeting.agenda_items[index]);
-        }
+        _.each($scope.meeting.agenda_items, function(item, index, list){
+          list[index].ordering = index;
+          $scope.saveAgendaItem(list[index]);
+        });
       }
     };
 
