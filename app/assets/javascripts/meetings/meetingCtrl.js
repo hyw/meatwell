@@ -52,9 +52,7 @@ angular.module('smartMeeting')
     };
 
     $scope.checkIfAgendaIsTooLong = function(){
-      var agenda_times = _.pluck($scope.meeting.agenda_items, 'duration');
-      var total = 0;
-      for(var i in agenda_times) { total += agenda_times[i]; }
+      var total = _.reduce($scope.meeting.agenda_items, function(memo, item){ return memo + item.duration; }, 0);
       if(total > $scope.meeting.duration){
         alert('Your meeting agenda is currently overtime by ' + String(total-$scope.meeting.duration) + ' minutes.  Please reduce your agenda items.');
       }
