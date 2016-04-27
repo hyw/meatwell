@@ -6,7 +6,7 @@ angular.module('smartMeeting')
 })
 .filter('secondsToWidthPercentage', ['agendaItemStatuses', function(agendaItemStatuses) {
     return function(item) {
-        if (item.status === agendaItemStatuses.finished) return 100;
+        if (item.countdown < 0) return 100;
         var totalInSeconds = item.duration*60;
         return ((totalInSeconds - item.countdown)/totalInSeconds)*100;
     };

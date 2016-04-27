@@ -1,4 +1,4 @@
-angular.module('constants', [])
+angular.module('smartMeeting')
 .constant('meetingStatuses', {
 	unstarted: 0,
 	started: 1,

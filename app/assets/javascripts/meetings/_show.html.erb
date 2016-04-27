@@ -19,10 +19,14 @@ Attendees:
 <hr></hr>
 
 <h3>Agenda:
-	<button class="btn btn-default" ng-click="startMeeting(meeting)">Start</button>
-	<button class="btn btn-default" ng-click="pauseMeeting(meeting)">Pause</button>
-	<button class="btn btn-default" ng-click="finishMeeting(meeting)">Finish</button>
-	<span>{{ meeting.status }}</span>
+	<button class="btn" ng-class="{
+		'disabled': meeting.status === meetingStatuses.finished, 
+		'btn-success': meeting.playing === false, 
+		'btn-danger': meeting.playing === true 
+		}" ng-click="meeting.playing? pauseMeeting(meeting) : startMeeting(meeting)">
+			{{ meeting.playing? 'Pause' : 'Start' }}
+	</button>
+	<button class="btn btn-primary" ng-click="finishMeeting(meeting)">Finish</button>
 </h3>
 <ol class="agenda-items">
 	<li ng-repeat="item in meeting.agenda_items" class="agenda-item" ng-click="startItem(item)" ng-class="{ 'agenda-item-active': item.active }" >
@@ -36,7 +40,6 @@ Attendees:
 			<span class="agenda-item-countdown" ng-class="{'agenda-item-countdown-overtime': (item.countdown < 0) }" ng-init="setUpCountdown(item)">
 				{{ item.countdown | secondsToTime }}
 			</span>
-			<span class="">{{ item.playing }} | {{ item.status }}</span>
 			<table style="width:100%;" class="agenda-notes">
 				<tr agenda-note-list-item ng-repeat="note in item.agenda_notes" note-types="noteTypes" agenda-note="note" agenda-item="item"> 
 				</tr>

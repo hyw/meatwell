@@ -9,7 +9,10 @@ angular.module('smartMeeting')
   'meetingStatuses',
   'agendaItemStatuses',
   function($scope, $timeout, meetings, meeting, users, agendaItems, meetingStatuses, agendaItemStatuses){
+    $scope.meetingStatuses = meetingStatuses;
+    $scope.agendaItemStatuses = agendaItemStatuses;
     $scope.meeting = meeting;
+    meeting.playing = false;
     console.log(meeting);
     $scope.noteTypes = [
       {value: 1, text: 'ACTION'},
@@ -45,6 +48,7 @@ angular.module('smartMeeting')
 
     $scope.startMeeting = function(meeting){
       if (meeting.status !== meetingStatuses.finished) {
+        meeting.playing = true;
         console.log("start the meeting");
         if (meeting.status === meetingStatuses.unstarted) { // if this is the first time this meeting was started
           meeting.status = meetingStatuses.started;
@@ -58,6 +62,7 @@ angular.module('smartMeeting')
     };
 
     $scope.pauseMeeting = function(meeting){
+      meeting.playing = false;
       console.log("pause the meeting");
       $scope.makeAllInactive();
     };
