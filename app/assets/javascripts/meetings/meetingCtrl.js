@@ -78,6 +78,7 @@ angular.module('smartMeeting')
     $scope.startItem = function(item){
       $scope.makeActive(item);
       if (!item.playing && (meeting.status === meetingStatuses.started)) {
+        meeting.playing = true;
         if (item.status === agendaItemStatuses.unstarted) { // if this is the first time this item was started
           item.status = agendaItemStatuses.started;
           var now = new Date();
@@ -99,9 +100,6 @@ angular.module('smartMeeting')
       item.countdown--;
       if (item.countdown % 5 === 0) {
         agendaItems.save(item);
-      }
-      if (item.countdown === 0) {
-        item.status = agendaItemStatuses.finished;
       }
       if (item.playing) { // avoid countinuing countdown if you press start and stop within the duration of 1 second
         item.timeout = $timeout(countDown, 1000, true, item);
