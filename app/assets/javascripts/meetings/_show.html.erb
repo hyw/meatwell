@@ -19,7 +19,7 @@ Attendees:
 <hr></hr>
 
 <h3>Agenda:</h3>
-<ol class="agenda-items">
+<ol class="agenda-items" ui-sortable="sortableOption" ng-model="meeting.agenda_items">
 	<li ng-repeat="item in meeting.agenda_items" class="agenda-item" ng-click="makeActive(item)" ng-class="{'active': item.active}" >
 		<table class="agenda-item-table"><tr>
 			<td class="delete-icon"><span ng-click="removeAgendaItem(item)" class="glyphicon glyphicon-remove" aria-hidden="true"></span></td>
