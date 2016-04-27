@@ -28,7 +28,7 @@ Attendees:
 	</button>
 	<button class="btn btn-primary" ng-click="finishMeeting(meeting)">Finish</button>
 </h3>
-<ol class="agenda-items">
+<ol class="agenda-items" ui-sortable="sortableOption" ng-model="meeting.agenda_items">
 	<li ng-repeat="item in meeting.agenda_items" class="agenda-item" ng-click="startItem(item)" ng-class="{ 'agenda-item-active': item.active }" >
 		<div class="agenda-item-progress-bar" ng-class="{'agenda-item-progress-overtime' : (item.countdown < 0) }" style="width: {{ item | secondsToWidthPercentage }}%"></div>
 		<div class="agenda-item-contents">

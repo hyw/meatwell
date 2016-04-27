@@ -30,6 +30,6 @@ class AgendaItemsController < ApplicationController
 	private
 
 	def agendaitem_params 
-		params.require(:agenda_item).permit(:title, :duration, :meeting_id, :started_at, :ended_at, :status, :countdown) 
+		params.require(:agenda_item).permit(:title, :duration, :meeting_id, :ordering, :started_at, :ended_at, :status, :countdown) 
 	end
 end

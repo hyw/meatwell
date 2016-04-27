@@ -13,13 +13,23 @@ angular.module('smartMeeting')
     $scope.agendaItemStatuses = agendaItemStatuses;
     $scope.meeting = meeting;
     meeting.playing = false;
-    console.log(meeting);
+    $scope.meeting.agenda_items = _.sortBy($scope.meeting.agenda_items, 'ordering');
     $scope.noteTypes = [
       {value: 1, text: 'ACTION'},
       {value: 2, text: 'INFO'},
       {value: 3, text: 'IDEA'},
       {value: 4, text: 'DECISION'}
     ];
+
+    $scope.sortableOption = {
+      stop: function(e, ui) {
+        _.each($scope.meeting.agenda_items, function(item, index, list){
+          list[index].ordering = index;
+          $scope.saveAgendaItem(list[index]);
+        });
+        $scope.pauseMeeting(meeting);
+      }
+    };
 
     $scope.setUpCountdown = function(item){
       item.playing = false;
@@ -29,6 +39,7 @@ angular.module('smartMeeting')
 
     $scope.finishMeeting = function(meeting){
       if (meeting.status !== meetingStatuses.finished) {
+        meeting.playing = false;
         console.log("finish the meeting");
         meeting.status = meetingStatuses.finished;
         var now = new Date();
@@ -56,7 +67,7 @@ angular.module('smartMeeting')
           meeting.started_at = now.toISOString();
           meetings.save(meeting);
         }
-        notFinished = _.filter(meeting.agenda_items, function(item){ if (item.status !== agendaItemStatuses.finished) return item; });
+        notFinished = _.filter(meeting.agenda_items, function(item){ if (item.countdown > 0) return item; });
         $scope.startItem(_.first(notFinished));
       }
     };
@@ -122,6 +133,7 @@ angular.module('smartMeeting')
         }).success(function(agendaitem){
           $scope.meeting.agenda_items.push(agendaitem);
           $('.agenda-item-form .title').focus();
+          $scope.checkIfAgendaIsTooLong();
         });
         $scope.title = '';
         $scope.duration = '';
@@ -132,6 +144,7 @@ angular.module('smartMeeting')
       if(item.title && item.title !== ''){
         agendaItems.save(item).success(function(){
           $scope.setUpCountdown(item);
+          $scope.checkIfAgendaIsTooLong();
           return true;
         });
       }
@@ -142,6 +155,13 @@ angular.module('smartMeeting')
       .success(function(item){
         $scope.meeting.agenda_items = _.reject($scope.meeting.agenda_items, function(agenda_item){ return agenda_item.id == removedagendaitem.id; });
       });
+    };
+
+    $scope.checkIfAgendaIsTooLong = function(){
+      var total = _.reduce($scope.meeting.agenda_items, function(memo, item){ return memo + item.duration; }, 0);
+      if(total > $scope.meeting.duration){
+        alert('Your meeting agenda is currently overtime by ' + String(total-$scope.meeting.duration) + ' minutes.  Please reduce your agenda items.');
+      }
     };
   }
 ]);

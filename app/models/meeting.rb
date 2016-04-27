@@ -12,6 +12,6 @@ class Meeting < ActiveRecord::Base
   }
 
   def as_json(options = {})
-    	super(options.merge(include: [:users, :agenda_items => { :include => :agenda_notes }]))
+    	super(options.merge(include: [:users, :agenda_items => { :include => { :agenda_notes => { :include => :users } } } ] ) )
   end
 end
