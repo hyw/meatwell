@@ -6,6 +6,7 @@
       <a href="/a/projects/{{project.id}}">{{project.title}}</a> 
       <button ng-show="project.isMember" ng-click="leaveProject(project)" class="btn btn-danger">Leave</button>
       <button ng-hide="project.isMember" ng-click="joinProject(project)" class="btn btn-success">Join</button>
+      <button ng-show="project.meetings.length < 1" ng-click="deleteProject(project)" class="btn btn-danger">Delete</button>
       <br/>
       <small>Created {{project.created_at | date:'mediumDate'}} by {{project.owner.username}}</small>
       <br/>

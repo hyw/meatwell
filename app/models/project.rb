@@ -7,7 +7,7 @@ class Project < ActiveRecord::Base
   	friendly_id :title, use: :slugged
 
   	def as_json(options = {})
-    	super(options.merge(include: [:owner, :users, :meetings]))
+    	super(options.merge(include: [:owner, :users, :meetings => { :include => :agenda_items }]))
   	end
 
 end

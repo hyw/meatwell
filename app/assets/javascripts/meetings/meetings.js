@@ -26,6 +26,10 @@ angular.module('smartMeeting')
             });
         };
 
+        o.delete = function(id){
+            return $http.delete('/meetings/' + id + '.json');
+        };
+
         return o;
     }
 ]);

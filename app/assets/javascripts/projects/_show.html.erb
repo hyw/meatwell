@@ -21,8 +21,15 @@ Members:
 
     <div ng-class="apt.name.length >= 15 ? 'col-md-12' : (apt.name.length >= 10 ? 'col-md-6' : 'col-md-4')">
 
-    <tr ng-click="goToMeeting(meeting)" style="cursor:pointer" ng-repeat="meeting in project.meetings" ng-class="meeting.status == 1 ? 'success' : (meeting.status == 0 ? 'info' : 'active')" >
-        <td> <a href="#" style="color: #428bca; border-bottom: dashed 1px #428bca;; text-decoration: none;">{{meeting.title}}</a></td>
+    <tr style="cursor:pointer" ng-repeat="meeting in project.meetings" ng-class="meeting.status == 1 ? 'success' : (meeting.status == 0 ? 'info' : 'active')" >
+        <td>
+            <span ng-show="meeting.agenda_items.length < 1" ng-click="deleteMeeting(meeting)" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        </td>
+        <td ng-click="goToMeeting(meeting)">
+            <a href="#" style="color: #428bca; border-bottom: dashed 1px #428bca;; text-decoration: none;"> 
+               {{meeting.title}}
+            </a>
+        </td>
         <td>{{meeting.date | date:'mediumDate'}} @ {{meeting.date | date:'shortTime'}}</td>
         <td>{{meeting.location}}</td>
         <td>{{meeting.duration}} mins.</td>

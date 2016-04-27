@@ -20,14 +20,14 @@ Rails.application.routes.draw do
 
   get "/auth/:provider/callback" => "users#auth_calendar"
 
-  resources :projects, only: [:create, :index, :show] do
+  resources :projects, only: [:create, :index, :show, :destroy] do
     member do
       put '/join' => 'projects#join'
       put '/leave' => 'projects#leave'
     end
   end
 
-  resources :meetings, only: [:create, :index, :show, :update]
+  resources :meetings, only: [:create, :index, :show, :update, :destroy]
   resources :agenda_items, only: [:create, :index, :show, :update, :destroy]
   resources :agenda_notes, only: [:create, :update, :destroy]
 

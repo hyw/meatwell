@@ -35,6 +35,12 @@ class ProjectsController < ApplicationController
 		respond_with Project.friendly.find(params[:id])
 	end
 
+	def destroy
+		project = Project.find(params[:id])
+		project.destroy
+		respond_with "Deleted"
+	end
+
 	private
 
 	def project_params 

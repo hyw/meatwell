@@ -33,6 +33,12 @@ angular.module('smartMeeting')
       projects.leave(project);
     };
 
+    $scope.deleteProject = function(project){
+      projects.delete(project.id).success(function(){
+        $scope.projects = _.reject($scope.projects, function(thisproject){ return thisproject.id == project.id; });
+      });
+    };
+
     function showError(message){
       $scope.formError = false;
       $scope.doFade = false;
