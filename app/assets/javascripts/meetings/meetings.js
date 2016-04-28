@@ -30,6 +30,10 @@ angular.module('smartMeeting')
             return $http.delete('/meetings/' + id + '.json');
         };
 
+        o.addAttendees = function(id, attendees){
+            return $http.post('/meetings/' + id + '/add_attendees.json', attendees);
+        };
+
         return o;
     }
 ]);

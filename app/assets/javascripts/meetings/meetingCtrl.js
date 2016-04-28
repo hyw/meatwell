@@ -163,5 +163,20 @@ angular.module('smartMeeting')
     $scope.refreshActionItems = function(){
       $scope.action_items = _.flatten(_.map($scope.meeting.agenda_items, function(item){ return _.where(item.agenda_notes, {note_type: 1}); }));
     };
+
+    $scope.autocompleteUsers = function(query){
+      return users.search(query);
+    };
+
+    $scope.addAttendees = function(attendees){
+      if (attendees) {
+        meetings.addAttendees($scope.meeting.id, {
+          attendees: attendees
+        }).success(function(res){
+          $scope.meeting.users = res.users;
+          $scope.attendees = "";
+        });
+      }
+    };
   }
 ]);
