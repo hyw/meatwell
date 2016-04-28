@@ -22,6 +22,7 @@ angular.module('smartMeeting')
           });
         }
       };
+      $scope.sharableLink = 'http://meatwell.io/a/meetings/p/'+meeting.id+'/'+meeting.access_code;
     };
 
     $scope.startMeeting = function(meeting){
