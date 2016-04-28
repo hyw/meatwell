@@ -1,7 +1,8 @@
 angular.module('smartMeeting')
 .factory('meetings', [
     '$http',
-    function($http){
+    'meetingStatuses',
+    function($http, meetingStatuses){
         var o = {
             meetings: []
         };
@@ -28,6 +29,21 @@ angular.module('smartMeeting')
 
         o.delete = function(id){
             return $http.delete('/meetings/' + id + '.json');
+        };
+
+        o.start = function(meeting){
+            if (meeting.status === meetingStatuses.unstarted) { // if this is the first time this meeting was started
+                meeting.status = meetingStatuses.started;
+                meeting.started_at = new Date().toISOString();
+                o.save(meeting);
+            }
+        };
+
+        o.finish = function(meeting){
+            meeting.playing = false;
+            meeting.status = meetingStatuses.finished;
+            meeting.ended_at = new Date().toISOString();
+            o.save(meeting);
         };
 
         return o;

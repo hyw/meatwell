@@ -113,3 +113,7 @@ td{
 .agenda-item-progress-overtime {
 	background: #f2dede;
 }
+
+.control-buttons{
+	display:inline-block;
+}

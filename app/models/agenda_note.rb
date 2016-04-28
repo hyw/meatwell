@@ -8,6 +8,7 @@ class AgendaNote < ActiveRecord::Base
   INFO = 2
   IDEA = 3
   DECISION = 4
+  QUESTION = 5
 
     def as_json(options = {})
     	super(options.merge(include: [:users]))
