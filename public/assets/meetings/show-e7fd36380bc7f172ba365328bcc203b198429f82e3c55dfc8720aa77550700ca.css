@@ -1,0 +1,134 @@
+td{
+	padding-top:10px;
+}
+
+.add-meeting-attendees-auto-complete {
+	display: inline-block;
+	margin-left: 40px;
+	margin-right: 10px;
+	width: 40%;
+}
+
+.add-meeting-attendees-submit {
+	display: inline-block;
+	width: 30px;
+	padding-left: 10px;
+	position: relative;
+	top: -12px;
+}
+
+.agenda-notes{
+	width:100%;
+}
+
+.agenda-notes td{
+	padding-left:10px;
+}
+
+.agenda-item{
+	position: relative;
+	width: 100%;
+	border-bottom: 1px dashed;
+	padding:20px;
+}
+
+.agenda-item-contents{
+	position: relative;
+}
+
+.agenda-item-active{
+	background: #f5f5f5;
+}
+
+.agenda-item-table{
+	margin-top:-29px;
+	width:100%;
+}
+
+.agenda-item-table .duration{
+	width:100px;
+}
+
+.agenda-item-form .title{
+	width:60%; 
+	display:inline-block;
+}
+
+.agenda-item-form .duration{
+	width:43px; 
+	display:inline-block;
+}
+
+.delete-icon{
+	width:20px;
+	cursor:pointer;
+}
+
+.note-type-select{
+	width:100px;
+}
+
+.new-agenda-note-form table{
+	width:100%;
+}
+
+.new-agenda-note-form .users{
+	padding-left:10px; 
+	width:150px;
+}
+
+.new-agenda-note-form .due-date{
+	width:50px; 
+	padding-left:10px;
+}
+
+.new-agenda-note-form .note-type-select .form-control{
+	width:91px;
+}
+
+.note-submit{
+	width:30px;
+	padding-left:10px;
+}
+
+.editable-number .form-control{
+    width:43px;
+}
+
+.editable-text .form-control{
+    width:100%;
+}
+
+.editable-text .editable-controls{
+	width:100%;
+}
+
+.editable-text{
+	width:100%;
+}
+
+.agenda-item-countdown {
+	position: absolute;
+	right: 0;
+	color: #A9A9A9;
+}
+
+.agenda-item-countdown-overtime {
+	color: red;
+}
+
+.agenda-item-progress-bar {
+	background: #dff0d8;
+	position: absolute;
+	height: 100%;
+	top: 0;
+	left: 0;
+}
+
+.agenda-item-progress-overtime {
+	background: #f2dede;
+}
+
+.control-buttons{
+	display:inline-block;
+}

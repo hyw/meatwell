@@ -1,0 +1,95 @@
+<link rel="stylesheet" media="screen" href="/assets/meetings/show-e7fd36380bc7f172ba365328bcc203b198429f82e3c55dfc8720aa77550700ca.css" />
+<div class="page-header">
+	<h3><a href="/a/projects/{{meeting.project.slug}}">{{meeting.project.title}}</a> > {{meeting.title}} <button class="btn" clipboard text="shareableLink">Copy <span class="glyphicon glyphicon-link"></span></button></h3>
+	<h4>{{meeting.description}}</h4>
+	<div class="text-muted"><span>{{meeting.date | date:'mediumDate'}} @ {{meeting.date | date:'shortTime'}}</span> ({{meeting.duration}} mins.) <i><span>{{meeting.location}}</span></i></div>
+</div>
+<div class="meeting-attendees" ng-init="attendeesActive = false" ng-class="{ 'active': attendeesActive }" ng-click="attendeesActive = !attendeesActive">
+	Attendees:
+	<ul>
+		<li ng-repeat="attendee in meeting.users">{{attendee.username}}</li>
+	</ul>
+	<tags-input ng-hide="!attendeesActive" class="add-meeting-attendees-auto-complete" ng-model="attendees" id="meeting-attendees" display-property="username" add-from-autocomplete-only="true" placeholder="Add more attendees" ng-click="$event.stopPropagation()">
+        <auto-complete source="autocompleteUsers($query)"></auto-complete>
+    </tags-input>
+	<input ng-hide="!attendeesActive" ng-click="$event.stopPropagation(); addAttendees(attendees);" type="submit" class="add-meeting-attendees-submit form-control" value="+" />
+</div>
+
+<hr></hr>
+<div ng-show="meeting.previous_action_items.length > 1">
+	<h3>Previous Action Items:</h3>
+	<table class="table table-striped table-hover">
+		<tr ng-repeat="item in meeting.previous_action_items">
+			<td><span class="glyphicon glyphicon-pushpin"></span> {{item.body}}</td>
+			<td class="users">
+	            Owners: <span ng-repeat="user in item.users">{{user.username}}, </span>
+	        </td>
+	        <td>
+	        	Due: {{item.due_date | date: 'shortDate'}}
+	        </td>
+		</tr>
+	</table>
+	<hr></hr>
+</div>
+
+
+<h3>Agenda
+	<div ng-show="meeting.status !== meetingStatuses.finished" class="control-buttons">
+		<button class="btn" ng-class="{
+			'disabled': meeting.status === meetingStatuses.finished, 
+			'btn-success': !meeting.playing, 
+			'btn-danger': meeting.playing === true 
+			}" ng-click="meeting.playing? pauseMeeting(meeting) : startMeeting(meeting)">
+				{{ meeting.playing? 'Pause' : meeting.status === meetingStatuses.unstarted ? 'Start' : 'Resume'}}
+		</button>
+		<button ng-show="meeting.status === meetingStatuses.started" class="btn btn-primary" ng-click="finishMeeting(meeting)">Finish</button>
+	</div>
+</h3>
+<ol class="agenda-items" ui-sortable="sortableOption" ng-model="meeting.agenda_items">
+	<li ng-repeat="item in meeting.agenda_items" class="agenda-item" ng-click="startItem(item)" ng-class="{ 'agenda-item-active': item.active }" >
+		<div class="agenda-item-progress-bar" ng-class="{'agenda-item-progress-overtime' : (item.countdown < 0) }" style="width: {{ item | secondsToWidthPercentage }}%"></div>
+		<div class="agenda-item-contents">
+			<span ng-show="meeting.status === meetingStatuses.unstarted" ng-click="removeAgendaItem(item)" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+			(<span ng-show="meeting.status === meetingStatuses.unstarted">
+				<a href="#" disabled="true" onaftersave="saveAgendaItem(item)" buttons="no" editable-number="item.duration">{{item.duration}}</a>
+			</span>
+			<span ng-show="meeting.status !== meetingStatuses.unstarted">{{item.duration}}</span> ) min.
+			<a href="#" blur="submit" onaftersave="saveAgendaItem(item)" buttons="no" editable-text="item.title">
+				{{item.title}}
+			</a>
+			<span class="agenda-item-countdown" ng-class="{'agenda-item-countdown-overtime': (item.countdown < 0) }">
+				{{ item.countdown | secondsToTime }}
+			</span>
+			<table style="width:100%;" class="agenda-notes">
+				<tr agenda-note-list-item ng-repeat="note in item.agenda_notes" note-types="agendaNoteTypes" agenda-note="note" agenda-item="item"> 
+				</tr>
+			</table>
+			<div ng-class="item.active ? 'active' : 'hidden'">
+				<agenda-note-form agenda-item="item" note-types="agendaNoteTypes"></agenda-note-form>
+			</div>
+		</div>
+	</li>
+	<li class="agenda-item agenda-item-form">
+		<form>
+			<input input type="number" class="duration form-control ng-pristine ng-untouched ng-valid ng-empty" placeholder="15" ng-model="duration"> min. 
+			<input type="text" class="form-control title" placeholder="Agenda item title" ng-model="title">
+			<button type="submit" class="btn btn-primary" ng-click="createAgendaItem()">Save</button>
+		</form>
+	</li>
+</ol>
+
+<br/>
+<hr></hr>
+<h3>Action Items:</h3>
+<br/>
+<table class="table table-striped table-hover">
+	<tr ng-repeat="item in action_items">
+		<td><span class="glyphicon glyphicon-pushpin"></span> {{item.body}}</td>
+		<td class="users">
+            Owners: <span ng-repeat="user in item.users">{{user.username}}, </span>
+        </td>
+        <td>
+        	Due: {{item.due_date | date: 'shortDate'}}
+        </td>
+	</tr>
+</table>
