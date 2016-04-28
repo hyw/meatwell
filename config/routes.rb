@@ -27,7 +27,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :meetings, only: [:create, :index, :show, :update, :destroy]
+  resources :meetings, only: [:create, :index, :show, :update, :destroy] do
+    member do
+      post '/add_attendees' => 'meetings#addAttendees'
+    end
+  end
   resources :agenda_items, only: [:create, :index, :show, :update, :destroy]
   resources :agenda_notes, only: [:create, :update, :destroy]
 
