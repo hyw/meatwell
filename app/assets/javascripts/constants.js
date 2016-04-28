@@ -11,9 +11,10 @@ angular.module('smartMeeting')
 })
 .constant('agendaNoteTypes',
 	[
-      {value: 1, text: 'ACTION'},
       {value: 2, text: 'INFO'},
       {value: 3, text: 'IDEA'},
-      {value: 4, text: 'DECISION'}
+      {value: 5, text: 'QUESTION'},
+      {value: 4, text: 'DECISION'},
+      {value: 1, text: 'ACTION'},
     ]
 );

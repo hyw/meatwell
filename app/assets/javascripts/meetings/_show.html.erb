@@ -47,7 +47,7 @@ Attendees:
 	<li ng-repeat="item in meeting.agenda_items" class="agenda-item" ng-click="startItem(item)" ng-class="{ 'agenda-item-active': item.active }" >
 		<div class="agenda-item-progress-bar" ng-class="{'agenda-item-progress-overtime' : (item.countdown < 0) }" style="width: {{ item | secondsToWidthPercentage }}%"></div>
 		<div class="agenda-item-contents">
-			<span ng-click="removeAgendaItem(item)" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+			<span ng-show="meeting.status === meetingStatuses.unstarted" ng-click="removeAgendaItem(item)" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 			(<span ng-show="meeting.status === meetingStatuses.unstarted">
 				<a href="#" disabled="true" onaftersave="saveAgendaItem(item)" buttons="no" editable-number="item.duration">{{item.duration}}</a>
 			</span>
