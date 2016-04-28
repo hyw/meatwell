@@ -1,122 +1,66 @@
 angular.module('smartMeeting')
 .controller('MeetingCtrl', [
   '$scope',
-  '$timeout',
   'meetings',
   'meeting',
   'users',
   'agendaItems',
   'meetingStatuses',
-  'agendaItemStatuses',
-  function($scope, $timeout, meetings, meeting, users, agendaItems, meetingStatuses, agendaItemStatuses){
-    $scope.meetingStatuses = meetingStatuses;
-    $scope.agendaItemStatuses = agendaItemStatuses;
-    $scope.meeting = meeting;
-    meeting.playing = false;
-    $scope.meeting.agenda_items = _.sortBy($scope.meeting.agenda_items, 'ordering');
-    $scope.noteTypes = [
-      {value: 1, text: 'ACTION'},
-      {value: 2, text: 'INFO'},
-      {value: 3, text: 'IDEA'},
-      {value: 4, text: 'DECISION'}
-    ];
-    $scope.sortableOption = {
-      stop: function(e, ui) {
-        _.each($scope.meeting.agenda_items, function(item, index, list){
-          list[index].ordering = index;
-          agendaItems.save(list[index]);
-        });
-        $scope.pauseMeeting(meeting);
-      }
-    };
-
-    $scope.$watch("meeting", function(newValue, oldValue) {
-      $scope.refreshActionItems();
-    }, true);
-
-    $scope.setUpCountdown = function(item){
-      item.playing = false;
-    };
-
-    $scope.finishMeeting = function(meeting){
-      if (meeting.status !== meetingStatuses.finished) {
-        meeting.playing = false;
-        meeting.status = meetingStatuses.finished;
-        var now = new Date();
-        meeting.ended_at = now.toISOString();
-        meetings.save(meeting);
-        //set ended_at for each agenda item too
-        _.each(meeting.agenda_items, function(item) {
-          item.active = false;
-          item.playing = false;
-          $timeout.cancel(item.timeout);
-          item.status = agendaItemStatuses.finished;
-          item.ended_at = now.toISOString();
-          agendaItems.save(item);
-        });
-      }
+  'agendaNoteTypes',
+  function($scope, meetings, meeting, users, agendaItems, meetingStatuses, agendaNoteTypes){
+    $scope.initialize = function(){
+      $scope.meetingStatuses = meetingStatuses;
+      $scope.agendaNoteTypes = agendaNoteTypes;
+      $scope.meeting = meeting;
+      $scope.$watch("meeting", function(newValue, oldValue) {$scope.refreshActionItems();}, true);
+      $scope.sortableOption = {
+        stop: function(e, ui) {
+          $scope.pauseMeeting(meeting);
+          _.each($scope.meeting.agenda_items, function(item, index, list){
+            list[index].ordering = index;
+            agendaItems.save(list[index]);
+          });
+        }
+      };
     };
 
     $scope.startMeeting = function(meeting){
-      if (meeting.status !== meetingStatuses.finished) {
-        meeting.playing = true;
-        if (meeting.status === meetingStatuses.unstarted) { // if this is the first time this meeting was started
-          meeting.status = meetingStatuses.started;
-          var now = new Date();
-          meeting.started_at = now.toISOString();
-          meetings.save(meeting);
-        }
-        notFinished = _.filter(meeting.agenda_items, function(item){ if (item.countdown > 0) return item; });
-        $scope.startItem(_.first(notFinished));
-      }
+      meetings.start(meeting);
+      var unfinishedItems = _.filter(meeting.agenda_items, function(item){ if (item.countdown > 0) return item; });
+      $scope.startItem(_.first(unfinishedItems));
     };
 
     $scope.pauseMeeting = function(meeting){
-      meeting.playing = false;
-      $scope.makeAllInactive();
+      $scope.meeting.playing = false;
+      $scope.makeAllInactiveAndStop();
     };
 
-    $scope.startItem = function(item){
-      $scope.makeActive(item);
-      if (!item.playing && (meeting.status === meetingStatuses.started)) {
-        meeting.playing = true;
-        if (item.status === agendaItemStatuses.unstarted) { // if this is the first time this item was started
-          item.status = agendaItemStatuses.started;
-          var now = new Date();
-          item.started_at = now.toISOString();
-          agendaItems.save(item);
-        }
-        item.playing = true;
-        item.timeout = countDown(item);
+    $scope.finishMeeting = function(meeting){
+      if(meeting.status == meetingStatuses.finished) {
+        return;
       }
-    };
-
-    $scope.stopItem = function(item){
-      item.playing = false;
-      agendaItems.save(item);
-      $timeout.cancel(item.timeout);
-    };
-
-    var countDown = function(item){
-      item.countdown--;
-      if (item.countdown % 5 === 0) {
-        agendaItems.save(item);
-      }
-      if (item.playing) { // avoid countinuing countdown if you press start and stop within the duration of 1 second
-        item.timeout = $timeout(countDown, 1000, true, item);
-      }
-    };
-
-    $scope.makeAllInactive = function(item){
-      _.each(_.without(meeting.agenda_items, item), function(item){
-        item.active = false;
-        $scope.stopItem(item);
+      meetings.finish(meeting);
+      $scope.makeAllInactiveAndStop();
+      _.each(meeting.agenda_items, function(item) {
+        agendaItems.finishItem(item);
       });
     };
 
-    $scope.makeActive = function(item){
-      $scope.makeAllInactive(item);
+    $scope.startItem = function(item){
+      $scope.makeAllInactiveAndStop(item);
       item.active = true;
+      meeting.playing = true;
+
+      if(meeting.status === meetingStatuses.started) {
+        agendaItems.startItem(item);
+      }
+    };
+
+    $scope.makeAllInactiveAndStop = function(except){
+      _.each(_.without(meeting.agenda_items, except), function(item){
+        item.active = false;
+        agendaItems.stopItem(item);
+      });
     };
 
     $scope.createAgendaItem = function(){
@@ -137,9 +81,7 @@ angular.module('smartMeeting')
 
     $scope.saveAgendaItem = function(item){
       if(item.title && item.title !== ''){
-        item.countdown = item.duration * 60;
         agendaItems.save(item).success(function(){
-          $scope.setUpCountdown(item);
           $scope.checkIfAgendaIsTooLong();
           return true;
         });
@@ -163,5 +105,8 @@ angular.module('smartMeeting')
     $scope.refreshActionItems = function(){
       $scope.action_items = _.flatten(_.map($scope.meeting.agenda_items, function(item){ return _.where(item.agenda_notes, {note_type: 1}); }));
     };
+
+    $scope.initialize();
+
   }
 ]);
