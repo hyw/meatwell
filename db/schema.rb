@@ -22,8 +22,8 @@ ActiveRecord::Schema.define(version: 20160428080808) do
     t.datetime "started_at"
     t.datetime "ended_at"
     t.integer  "status",     limit: 4,   default: 0
-    t.integer  "ordering",   limit: 4
     t.integer  "countdown",  limit: 4
+    t.integer  "ordering",   limit: 4
   end
 
   add_index "agenda_items", ["meeting_id"], name: "index_agenda_items_on_meeting_id", using: :btree

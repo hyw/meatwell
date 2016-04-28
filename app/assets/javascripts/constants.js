@@ -22,4 +22,11 @@ angular.module('smartMeeting')
 	'3' : 'IDEA',
 	'4' : 'DECISION',
 	'5' : 'QUESTION'
+})
+.constant('agendaNoteTypeReverseMap', {
+	ACTION: 1,
+	INFO: 2,
+	IDEA: 3,
+	DECISION: 4,
+	QUESTION: 5
 });

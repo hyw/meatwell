@@ -7,9 +7,8 @@ class MeetingsController < ApplicationController
 	end
 
 	def create
-		meeting = Meeting.create(meeting_params.merge(leader: current_user.id))
-		meeting.access_code = ('a'..'z').to_a.shuffle[0,8].join
-		meeting.save
+		new_access_code = ('a'..'z').to_a.shuffle[0,8].join
+		meeting = Meeting.create(meeting_params.merge({leader: current_user.id, access_code: new_access_code}))
 		attendees = params[:attendees].map{|x| x[:username]}
 		attendees.each do |attendee|
 			user = User.find_by_username(attendee)

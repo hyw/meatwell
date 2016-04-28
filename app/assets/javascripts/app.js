@@ -54,7 +54,7 @@ angular.module('smartMeeting', ['ui.router', 'templates', 'Devise', 'ngTagsInput
         templateUrl: 'auth/_register.html',
         controller: 'AuthCtrl'
       })
-      .state('logged-out.meetings', {
+      .state('logged-out.meeting', {
         url:'/a/meetings/p/{id}/{access_code}',
         templateUrl: 'meetings/_show_public.html',
         controller: 'MeetingPublicCtrl',
