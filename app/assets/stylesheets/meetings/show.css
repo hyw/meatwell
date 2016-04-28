@@ -13,9 +13,12 @@ td{
 .agenda-item{
 	position: relative;
 	width: 100%;
-	z-index: 1;
 	border-bottom: 1px dashed;
 	padding:20px;
+}
+
+.agenda-item-contents{
+	position: relative;
 }
 
 .agenda-item-active{
@@ -91,7 +94,7 @@ td{
 
 .agenda-item-countdown {
 	position: absolute;
-	right: 20px; /* same value as padding on agenda-item */
+	right: 0;
 	color: #A9A9A9;
 }
 
@@ -105,7 +108,6 @@ td{
 	height: 100%;
 	top: 0;
 	left: 0;
-	z-index: -1;
 }
 
 .agenda-item-progress-overtime {
