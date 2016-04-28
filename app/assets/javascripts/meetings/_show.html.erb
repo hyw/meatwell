@@ -48,7 +48,10 @@ Attendees:
 		<div class="agenda-item-progress-bar" ng-class="{'agenda-item-progress-overtime' : (item.countdown < 0) }" style="width: {{ item | secondsToWidthPercentage }}%"></div>
 		<div class="agenda-item-contents">
 			<span ng-click="removeAgendaItem(item)" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-			(<a href="#" onaftersave="saveAgendaItem(item)" buttons="no" editable-number="item.duration">{{item.duration}}</a>) min.
+			(<span ng-show="meeting.status === meetingStatuses.unstarted">
+				<a href="#" disabled="true" onaftersave="saveAgendaItem(item)" buttons="no" editable-number="item.duration">{{item.duration}}</a>
+			</span>
+			<span ng-show="meeting.status !== meetingStatuses.unstarted">{{item.duration}}</span> ) min.
 			<a href="#" blur="submit" onaftersave="saveAgendaItem(item)" buttons="no" editable-text="item.title">
 				{{item.title}}
 			</a>
