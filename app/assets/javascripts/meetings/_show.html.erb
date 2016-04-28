@@ -5,10 +5,16 @@
 	<h4>{{meeting.description}}</h4>
 	<div class="text-muted"><span>{{meeting.date | date:'mediumDate'}} @ {{meeting.date | date:'shortTime'}}</span> ({{meeting.duration}} mins.) <i><span>{{meeting.location}}</span></i></div>
 </div>
-Attendees:
-<ul>
-	<li ng-repeat="attendee in meeting.users">{{attendee.username}}</li>
-</ul>
+<div class="meeting-attendees" ng-init="attendeesActive = false" ng-class="{ 'active': attendeesActive }" ng-click="attendeesActive = !attendeesActive">
+	Attendees:
+	<ul>
+		<li ng-repeat="attendee in meeting.users">{{attendee.username}}</li>
+	</ul>
+	<tags-input ng-hide="!attendeesActive" class="add-meeting-attendees-auto-complete" ng-model="attendees" id="meeting-attendees" display-property="username" add-from-autocomplete-only="true" placeholder="Add more attendees" ng-click="$event.stopPropagation()">
+        <auto-complete source="autocompleteUsers($query)"></auto-complete>
+    </tags-input>
+	<input ng-hide="!attendeesActive" ng-click="$event.stopPropagation(); addAttendees(attendees);" type="submit" class="add-meeting-attendees-submit form-control" value="+" />
+</div>
 
 <hr></hr>
 <div ng-show="meeting.previous_action_items.length > 1">

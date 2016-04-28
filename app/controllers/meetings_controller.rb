@@ -46,6 +46,19 @@ class MeetingsController < ApplicationController
 		respond_with meeting
 	end
 
+	def addAttendees
+		meeting = Meeting.find(params[:id])
+		attendees = params[:attendees].map{|x| x[:username]}
+		attendees.each do |username|
+			user = User.find_by_username(username)
+			if meeting.users.exclude?(user)
+				Attendee.create('user_id'=>user.id, 'meeting_id'=>params[:id])
+			end
+		end
+		meeting.reload
+		respond_with meeting
+	end
+
 	private
 
 	def meeting_params

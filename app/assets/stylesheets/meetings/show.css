@@ -2,6 +2,21 @@ td{
 	padding-top:10px;
 }
 
+.add-meeting-attendees-auto-complete {
+	display: inline-block;
+	margin-left: 40px;
+	margin-right: 10px;
+	width: 40%;
+}
+
+.add-meeting-attendees-submit {
+	display: inline-block;
+	width: 30px;
+	padding-left: 10px;
+	position: relative;
+	top: -12px;
+}
+
 .agenda-notes{
 	width:100%;
 }

@@ -37,6 +37,10 @@ angular.module('smartMeeting')
             return $http.delete('/meetings/' + id + '.json');
         };
 
+        o.addAttendees = function(id, attendees){
+            return $http.post('/meetings/' + id + '/add_attendees.json', attendees);
+        };
+
         o.start = function(meeting){
             if (meeting.status === meetingStatuses.unstarted) { // if this is the first time this meeting was started
                 meeting.status = meetingStatuses.started;
