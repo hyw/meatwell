@@ -28,4 +28,5 @@
 //= require angular-bootstrap-datetimepicker/src/js/datetimepicker_templates
 //= require app.js
 //= require angular-ui-sortable
+//= require angular-clipboard
 //= require_tree .

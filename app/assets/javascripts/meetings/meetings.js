@@ -21,6 +21,12 @@ angular.module('smartMeeting')
                 return res.data;
             });
         };
+        o.getPublic = function(id, access_code){
+            return $http.get('/meetings/' + id + '/showpublic.json?access_code='+access_code).then(function(res){
+                return res.data;
+            });
+        };
+
         o.save = function(meeting){
             return $http.put('/meetings/' + meeting.id + '.json', meeting).success(function(res){
                 return res.data;

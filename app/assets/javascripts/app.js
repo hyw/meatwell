@@ -1,4 +1,4 @@
-angular.module('smartMeeting', ['ui.router', 'templates', 'Devise', 'ngTagsInput', "ui.calendar", "xeditable", "ui.bootstrap.datetimepicker", "ui.sortable"])
+angular.module('smartMeeting', ['ui.router', 'templates', 'Devise', 'ngTagsInput', "ui.calendar", "xeditable", "ui.bootstrap.datetimepicker", "ui.sortable", 'angular-clipboard'])
 .config([
   '$stateProvider',
   '$urlRouterProvider',
@@ -53,6 +53,16 @@ angular.module('smartMeeting', ['ui.router', 'templates', 'Devise', 'ngTagsInput
         url: '/register',
         templateUrl: 'auth/_register.html',
         controller: 'AuthCtrl'
+      })
+      .state('logged-out.meeting', {
+        url:'/a/meetings/p/{id}/{access_code}',
+        templateUrl: 'meetings/_show_public.html',
+        controller: 'MeetingPublicCtrl',
+        resolve: {
+          meeting: ['$stateParams', 'meetings', function($stateParams, meetings){
+            return meetings.getPublic($stateParams.id, $stateParams.access_code);
+          }]
+        }
       })
       .state('logged-in.projects', {
         url: '/a/projects',

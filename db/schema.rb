@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160427033407) do
+ActiveRecord::Schema.define(version: 20160428080808) do
 
   create_table "agenda_items", force: :cascade do |t|
     t.string   "title",      limit: 255
@@ -22,8 +22,8 @@ ActiveRecord::Schema.define(version: 20160427033407) do
     t.datetime "started_at"
     t.datetime "ended_at"
     t.integer  "status",     limit: 4,   default: 0
-    t.integer  "ordering",   limit: 4
     t.integer  "countdown",  limit: 4
+    t.integer  "ordering",   limit: 4
   end
 
   add_index "agenda_items", ["meeting_id"], name: "index_agenda_items_on_meeting_id", using: :btree
@@ -109,6 +109,7 @@ ActiveRecord::Schema.define(version: 20160427033407) do
     t.string   "location",    limit: 255
     t.string   "description", limit: 255
     t.string   "slug",        limit: 255
+    t.string   "access_code", limit: 255
   end
 
   add_index "meetings", ["leader"], name: "index_meetings_on_leader", using: :btree

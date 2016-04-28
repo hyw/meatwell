@@ -29,12 +29,13 @@ Rails.application.routes.draw do
 
   resources :meetings, only: [:create, :index, :show, :update, :destroy] do
     member do
+      get '/showpublic' => 'meetings#showPublic'
       post '/add_attendees' => 'meetings#addAttendees'
     end
   end
+
   resources :agenda_items, only: [:create, :index, :show, :update, :destroy]
   resources :agenda_notes, only: [:create, :update, :destroy]
-
 
   get '*path', :to => redirect('/#/%{path}')
 

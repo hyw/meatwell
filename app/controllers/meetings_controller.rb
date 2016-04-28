@@ -1,19 +1,26 @@
 class MeetingsController < ApplicationController
 
-	before_filter :authenticate_user!, only: [:create]
+	before_filter :authenticate_user!, except: [:showPublic]
 
 	def index
 		respond_with Meeting.all
 	end
 
 	def create
-		meeting = Meeting.create(meeting_params.merge(leader: current_user.id))
+		new_access_code = ('a'..'z').to_a.shuffle[0,8].join
+		meeting = Meeting.create(meeting_params.merge({leader: current_user.id, access_code: new_access_code}))
 		attendees = params[:attendees].map{|x| x[:username]}
 		attendees.each do |attendee|
 			user = User.find_by_username(attendee)
 			Attendee.create('user_id'=>user.id, 'meeting_id'=>meeting.id)
 		end
 		respond_with meeting
+	end
+
+	def showPublic
+		meeting = Meeting.friendly.find(params[:id])
+		return if params[:access_code] != meeting.access_code
+		show
 	end
 
 	def show
