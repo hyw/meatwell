@@ -15,7 +15,12 @@ angular.module('smartMeeting')
         };
 
         o.save = function(agendaitem){
-            return $http.put('/agenda_items/' + agendaitem.id + '.json', agendaitem);
+            if(agendaitem.status === agendaItemStatuses.unstarted){
+               agendaitem.countdown = agendaitem.duration*60;
+            }
+            return $http.put('/agenda_items/' + agendaitem.id + '.json', agendaitem).success(function(data){
+                agendaitem = data;
+            });
         };
 
         o.deleteItem = function(agendaitem){

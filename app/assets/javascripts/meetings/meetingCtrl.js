@@ -49,9 +49,9 @@ angular.module('smartMeeting')
     $scope.startItem = function(item){
       $scope.makeAllInactiveAndStop(item);
       item.active = true;
-      meeting.playing = true;
 
       if(meeting.status === meetingStatuses.started) {
+        meeting.playing = true;
         agendaItems.startItem(item);
       }
     };

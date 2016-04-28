@@ -17,11 +17,7 @@ class AgendaItemsController < ApplicationController
 
 	def update
 		item = AgendaItem.find(params[:id])
-		if item.status == AgendaItem::UNSTARTED
-			item.update(agendaitem_params.merge({ countdown: agendaitem_params["duration"]*60}))
-		else
-			item.update(agendaitem_params)
-		end
+		item.update(agendaitem_params)
 		respond_with item
 	end
 
