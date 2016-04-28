@@ -1,0 +1,92 @@
+<link rel="stylesheet" media="screen" href="/assets/projects/show-88e251232e2beafdad8e4eaece8270510ed3fe78f4ab7ebf20b852dc16b7de66.css" />
+<div class="page-header">
+    <h3>
+        {{project.title}} 
+        <button ng-hide="project.isMember" ng-click="joinProject(project)" class="btn btn-success">Join</button>
+        <button ng-show="project.isMember" ng-click="leaveProject(project)" class="btn btn-danger">Leave</button>
+    </h3>
+</div>
+
+Created by: {{project.owner.username}}<br/>
+Members:
+<ul>
+    <li ng-repeat="member in project.users">{{member.username}}</li>
+</ul>
+
+<hr></hr>
+<h3>Meetings</h3>
+
+<table class="table table-hover">
+
+    <div ng-class="apt.name.length >= 15 ? 'col-md-12' : (apt.name.length >= 10 ? 'col-md-6' : 'col-md-4')">
+
+    <tr style="cursor:pointer" ng-repeat="meeting in project.meetings" ng-class="meeting.status == meetingStatuses.started ? 'success' : (meeting.status == meetingStatuses.unstarted ? 'info' : 'active')" >
+        <td>
+            <span ng-show="meeting.agenda_items.length < 1" ng-click="deleteMeeting(meeting)" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        </td>
+        <td ng-click="goToMeeting(meeting)">
+            <a href="#" style="color: #428bca; border-bottom: dashed 1px #428bca;; text-decoration: none;"> 
+               {{meeting.title}}
+            </a>
+        </td>
+        <td>{{meeting.date | date:'mediumDate'}} @ {{meeting.date | date:'shortTime'}}</td>
+        <td>{{meeting.location}}</td>
+        <td>{{meeting.duration}} mins.</td>
+        <td width="30%">
+            {{meeting.description}}
+        </td>
+    </tr>
+</table>
+
+<h3>Schedule a Meeting</h3>
+
+<div data-ng-show="formError" ng-class="{fade:doFade}" class="alert alert-danger"><strong>Error:</strong> {{errorMessage}}</div>
+
+<form ng-submit="createMeeting()" style="margin-top:30px;">
+    <div class="row">
+        <fieldset class="form-group col-md-6">
+            <label for="meeting-title">Title</label>
+            <input type="text" class="form-control" id="meeting-title" placeholder="Untitled Meeting" ng-model="title"></input>
+        </fieldset>
+
+        <fieldset class="form-group col-md-6">
+            <label for="meeting-attendees">Attendees</label>
+            <tags-input ng-model="attendees" id="meeting-attendees" display-property="username" add-from-autocomplete-only="true" placeholder="Who is coming?">
+                <auto-complete source="autocompleteUsers($query)"></auto-complete>
+            </tags-input>
+        </fieldset>
+    </div>
+
+    <fieldset class="form-group">
+        <label for="meeting-datetime">When</label>
+        <div class="dropdown">
+            <a class="dropdown-toggle" id="meeting-datetime" role="button" data-toggle="dropdown" data-target="#" href="#">
+                <div class="input-group">
+                    <input type="text" placeholder="When is this meeting?" class="form-control" data-ng-model="datetime">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                </div>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+                <datetimepicker data-ng-model="datetime" data-datetimepicker-config="{ dropdownSelector: '#meeting-datetime' }"/>
+            </ul>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group">
+        <label for="meeting-location">Location</label>
+        <input type="text" class="form-control" id="meeting-location" placeholder="Don't forget to book the room!" ng-model="location"></input>
+    </fieldset>
+
+    <fieldset class="form-group">
+        <label for="meeting-location">Description</label>
+        <input type="text" class="form-control" id="meeting-description" placeholder="A short description of your meeting" ng-model="description"></input>
+    </fieldset>
+    
+    <div class="minute-holder">
+        <h2>Your meeting is <input input type="number" max="120" id="meeting-duration" class="form-control ng-pristine ng-untouched ng-valid ng-empty" placeholder="60" ng-model="duration"> minutes</h2>
+    </div>
+
+    <fieldset class="form-group">
+        <button type="submit" class="btn btn-primary">Create</button>
+    </fieldset>
+</form>
