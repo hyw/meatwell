@@ -56,8 +56,8 @@ angular.module('smartMeeting', ['ui.router', 'templates', 'Devise', 'ngTagsInput
       })
       .state('logged-out.meeting', {
         url:'/a/meetings/p/{id}/{access_code}',
-        templateUrl: 'meetings/_show_public.html',
-        controller: 'MeetingPublicCtrl',
+        templateUrl: 'meetings/_show.html',
+        controller: 'MeetingCtrl',
         resolve: {
           meeting: ['$stateParams', 'meetings', function($stateParams, meetings){
             return meetings.getPublic($stateParams.id, $stateParams.access_code);

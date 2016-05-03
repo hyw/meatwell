@@ -1,6 +1,6 @@
 class MeetingsController < ApplicationController
 
-	before_filter :authenticate_user!, except: [:showPublic]
+	before_filter :authenticate_user!, except: [:showPublic, :createPublic]
 
 	def index
 		respond_with Meeting.all
@@ -23,9 +23,15 @@ class MeetingsController < ApplicationController
 		show
 	end
 
+	def createPublic
+		new_access_code = ('a'..'z').to_a.shuffle[0,8].join
+		meeting = Meeting.create(meeting_params.merge(access_code: new_access_code))
+		respond_with meeting
+	end
+
 	def show
 		meeting = Meeting.friendly.find(params[:id])
-		previous_meeting = meeting.project.meetings.where('id < ?', meeting.id).last
+		previous_meeting = meeting.project.meetings.where('id < ?', meeting.id).last if meeting.project
 		if previous_meeting
 			meeting = meeting.as_json
 			meeting["previous_action_items"] =  previous_meeting.action_items

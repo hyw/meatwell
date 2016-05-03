@@ -1,23 +1,16 @@
 angular.module('smartMeeting')
 .controller('MainCtrl', [
 	'$scope',
-	'posts',
-	function($scope, posts){
-		$scope.posts = posts.posts;
-		$scope.addPost = function(){
-			if(!$scope.title || $scope.title === ''){
-				return;
-			}
-			posts.create({
-				title: $scope.title,
-				link: $scope.link
-			});
-			$scope.title = '';
-			$scope.link = '';
-		};
-
-		$scope.incrementUpvotes = function(post){
-			posts.upvote(post);
-		};
+	'meetings',
+  '$location',
+	function($scope, meetings, $location){
+    $scope.createMeeting = function(){
+      meetings.createPublic({
+        title: $scope.title,
+        duration: $scope.duration
+      }).success(function(meeting){
+        $location.path('/a/meetings/p/' + meeting.id + '/' + meeting.access_code);
+      });
+    }
 	}
 ]);

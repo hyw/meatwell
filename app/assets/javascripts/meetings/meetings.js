@@ -16,6 +16,11 @@ angular.module('smartMeeting')
                 o.meetings.push(data);
             });
         };
+        o.createPublic = function(meeting){
+            return $http.post('/meetings/createpublic.json', meeting).success(function(data){
+                o.meetings.push(data);
+            });
+        };
         o.get = function(id){
             return $http.get('/meetings/' + id + '.json').then(function(res){
                 return res.data;

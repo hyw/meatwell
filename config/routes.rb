@@ -28,6 +28,10 @@ Rails.application.routes.draw do
   end
 
   resources :meetings, only: [:create, :index, :show, :update, :destroy] do
+    collection do
+      post '/createpublic' => 'meetings#createPublic'
+    end
+
     member do
       get '/showpublic' => 'meetings#showPublic'
       post '/add_attendees' => 'meetings#addAttendees'
