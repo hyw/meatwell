@@ -1,28 +1,47 @@
 angular.module('smartMeeting')
 .controller('MeetingCtrl', [
   '$scope',
+  '$location',
   'meetings',
   'meeting',
   'users',
   'agendaItems',
   'meetingStatuses',
   'agendaNoteTypes',
-  function($scope, meetings, meeting, users, agendaItems, meetingStatuses, agendaNoteTypes){
+  function($scope, $location, meetings, meeting, users, agendaItems, meetingStatuses, agendaNoteTypes){
     $scope.initialize = function(){
       $scope.meetingStatuses = meetingStatuses;
       $scope.agendaNoteTypes = agendaNoteTypes;
-      $scope.meeting = meeting;
+      $scope.meeting = meeting || $scope.setDefaultMeeting();
       $scope.$watch("meeting", function(newValue, oldValue) {$scope.refreshActionItems();}, true);
       $scope.sortableOption = {
         stop: function(e, ui) {
-          $scope.pauseMeeting(meeting);
+          $scope.pauseMeeting($scope.meeting);
           _.each($scope.meeting.agenda_items, function(item, index, list){
             list[index].ordering = index;
             agendaItems.save(list[index]);
           });
         }
       };
-      $scope.shareableLink = 'http://meatwell.io/a/meetings/p/'+meeting.id+'/'+meeting.access_code;
+      $scope.shareableLink = 'http://meatwell.io/a/meetings/p/'+$scope.meeting.id+'/'+$scope.meeting.access_code;
+    };
+
+    $scope.setDefaultMeeting = function(){
+      return {
+        'title' : 'New Meeting Title',
+        'duration' : 60
+      };
+    };
+
+    $scope.saveMeeting = function(){
+      if($scope.meeting.id){
+        meetings.save($scope.meeting);
+      }else{
+        meetings.createPublic($scope.meeting).success(function(meeting){
+          $scope.meeting = meeting;
+          $location.path('/a/meetings/p/' + meeting.id + '/' + meeting.access_code, false);
+        });
+      }
     };
 
     $scope.startMeeting = function(meeting){

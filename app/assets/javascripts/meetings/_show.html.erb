@@ -1,11 +1,23 @@
 <%= stylesheet_link_tag "meetings/show.css"%>
 
 <div class="page-header">
-	<h3><a href="/a/projects/{{meeting.project.slug}}">{{meeting.project.title}}</a> > {{meeting.title}} <button class="btn" clipboard text="shareableLink">Copy <span class="glyphicon glyphicon-link"></span></button></h3>
+	<h3>
+		<span ng-show="meeting.project"><a href="/a/projects/{{meeting.project.slug}}">{{meeting.project.title}}</a> ></span> 
+		<span>
+			<a href="#" blur="submit" onaftersave="saveMeeting()" buttons="no" editable-text="meeting.title">
+				{{meeting.title}}
+			</a>
+		</span> 
+		<button ng-show="meeting.project" class="btn" clipboard text="shareableLink">Copy <span class="glyphicon glyphicon-link"></span></button>
+	</h3>
 	<h4>{{meeting.description}}</h4>
-	<div class="text-muted"><span>{{meeting.date | date:'mediumDate'}} @ {{meeting.date | date:'shortTime'}}</span> ({{meeting.duration}} mins.) <i><span>{{meeting.location}}</span></i></div>
+	<div class="text-muted">
+		<span ng-show="meeting.date">{{meeting.date | date:'mediumDate'}} @ {{meeting.date | date:'shortTime'}}</span> 
+		<span><a href="#" blur="submit" onaftersave="saveMeeting()" buttons="no" editable-number="meeting.duration">{{meeting.duration}}</a> min.</span>
+		<i><span ng-show="meeting.location">{{meeting.location}}</span></i>
+	</div>
 </div>
-<div class="meeting-attendees" ng-init="attendeesActive = false" ng-class="{ 'active': attendeesActive }" ng-click="attendeesActive = !attendeesActive">
+<div ng-show="meeting.users" class="meeting-attendees" ng-init="attendeesActive = false" ng-class="{ 'active': attendeesActive }" ng-click="attendeesActive = !attendeesActive">
 	Attendees:
 	<ul>
 		<li ng-repeat="attendee in meeting.users">{{attendee.username}}</li>
@@ -14,9 +26,9 @@
         <auto-complete source="autocompleteUsers($query)"></auto-complete>
     </tags-input>
 	<input ng-hide="!attendeesActive" ng-click="$event.stopPropagation(); addAttendees(attendees);" type="submit" class="add-meeting-attendees-submit form-control" value="+" />
+	<hr></hr>
 </div>
 
-<hr></hr>
 <div ng-show="meeting.previous_action_items.length > 1">
 	<h3>Previous Action Items:</h3>
 	<table class="table table-striped table-hover">

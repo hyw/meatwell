@@ -1,6 +1,6 @@
 class MeetingsController < ApplicationController
 
-	before_filter :authenticate_user!, except: [:showPublic, :createPublic]
+	before_filter :authenticate_user!, except: [:showPublic, :createPublic, :update]
 
 	def index
 		respond_with Meeting.all

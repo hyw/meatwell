@@ -36,11 +36,11 @@ angular.module('smartMeeting', ['ui.router', 'templates', 'Devise', 'ngTagsInput
       })
       .state('neutral.home', {
         url: '/home',
-        templateUrl: 'home/_home.html',
-        controller: 'MainCtrl',
+        templateUrl: 'meetings/_show.html',
+        controller: 'MeetingCtrl',
         resolve: {
-          postPromise: ['posts', function(posts){
-            return posts.getAll();
+          meeting: ['$stateParams', 'meetings', function($stateParams, meetings){
+            return null;
           }]
         }
       })

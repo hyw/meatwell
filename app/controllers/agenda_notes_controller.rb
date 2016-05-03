@@ -1,7 +1,5 @@
 class AgendaNotesController < ApplicationController
 
-	before_filter :authenticate_user!, only: [:create, :update]
-
 	def create
 		agendanote = AgendaNote.create(agendanote_params)
 		users = !params[:users].blank? ? params[:users].map{|x| x[:username]} : []
