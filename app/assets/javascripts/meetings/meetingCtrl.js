@@ -1,28 +1,48 @@
 angular.module('smartMeeting')
 .controller('MeetingCtrl', [
   '$scope',
+  '$location',
   'meetings',
   'meeting',
   'users',
   'agendaItems',
   'meetingStatuses',
   'agendaNoteTypes',
-  function($scope, meetings, meeting, users, agendaItems, meetingStatuses, agendaNoteTypes){
+  function($scope, $location, meetings, meeting, users, agendaItems, meetingStatuses, agendaNoteTypes){
     $scope.initialize = function(){
       $scope.meetingStatuses = meetingStatuses;
       $scope.agendaNoteTypes = agendaNoteTypes;
-      $scope.meeting = meeting;
+      $scope.meeting = meeting || $scope.setDefaultMeeting();
       $scope.$watch("meeting", function(newValue, oldValue) {$scope.refreshActionItems();}, true);
       $scope.sortableOption = {
         stop: function(e, ui) {
-          $scope.pauseMeeting(meeting);
+          $scope.pauseMeeting($scope.meeting);
           _.each($scope.meeting.agenda_items, function(item, index, list){
             list[index].ordering = index;
             agendaItems.save(list[index]);
           });
         }
       };
-      $scope.shareableLink = 'http://meatwell.io/a/meetings/p/'+meeting.id+'/'+meeting.access_code;
+      $scope.shareableLink = 'http://meatwell.io/a/meetings/p/'+$scope.meeting.id+'/'+$scope.meeting.access_code;
+    };
+
+    $scope.setDefaultMeeting = function(){
+      return {
+        'title' : 'New Meeting Title',
+        'duration' : 60,
+        'description' : 'What is the purpose of this meeting?'
+      };
+    };
+
+    $scope.saveMeeting = function(){
+      if($scope.meeting.id){
+        return meetings.save($scope.meeting);
+      }else{
+        return meetings.createPublic($scope.meeting).success(function(meeting){
+          $scope.meeting = meeting;
+          $location.path('/a/meetings/p/' + meeting.id + '/' + meeting.access_code, false);
+        });
+      }
     };
 
     $scope.startMeeting = function(meeting){
@@ -65,16 +85,31 @@ angular.module('smartMeeting')
     };
 
     $scope.createAgendaItem = function(){
-      if($scope.title && $scope.title !== ''){
-        agendaItems.create({
-          meeting_id: $scope.meeting.id,
-          title: $scope.title,
-          duration: $scope.duration || 15
-        }).success(function(agendaitem){
-          $scope.meeting.agenda_items.push(agendaitem);
-          $('.agenda-item-form .title').focus();
-          $scope.checkIfAgendaIsTooLong();
-        });
+      if($scope.itemtitle && $scope.itemtitle !== ''){
+        if(!$scope.meeting.id){
+          $scope.saveMeeting().then(function(){
+            return agendaItems.create({
+              meeting_id: $scope.meeting.id,
+              title: $scope.itemtitle,
+              duration: $scope.itemduration || 15
+            }).success(function(agendaitem){
+              $scope.meeting.agenda_items.push(agendaitem);
+              $('.agenda-item-form .title').focus();
+              $scope.checkIfAgendaIsTooLong();
+            });
+          });
+        }else{
+          agendaItems.create({
+            meeting_id: $scope.meeting.id,
+            title: $scope.itemtitle,
+            duration: $scope.itemduration || 15
+          }).success(function(agendaitem){
+            $scope.meeting.agenda_items.push(agendaitem);
+            $('.agenda-item-form .title').focus();
+            $scope.checkIfAgendaIsTooLong();
+          });
+
+        }
         $scope.title = '';
         $scope.duration = '';
       }
@@ -111,13 +146,16 @@ angular.module('smartMeeting')
       return users.search(query);
     };
 
-    $scope.addAttendees = function(attendees){
-      if (attendees) {
-        meetings.addAttendees($scope.meeting.id, {
-          attendees: attendees
-        }).success(function(res){
-          $scope.meeting.users = res.users;
-          $scope.attendees = "";
+    $scope.addAttendee = function(attendee){
+      if(!$scope.meeting.id){
+        $scope.saveMeeting().then(function(){
+          return meetings.addAttendee($scope.meeting.id, {
+            attendee_email: attendee.email
+          });
+        });
+      }else{
+        meetings.addAttendee($scope.meeting.id, {
+          attendee_email: attendee.email
         });
       }
     };

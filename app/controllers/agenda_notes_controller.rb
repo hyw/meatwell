@@ -1,12 +1,15 @@
 class AgendaNotesController < ApplicationController
 
-	before_filter :authenticate_user!, only: [:create, :update]
-
 	def create
 		agendanote = AgendaNote.create(agendanote_params)
-		users = !params[:users].blank? ? params[:users].map{|x| x[:username]} : []
-		users.each do |user|
-			user = User.find_by_username(user)
+		users = !params[:users].blank? ? params[:users].map{|x| x[:email]} : []
+		users.each do |user_email|
+			user = User.find_by_email(user_email)
+			if !user
+				user = User.new(:email => user_email)
+				user.skip_password_validation = true
+				user.save
+			end
 			AgendaNoteUser.create('user_id'=>user.id, 'agenda_note_id'=>agendanote.id)
 		end
 		respond_with agendanote

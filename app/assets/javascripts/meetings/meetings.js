@@ -49,14 +49,15 @@ angular.module('smartMeeting')
             return $http.delete('/meetings/' + id + '.json');
         };
 
-        o.addAttendees = function(id, attendees){
-            return $http.post('/meetings/' + id + '/add_attendees.json', attendees);
+        o.addAttendee = function(id, attendee_email){
+            return $http.post('/meetings/' + id + '/add_attendee.json', attendee_email);
         };
 
         o.start = function(meeting){
             if (meeting.status === meetingStatuses.unstarted) { // if this is the first time this meeting was started
                 meeting.status = meetingStatuses.started;
                 meeting.started_at = new Date().toISOString();
+                meeting.date = new Date().toISOString();
                 o.save(meeting);
             }
         };

@@ -2,19 +2,16 @@ td{
 	padding-top:10px;
 }
 
-.add-meeting-attendees-auto-complete {
-	display: inline-block;
-	margin-left: 40px;
-	margin-right: 10px;
-	width: 40%;
+.buttons-container{
+	margin-left:10px; 
+	display:inline-block; 
+	vertical-align:super
 }
 
-.add-meeting-attendees-submit {
+.meeting-attendees {
 	display: inline-block;
-	width: 30px;
-	padding-left: 10px;
-	position: relative;
-	top: -12px;
+	margin-right: 10px;
+	width: 50%;
 }
 
 .agenda-notes{
@@ -78,7 +75,7 @@ td{
 }
 
 .new-agenda-note-form .due-date{
-	width:50px; 
+	width:100px; 
 	padding-left:10px;
 }
 
@@ -92,7 +89,7 @@ td{
 }
 
 .editable-number .form-control{
-    width:43px;
+    width:50px;
 }
 
 .editable-text .form-control{

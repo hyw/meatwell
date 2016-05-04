@@ -1,0 +1,20 @@
+.page-header {
+	margin-top: 0;
+	margin-bottom: 30px;
+	padding-top: 20px;
+	padding-bottom: 30px;
+}
+
+.page-header-logo {
+	margin: 0;
+	height: 80px;
+	display: inline-block;
+}
+
+.page-header-title {
+	display: inline-block;
+	line-height: 80px;
+	margin: 0;
+	vertical-align: middle;
+	margin-left: 15px;
+}

@@ -36,8 +36,13 @@ angular.module('smartMeeting', ['ui.router', 'templates', 'Devise', 'ngTagsInput
       })
       .state('neutral.home', {
         url: '/',
-        templateUrl: 'home/_home.html',
-        controller: 'MainCtrl'
+        templateUrl: 'meetings/_show.html',
+        controller: 'MeetingCtrl',
+        resolve: {
+          meeting: ['$stateParams', 'meetings', function($stateParams, meetings){
+            return null;
+          }]
+        }
       })
       .state('neutral.org', {
         url: '/{org}',
@@ -46,6 +51,7 @@ angular.module('smartMeeting', ['ui.router', 'templates', 'Devise', 'ngTagsInput
         resolve: {
           meeting: ['$stateParams', 'meetings', function($stateParams, meetings){
             return meetings.getOrgMeetings($stateParams.org);
+
           }]
         }
       })

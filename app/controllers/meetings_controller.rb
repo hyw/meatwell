@@ -1,7 +1,5 @@
 class MeetingsController < ApplicationController
 
-	before_filter :authenticate_user!, except: [:showPublic, :createPublic, :showOrg]
-
 	def index
 		respond_with Meeting.all
 	end
@@ -59,17 +57,15 @@ class MeetingsController < ApplicationController
 		respond_with meeting
 	end
 
-	def addAttendees
-		meeting = Meeting.find(params[:id])
-		attendees = params[:attendees].map{|x| x[:username]}
-		attendees.each do |username|
-			user = User.find_by_username(username)
-			if meeting.users.exclude?(user)
-				Attendee.create('user_id'=>user.id, 'meeting_id'=>params[:id])
-			end
+	def addAttendee
+		user = User.find_by_email(params[:attendee_email])
+		if !user
+			user = User.new(:email => params[:attendee_email])
+			user.skip_password_validation = true
+			user.save
 		end
-		meeting.reload
-		respond_with meeting
+		Attendee.create('user_id'=>user.id, 'meeting_id'=>params[:id]) if user
+		render :json => user
 	end
 
 	private

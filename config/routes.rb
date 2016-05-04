@@ -35,7 +35,7 @@ Rails.application.routes.draw do
 
     member do
       get '/showpublic' => 'meetings#showPublic'
-      post '/add_attendees' => 'meetings#addAttendees'
+      post '/add_attendee' => 'meetings#addAttendee'
     end
   end
 

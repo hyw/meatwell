@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
+  attr_accessor :skip_password_validation
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
@@ -23,6 +24,13 @@ class User < ActiveRecord::Base
       organization = Organization.create(:code => domain_name, :name=> domain_name)
       self.organization_users.create(:organization_id => organization.id)
     end
+  end
+
+  protected
+
+  def password_required?
+    return false if skip_password_validation
+    super
   end
 
 end

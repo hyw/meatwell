@@ -7,23 +7,21 @@ angular.module('smartMeeting')
             agendaItem: '=agendaItem',
             noteTypes: '=noteTypes'
         },
-        template: '<tr>\
-                    <td class="delete-icon">\
+        template: '<td class="delete-icon">\
                         <span ng-click="removeAgendaNote()" class="glyphicon glyphicon-remove" aria-hidden="true"></span>\
                     </td>\
                     <td class="note-type-select">\
                         <a href="#" onaftersave="saveAgendaNote()" buttons="no" editable-select="agendaNote.note_type" e-ng-options="t.value as t.text for t in noteTypes">{{noteTypeLabel}}</a>\
                     </td>\
-                    <td>\
-                        <a href="#" blur="submit" onaftersave="saveAgendaNote()" buttons="no" editable-text="agendaNote.body">{{agendaNote.body}}</a>\
+                    <td class="body">\
+                        <a href="#" style="white-space:pre" blur="submit" onaftersave="saveAgendaNote()" buttons="no" editable-textarea="agendaNote.body">{{agendaNote.body}}</a>\
                     </td>\
                     <td class="users" ng-show="agendaNote.note_type == 1">\
-                        <span ng-repeat="user in agendaNote.users">{{user.username}}, </span>\
+                        <span ng-repeat="user in agendaNote.users">{{user.email}}, </span>\
                     </td>\
                     <td class="due-date" ng-show="agendaNote.note_type == 1">\
                         {{agendaNote.due_date | date:\'shortDate\'}}\
-                    </td>\
-                </tr>',
+                    </td>',
 
         link: function ( scope, element, attrs ) {
 

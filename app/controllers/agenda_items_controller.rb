@@ -1,7 +1,5 @@
 class AgendaItemsController < ApplicationController
 
-	before_filter :authenticate_user!, only: [:create, :update]
-
 	def index
 		respond_with AgendaItem.all
 	end

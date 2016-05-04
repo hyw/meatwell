@@ -1,14 +1,8 @@
 <%= stylesheet_link_tag "home/show.css"%>
 
-<div class="page-header">
-    <%= image_tag("meat-icon.png", :class => "page-header-logo") %>
-    <h2 class="page-header-title">Your Meetings, well-done.</h2>
-</div>
-
 <p ng-show="organization_name" class="organization-title lead">All of <strong>{{ organization_name }}</strong>'s meetings:</p>
-<p ng-hide="organization_name" class="organization-title lead">All of <strong>your</strong> meetings:</p>
 
-<table class="table table-hover meetings-table">
+<table ng-show="organization_name" class="table table-hover meetings-table">
     <thead>
         <tr>
             <th>Title</th>
@@ -39,7 +33,7 @@
 </table>
 
 
-<!-- <form ng-submit="createMeeting()" class="form-inline">
+<form ng-hide="organization_name" ng-submit="createMeeting()" class="form-inline">
     <div class="form-group title-form-group">
         <label class="sr-only" for="meeting-title">Meeting title</label>
         <input type="text" class="form-control" id="meeting-title" placeholder="Meeting title" ng-model="title" />
@@ -55,4 +49,4 @@
     <div class="form-group">
         <button type="submit" class="btn btn-default">Create</button>
     </div>
-</form> -->
+</form>
