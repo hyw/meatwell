@@ -29,4 +29,5 @@
 //= require app.js
 //= require angular-ui-sortable
 //= require angular-clipboard
+//= require angular-elastic
 //= require_tree .

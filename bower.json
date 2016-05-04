@@ -29,7 +29,8 @@
     "angular-xeditable": "^0.1.12",
     "angular-bootstrap-datetimepicker": "^1.0.1",
     "angular-ui-sortable": "^0.14.0",
-    "angular-clipboard": "^1.4.1"
+    "angular-clipboard": "^1.4.1",
+    "angular-elastic": "^2.5.1"
   },
   "resolutions": {
     "angular": "^1.5.0"
