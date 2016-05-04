@@ -1,0 +1,51 @@
+<link rel="stylesheet" media="screen" href="/assets/home/show-7826f036998cb42eff7d8b3d794e46bb541f469b7e70b9e89bc5e35762a8ae1e.css" />
+<p ng-show="organization_name" class="organization-title lead">All of <strong>{{ organization_name }}</strong>'s meetings:</p>
+
+<table ng-show="organization_name" class="table table-hover meetings-table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Duration</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="meeting in meetings">
+            <td class="title-td">{{ meeting.title }}</td>
+            <td class="duration-td">{{ meeting.duration }}</td>
+        </tr>
+        <tr ng-form>
+            <td class="title-form-td title-td">
+                <div class="form-group title-form-group">
+                    <input ng-enter="createMeeting()" type="text" class="form-control meeting-title" id="meeting-title" placeholder="Meeting title" ng-model="title" />
+                </div>
+            </td>
+            <td class="duration-form-td">
+                <div class="form-group duration-form-group">
+                    <div class="input-group">
+                        <input ng-enter="createMeeting()" input type="number" max="120" id="meeting-duration" class="form-control meeting-duration" placeholder="60" ng-model="duration">
+                        <div class="input-group-addon">mins.</div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+<form ng-hide="organization_name" ng-submit="createMeeting()" class="form-inline">
+    <div class="form-group title-form-group">
+        <label class="sr-only" for="meeting-title">Meeting title</label>
+        <input type="text" class="form-control" id="meeting-title" placeholder="Meeting title" ng-model="title" />
+    </div>
+    <div class="form-group">
+        <label class="sr-only" for="meeting-duration">Meeting duration</label>
+        <div class="input-group">
+            <input input type="number" max="120" id="meeting-duration" class="form-control ng-pristine ng-untouched ng-valid ng-empty" placeholder="60" ng-model="duration">
+            <div class="input-group-addon">mins.</div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-default">Create</button>
+    </div>
+</form>
