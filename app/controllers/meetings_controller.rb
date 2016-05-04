@@ -1,6 +1,6 @@
 class MeetingsController < ApplicationController
 
-	before_filter :authenticate_user!, except: [:showPublic, :createPublic]
+	before_filter :authenticate_user!, except: [:showPublic, :createPublic, :showOrg]
 
 	def index
 		respond_with Meeting.all
@@ -38,6 +38,13 @@ class MeetingsController < ApplicationController
 		end
 
 		respond_with meeting
+	end
+
+	def showOrg
+		# query for all meetings that users of given organization belong to
+		meetings = Meeting.includes(users: :organizations).where('organizations.name' => params[:org])
+		respond_with meetings
+		# render json: meetings.to_json
 	end
 
 	def destroy

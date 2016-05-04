@@ -1,26 +1,57 @@
-<%= stylesheet_link_tag "projects/show.css"%>
+<%= stylesheet_link_tag "home/show.css"%>
 
 <div class="page-header">
-  <h1>Meat</h1>
-</div>
-<div style="text-align:center">
-  <%= image_tag "meat-icon.png" %>
-  <h2>Meetings, well-done.</h2>
+    <%= image_tag("meat-icon.png", :class => "page-header-logo") %>
+    <h2 class="page-header-title">Your Meetings, well-done.</h2>
 </div>
 
-<form ng-submit="createMeeting()" style="margin-top:30px;">
-    <div class="row">
-        <fieldset class="form-group col-md-6">
-            <label for="meeting-title">Title</label>
-            <input type="text" class="form-control" id="meeting-title" placeholder="Untitled Meeting" ng-model="title"></input>
-        </fieldset>
+<p class="organization-title lead">All of <strong>{{ organization_name }}</strong>'s meetings:</p>
+
+<table ng-show="meetings.length > 0" class="table table-hover meetings-table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Duration</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="meeting in meetings">
+            <td>{{ meeting.title }}</td>
+            <td class="duration-td">{{ meeting.duration }}</td>
+        </tr>
+        <tr ng-form>
+            <td class="title-form-td">
+                <div class="form-group title-form-group">
+                    <input ng-enter="createMeeting()" type="text" class="form-control meeting-title" id="meeting-title" placeholder="Meeting title" ng-model="title" />
+                </div>
+            </td>
+            <td class="duration-form-td">
+                <div class="form-group duration-form-group">
+                    <div class="input-group">
+                        <input ng-enter="createMeeting()" input type="number" max="120" id="meeting-duration" class="form-control meeting-duration" placeholder="60" ng-model="duration">
+                        <div class="input-group-addon">mins.</div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+<!-- <form ng-submit="createMeeting()" class="form-inline">
+    <div class="form-group title-form-group">
+        <label class="sr-only" for="meeting-title">Meeting title</label>
+        <input type="text" class="form-control" id="meeting-title" placeholder="Meeting title" ng-model="title" />
+    </div>
+    <div class="form-group">
+        <label class="sr-only" for="meeting-duration">Meeting duration</label>
+        <div class="input-group">
+            <input input type="number" max="120" id="meeting-duration" class="form-control ng-pristine ng-untouched ng-valid ng-empty" placeholder="60" ng-model="duration">
+            <div class="input-group-addon">mins.</div>
+        </div>
     </div>
 
-    <div class="minute-holder">
-        <h2>Your meeting is <input input type="number" max="120" id="meeting-duration" class="form-control ng-pristine ng-untouched ng-valid ng-empty" placeholder="60" ng-model="duration"> minutes</h2>
+    <div class="form-group">
+        <button type="submit" class="btn btn-default">Create</button>
     </div>
-
-    <fieldset class="form-group">
-        <button type="submit" class="btn btn-primary">Create</button>
-    </fieldset>
-</form>
+</form> -->

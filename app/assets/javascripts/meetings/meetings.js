@@ -32,6 +32,13 @@ angular.module('smartMeeting')
             });
         };
 
+        o.getOrgMeetings = function(org) {
+            return $http.get('/meetings/showorg.json?org=' + org).success(function(data){
+                angular.copy(data, o.meetings);
+                o.organization_name = org;
+            });
+        };
+
         o.save = function(meeting){
             return $http.put('/meetings/' + meeting.id + '.json', meeting).success(function(res){
                 return res.data;

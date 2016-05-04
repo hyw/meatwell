@@ -1,0 +1,83 @@
+.page-header {
+	margin-top: 0;
+	margin-bottom: 30px;
+	padding-top: 20px;
+	padding-bottom: 30px;
+}
+
+.page-header-logo {
+	margin: 0;
+	height: 80px;
+	display: inline-block;
+}
+
+.page-header-title {
+	display: inline-block;
+	line-height: 80px;
+	margin: 0;
+	vertical-align: middle;
+	margin-left: 15px;
+}
+
+.organization-title {
+	padding-left: 8px;
+}
+
+.meetings-table .duration-td {
+	border-left: 1px solid #ccc;
+}
+
+.table > tbody > tr > td.title-form-td {
+	padding: 0;
+}
+
+.title-form-group {
+	margin: 0;
+}
+
+.title-form-group .meeting-title {
+	width: 100%;
+	border: 0;
+	border-radius: 0;
+	box-shadow: none;
+	height: 36px;
+	padding-left: 8px;
+}
+
+.table > tbody > tr > td.duration-form-td {
+	padding: 0;
+}
+
+.duration-form-group {
+	margin: 0;
+	width: 1px;
+}
+
+.duration-form-group .input-group {
+	width: 1px;
+}
+
+.duration-form-group .meeting-duration {
+	width: 115px;
+	border: 0;
+	border-left: 1px solid #ccc;
+	border-radius: 0;
+	box-shadow: none;
+	height: 36px;
+	padding-left: 8px;
+}
+
+.duration-form-group .input-group-addon {
+	border-left: 1px solid #ccc;
+	border-top: 0;
+	border-right: 0;
+	border-bottom: 0;
+	border-radius: 0;
+}
+
+input.meeting-title:focus,
+input.meeting-duration:focus,
+input.meeting-title:hover,
+input.meeting-duration:hover {
+	background-color: #FFC;
+}

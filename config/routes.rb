@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   resources :meetings, only: [:create, :index, :show, :update, :destroy] do
     collection do
       post '/createpublic' => 'meetings#createPublic'
+      get '/showorg' => 'meetings#showOrg'
     end
 
     member do

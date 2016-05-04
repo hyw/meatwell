@@ -6,18 +6,18 @@ angular.module('smartMeeting', ['ui.router', 'templates', 'Devise', 'ngTagsInput
   function($stateProvider, $urlRouterProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
     $stateProvider
-      .state('logged-in', {
-        abstract: true,
-        template: '<div ui-view></div>',
-        data: {
-          requireLogin: true
-        },
-        resolve: {
-          currentUser: ['Auth', function(Auth){
-            return Auth.currentUser();
-          }]
-        }
-      })
+      // .state('logged-in', {
+      //   abstract: true,
+      //   template: '<div ui-view></div>',
+      //   data: {
+      //     requireLogin: true
+      //   },
+      //   resolve: {
+      //     currentUser: ['Auth', function(Auth){
+      //       return Auth.currentUser();
+      //     }]
+      //   }
+      // })
       .state('logged-out', {
         abstract: true,
         template: '<div ui-view></div>',
@@ -35,12 +35,17 @@ angular.module('smartMeeting', ['ui.router', 'templates', 'Devise', 'ngTagsInput
         }
       })
       .state('neutral.home', {
-        url: '/home',
+        url: '/',
+        templateUrl: 'home/_home.html',
+        controller: 'MainCtrl'
+      })
+      .state('neutral.org', {
+        url: '/{org}',
         templateUrl: 'home/_home.html',
         controller: 'MainCtrl',
         resolve: {
-          postPromise: ['posts', function(posts){
-            return posts.getAll();
+          meeting: ['$stateParams', 'meetings', function($stateParams, meetings){
+            return meetings.getOrgMeetings($stateParams.org);
           }]
         }
       })
@@ -63,39 +68,39 @@ angular.module('smartMeeting', ['ui.router', 'templates', 'Devise', 'ngTagsInput
             return meetings.getPublic($stateParams.id, $stateParams.access_code);
           }]
         }
-      })
-      .state('logged-in.projects', {
-        url: '/a/projects',
-        templateUrl: 'projects/_index.html',
-        controller: 'ProjectsCtrl',
-        resolve: {
-          projectsPromise: ['currentUser', 'projects', function(currentUser, projects){
-            projects.setCurrentUser(currentUser);
-            return projects.getAll();
-          }]
-        }
-      })
-      .state('logged-in.project', {
-        url: '/a/projects/{id}',
-        templateUrl: 'projects/_show.html',
-        controller: 'ProjectCtrl',
-        resolve: {
-          project: ['$stateParams','projects', 'currentUser', function($stateParams, projects, currentUser){
-              projects.setCurrentUser(currentUser);
-              return projects.get($stateParams.id);
-          }]
-        }
-      })
-      .state('logged-in.meeting', {
-        url: '/a/meetings/{id}',
-        templateUrl: 'meetings/_show.html',
-        controller: 'MeetingCtrl',
-        resolve: {
-          meeting: ['$stateParams', 'meetings', 'currentUser', function($stateParams, meetings, currentUser){
-            return meetings.get($stateParams.id);
-          }]
-        }
       });
+      // .state('logged-in.projects', {
+      //   url: '/a/projects',
+      //   templateUrl: 'projects/_index.html',
+      //   controller: 'ProjectsCtrl',
+      //   resolve: {
+      //     projectsPromise: ['currentUser', 'projects', function(currentUser, projects){
+      //       projects.setCurrentUser(currentUser);
+      //       return projects.getAll();
+      //     }]
+      //   }
+      // })
+      // .state('logged-in.project', {
+      //   url: '/a/projects/{id}',
+      //   templateUrl: 'projects/_show.html',
+      //   controller: 'ProjectCtrl',
+      //   resolve: {
+      //     project: ['$stateParams','projects', 'currentUser', function($stateParams, projects, currentUser){
+      //         projects.setCurrentUser(currentUser);
+      //         return projects.get($stateParams.id);
+      //     }]
+      //   }
+      // })
+      // .state('logged-in.meeting', {
+      //   url: '/a/meetings/{id}',
+      //   templateUrl: 'meetings/_show.html',
+      //   controller: 'MeetingCtrl',
+      //   resolve: {
+      //     meeting: ['$stateParams', 'meetings', 'currentUser', function($stateParams, meetings, currentUser){
+      //       return meetings.get($stateParams.id);
+      //     }]
+      //   }
+      // });
  
     $urlRouterProvider.otherwise('home');
   }
