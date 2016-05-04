@@ -27,6 +27,10 @@
 	border-left: 1px solid #ccc;
 }
 
+.meetings-table .title-td {
+	width: 558px;
+}
+
 .table > tbody > tr > td.title-form-td {
 	padding: 0;
 }

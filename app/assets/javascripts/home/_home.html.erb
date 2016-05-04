@@ -5,9 +5,10 @@
     <h2 class="page-header-title">Your Meetings, well-done.</h2>
 </div>
 
-<p class="organization-title lead">All of <strong>{{ organization_name }}</strong>'s meetings:</p>
+<p ng-show="organization_name" class="organization-title lead">All of <strong>{{ organization_name }}</strong>'s meetings:</p>
+<p ng-hide="organization_name" class="organization-title lead">All of <strong>your</strong> meetings:</p>
 
-<table ng-show="meetings.length > 0" class="table table-hover meetings-table">
+<table class="table table-hover meetings-table">
     <thead>
         <tr>
             <th>Title</th>
@@ -16,11 +17,11 @@
     </thead>
     <tbody>
         <tr ng-repeat="meeting in meetings">
-            <td>{{ meeting.title }}</td>
+            <td class="title-td">{{ meeting.title }}</td>
             <td class="duration-td">{{ meeting.duration }}</td>
         </tr>
         <tr ng-form>
-            <td class="title-form-td">
+            <td class="title-form-td title-td">
                 <div class="form-group title-form-group">
                     <input ng-enter="createMeeting()" type="text" class="form-control meeting-title" id="meeting-title" placeholder="Meeting title" ng-model="title" />
                 </div>
