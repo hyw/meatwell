@@ -11,7 +11,7 @@
     </thead>
     <tbody>
         <tr ng-repeat="meeting in meetings">
-            <td class="title-td">{{ meeting.title }}</td>
+            <td class="title-td">{{ meeting.title }} <a class="meeting-link" href="http://meatwell.io/meeting/{{ meeting.access_code }}"><span class="glyphicon glyphicon-link"></span></a></td>
             <td class="duration-td">{{ meeting.duration }}</td>
         </tr>
         <tr ng-form>
