@@ -30,8 +30,6 @@
 <div class="meeting-description-div"><a href="#" blur="submit" onaftersave="saveMeeting()" buttons="no" editable-text="meeting.description">{{meeting.description}}</a></div>
 <div class="meeting-attendees-div"><tags-input ng-model="meeting.users" id="meeting-attendees" display-property="email" placeholder="Add more attendees" add-on-enter="true" add-on-space="true" add-on-comma="true" add-on-blur="true" on-tag-added="addAttendee($tag)"></tags-input></div>
 
-<hr></hr>
-
 <div ng-show="meeting.previous_action_items.length > 1">
 	<h3>Previous Action Items:</h3>
 	<table class="table table-striped table-hover">
@@ -49,7 +47,7 @@
 </div>
 
 
-<h3>Agenda</h3>
+<h3 class="agenda-items-title">Agenda</h3>
 <ol class="agenda-items" ui-sortable="sortableOption" ng-model="meeting.agenda_items">
 	<li ng-repeat="item in meeting.agenda_items" class="agenda-item" ng-click="startItem(item)" ng-class="{ 'agenda-item-active': item.active }" >
 		<div class="agenda-item-progress-bar" ng-class="{'agenda-item-progress-overtime' : (item.countdown < 0) }" style="width: {{ item | secondsToWidthPercentage }}%"></div>
@@ -84,13 +82,9 @@
 	</li>
 </ol>
 
-<br/>
-
-<div ng-show="action_items.length > 0"class="action-items">
-	<hr></hr>
-	<h3>Action Items:</h3>
-	<br/>
-	<table class="table table-striped table-hover">
+<div ng-show="action_items.length > 0" class="action-items">
+	<h3 class="action-items-title">Action Items</h3>
+	<table class="table table-hover">
 		<tr ng-repeat="item in action_items">
 			<td style="white-space:pre;"><span class="glyphicon glyphicon-pushpin"></span> {{item.body}}</td>
 			<td class="users">
