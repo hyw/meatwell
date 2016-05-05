@@ -68,6 +68,13 @@ class MeetingsController < ApplicationController
 		render :json => user
 	end
 
+	def send_minutes
+		meeting = Meeting.find(params[:id])
+		meeting.attendees each do |attendee|
+			UserMailer.send_minutes(attendee.user_id, meeting)
+		end
+	end
+
 	private
 
 	def meeting_params

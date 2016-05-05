@@ -110,8 +110,8 @@ angular.module('smartMeeting')
           });
 
         }
-        $scope.title = '';
-        $scope.duration = '';
+        $scope.itemtitle = '';
+        $scope.itemduration = '';
       }
     };
 

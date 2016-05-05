@@ -27,7 +27,6 @@ class UsersController < ApplicationController
   	calendar_client = GoogleLib::Calendar.new current_user.id
   	events = calendar_client.get_all_visible_events
   	respond_with events
-
   end
 
 end

@@ -18,8 +18,26 @@ td{
 	width:100%;
 }
 
+.agenda-notes .body{
+	min-width:400px;
+}
+
+.agenda-notes form{
+	width:100%;
+}
+
+.agenda-notes .form-group{
+	width:100%;
+}
+
+.agenda-notes .editable-input{
+	width:100%;
+}
+
 .agenda-notes td{
 	padding-left:10px;
+	padding-bottom:10px;
+	border-bottom: 1px dashed #ddd;
 }
 
 .agenda-item{
