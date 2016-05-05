@@ -31,10 +31,10 @@ Rails.application.routes.draw do
     collection do
       post '/createpublic' => 'meetings#createPublic'
       get '/showorg' => 'meetings#showOrg'
+      get '/showpublic' => 'meetings#showPublic'
     end
 
     member do
-      get '/showpublic' => 'meetings#showPublic'
       post '/add_attendee' => 'meetings#addAttendee'
     end
   end

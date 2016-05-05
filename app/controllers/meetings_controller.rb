@@ -16,9 +16,14 @@ class MeetingsController < ApplicationController
 	end
 
 	def showPublic
-		meeting = Meeting.friendly.find(params[:id])
-		return if params[:access_code] != meeting.access_code
-		show
+		meeting = Meeting.find_by access_code: params[:access_code]
+		previous_meeting = meeting.project.meetings.where('id < ?', meeting.id).last if meeting.project
+		if previous_meeting
+			meeting = meeting.as_json
+			meeting["previous_action_items"] =  previous_meeting.action_items
+		end
+
+		respond_with meeting
 	end
 
 	def createPublic

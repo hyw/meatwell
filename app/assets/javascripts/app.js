@@ -18,95 +18,52 @@ angular.module('smartMeeting', ['ui.router', 'templates', 'Devise', 'ngTagsInput
       //     }]
       //   }
       // })
-      .state('logged-out', {
-        abstract: true,
-        template: '<div ui-view></div>',
-        data: {
-          requireLogin: false,
-          requireLogout: true
-        }
-      })
-      .state('neutral', {
-        abstract: true,
-        template: '<div ui-view></div>',
-        data: {
-          requireLogin: false,
-          requireLogout: false
-        }
-      })
-      .state('neutral.home', {
-        url: '/',
-        templateUrl: 'meetings/_show.html',
-        controller: 'MeetingCtrl',
-        resolve: {
-          meeting: ['$stateParams', 'meetings', function($stateParams, meetings){
-            return null;
-          }]
-        }
-      })
-      .state('neutral.org', {
-        url: '/{org}',
-        templateUrl: 'home/_home.html',
-        controller: 'MainCtrl',
-        resolve: {
-          meeting: ['$stateParams', 'meetings', function($stateParams, meetings){
-            return meetings.getOrgMeetings($stateParams.org);
-
-          }]
-        }
-      })
-      .state('logged-out.login', {
-        url: '/login',
-        templateUrl: 'auth/_login.html',
-        controller: 'AuthCtrl'
-      })
-      .state('logged-out.register', {
-        url: '/register',
-        templateUrl: 'auth/_register.html',
-        controller: 'AuthCtrl'
-      })
-      .state('logged-out.meeting', {
-        url:'/a/meetings/p/{id}/{access_code}',
-        templateUrl: 'meetings/_show.html',
-        controller: 'MeetingCtrl',
-        resolve: {
-          meeting: ['$stateParams', 'meetings', function($stateParams, meetings){
-            return meetings.getPublic($stateParams.id, $stateParams.access_code);
-          }]
-        }
-      });
-      // .state('logged-in.projects', {
-      //   url: '/a/projects',
-      //   templateUrl: 'projects/_index.html',
-      //   controller: 'ProjectsCtrl',
-      //   resolve: {
-      //     projectsPromise: ['currentUser', 'projects', function(currentUser, projects){
-      //       projects.setCurrentUser(currentUser);
-      //       return projects.getAll();
-      //     }]
-      //   }
-      // })
-      // .state('logged-in.project', {
-      //   url: '/a/projects/{id}',
-      //   templateUrl: 'projects/_show.html',
-      //   controller: 'ProjectCtrl',
-      //   resolve: {
-      //     project: ['$stateParams','projects', 'currentUser', function($stateParams, projects, currentUser){
-      //         projects.setCurrentUser(currentUser);
-      //         return projects.get($stateParams.id);
-      //     }]
-      //   }
-      // })
-      // .state('logged-in.meeting', {
-      //   url: '/a/meetings/{id}',
-      //   templateUrl: 'meetings/_show.html',
-      //   controller: 'MeetingCtrl',
-      //   resolve: {
-      //     meeting: ['$stateParams', 'meetings', 'currentUser', function($stateParams, meetings, currentUser){
-      //       return meetings.get($stateParams.id);
-      //     }]
-      //   }
-      // });
+    .state('logged-out', {
+      abstract: true,
+      template: '<div ui-view></div>',
+      data: {
+        requireLogin: false,
+        requireLogout: true
+      }
+    })
+    .state('neutral', {
+      abstract: true,
+      template: '<div ui-view></div>',
+      data: {
+        requireLogin: false,
+        requireLogout: false
+      }
+    })
+    .state('neutral.home', {
+      url: '/',
+      templateUrl: 'meetings/_show.html',
+      controller: 'MeetingCtrl',
+      resolve: {
+        meeting: ['$stateParams', 'meetings', function($stateParams, meetings){
+          return null;
+        }]
+      }
+    })
+    .state('neutral.org', {
+      url: '/{org}',
+      templateUrl: 'home/_home.html',
+      controller: 'MainCtrl',
+      resolve: {
+        meeting: ['$stateParams', 'meetings', function($stateParams, meetings){
+          return meetings.getOrgMeetings($stateParams.org);
+        }]
+      }
+    })
+    .state('neutral.meeting', {
+      url:'/meeting/{access_code}',
+      templateUrl: 'meetings/_show.html',
+      controller: 'MeetingCtrl',
+      resolve: {
+        meeting: ['$stateParams', 'meetings', function($stateParams, meetings){
+          return meetings.getPublic($stateParams.access_code);
+        }]
+      }
+    });
  
     $urlRouterProvider.otherwise('home');
   }

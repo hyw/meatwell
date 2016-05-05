@@ -26,8 +26,8 @@ angular.module('smartMeeting')
                 return res.data;
             });
         };
-        o.getPublic = function(id, access_code){
-            return $http.get('/meetings/' + id + '/showpublic.json?access_code='+access_code).then(function(res){
+        o.getPublic = function(access_code){
+            return $http.get('/meetings/showpublic.json?access_code='+access_code).then(function(res){
                 return res.data;
             });
         };

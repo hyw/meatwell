@@ -21,7 +21,7 @@ angular.module('smartMeeting')
         };
 
         validateCreateMeetingForm = function(){
-            return $scope.title != null && $scope.duration != null; // http://stackoverflow.com/a/2647888
+            return $scope.title != null && $scope.title !== "" && $scope.duration != null; // http://stackoverflow.com/a/2647888
         };
 	}
 ])

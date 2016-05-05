@@ -2,7 +2,7 @@
 
 <p ng-show="organization_name" class="organization-title lead">All of <strong>{{ organization_name }}</strong>'s meetings:</p>
 
-<table ng-show="organization_name" class="table table-hover meetings-table">
+<table class="table table-hover meetings-table">
     <thead>
         <tr>
             <th>Title</th>
@@ -31,22 +31,3 @@
         </tr>
     </tbody>
 </table>
-
-
-<form ng-hide="organization_name" ng-submit="createMeeting()" class="form-inline">
-    <div class="form-group title-form-group">
-        <label class="sr-only" for="meeting-title">Meeting title</label>
-        <input type="text" class="form-control" id="meeting-title" placeholder="Meeting title" ng-model="title" />
-    </div>
-    <div class="form-group">
-        <label class="sr-only" for="meeting-duration">Meeting duration</label>
-        <div class="input-group">
-            <input input type="number" max="120" id="meeting-duration" class="form-control ng-pristine ng-untouched ng-valid ng-empty" placeholder="60" ng-model="duration">
-            <div class="input-group-addon">mins.</div>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <button type="submit" class="btn btn-default">Create</button>
-    </div>
-</form>
