@@ -11,7 +11,7 @@ angular.module('smartMeeting')
                   <td class="note-type-select">\
                     <select class="form-control" ng-init="note_type = noteTypes[0].value" ng-model="note_type" ng-options="t.value as t.text for t in noteTypes"></select>\
                   </td>\
-                  <td><textarea msd-elastic class="form-control" ng-model="body" placeholder="" ng-enter="createAgendaNote()"></textarea></td>\
+                  <td><textarea msd-elastic class="form-control" ng-model="body" placeholder=""></textarea></td>\
                   <td class="users" ng-show="note_type==1">\
                     <tags-input add-on-enter="true" add-on-space="true" add-on-comma="true" add-on-blur="true" ng-model="users" display-property="email" placeholder="Owners">\
                     </tags-input>\

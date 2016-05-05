@@ -40,7 +40,7 @@ angular.module('smartMeeting')
       }else{
         return meetings.createPublic($scope.meeting).success(function(meeting){
           $scope.meeting = meeting;
-          $location.path('/a/meetings/p/' + meeting.id + '/' + meeting.access_code, false);
+          $location.path('/meeting/' + meeting.access_code, false);
         });
       }
     };
