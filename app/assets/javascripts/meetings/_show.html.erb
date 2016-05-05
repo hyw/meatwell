@@ -59,9 +59,11 @@
 				<a href="#" disabled="true" onaftersave="saveAgendaItem(item)" buttons="no" editable-number="item.duration">{{item.duration}}</a>
 			</span>
 			<span ng-show="meeting.status !== meetingStatuses.unstarted">{{item.duration}}</span> ) min.
-			<a href="#" blur="submit" onaftersave="saveAgendaItem(item)" buttons="no" editable-text="item.title">
-				{{item.title}}
-			</a>
+			<div style="display:inline-block; width: calc(100% - 140px)">
+				<a href="#" blur="submit" onaftersave="saveAgendaItem(item)" buttons="no" editable-text="item.title">
+					{{item.title}}
+				</a>
+			</div>
 			<span class="agenda-item-countdown" ng-class="{'agenda-item-countdown-overtime': (item.countdown < 0) }">
 				{{ item.countdown | secondsToTime }}
 			</span>
@@ -77,8 +79,7 @@
 	<li class="agenda-item agenda-item-form">
 		<form>
 			<input input type="number" class="duration form-control ng-pristine ng-untouched ng-valid ng-empty" placeholder="15" ng-model="itemduration"> min. 
-			<input type="text" class="form-control title" placeholder="Agenda item title" ng-model="itemtitle">
-			<button type="submit" class="btn btn-primary" ng-click="createAgendaItem()">Save</button>
+			<input type="text" class="form-control title" ng-enter="createAgendaItem()" ng-blur="createAgendaItem()" placeholder="Agenda item title" ng-model="itemtitle">
 		</form>
 	</li>
 </ol>

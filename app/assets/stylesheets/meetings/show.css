@@ -164,7 +164,7 @@ td{
 }
 
 .agenda-item-form .title{
-	width:60%; 
+	width:calc(100% - 80px); 
 	display:inline-block;
 }
 
@@ -192,8 +192,11 @@ td{
 }
 
 .new-agenda-note-form .due-date{
-	width:100px; 
 	padding-left:10px;
+}
+
+.new-agenda-note-form .due-date input{
+	width:150px;
 }
 
 .new-agenda-note-form .note-type-select .form-control{

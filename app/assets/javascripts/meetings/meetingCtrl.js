@@ -96,6 +96,8 @@ angular.module('smartMeeting')
               $scope.meeting.agenda_items.push(agendaitem);
               $('.agenda-item-form .title').focus();
               $scope.checkIfAgendaIsTooLong();
+              $scope.itemtitle = '';
+              $scope.itemduration = '';
             });
           });
         }else{
@@ -107,11 +109,11 @@ angular.module('smartMeeting')
             $scope.meeting.agenda_items.push(agendaitem);
             $('.agenda-item-form .title').focus();
             $scope.checkIfAgendaIsTooLong();
+            $scope.itemtitle = '';
+            $scope.itemduration = '';
           });
 
         }
-        $scope.itemtitle = '';
-        $scope.itemduration = '';
       }
     };
 

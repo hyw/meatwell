@@ -7,31 +7,22 @@ angular.module('smartMeeting')
     },
     restrict: 'E',
     template: '<form class="new-agenda-note-form">\
-                <table><tr>\
-                  <td class="delete-icon">\
-                  </td>\
+                <table click-off="createAgendaNote()"><tr>\
                   <td class="note-type-select">\
                     <select class="form-control" ng-init="note_type = noteTypes[0].value" ng-model="note_type" ng-options="t.value as t.text for t in noteTypes"></select>\
                   </td>\
-                  <td><textarea msd-elastic class="form-control" ng-model="body" placeholder=""></textarea></td>\
+                  <td><textarea msd-elastic class="form-control" ng-model="body" placeholder="" ng-enter="createAgendaNote()"></textarea></td>\
                   <td class="users" ng-show="note_type==1">\
                     <tags-input add-on-enter="true" add-on-space="true" add-on-comma="true" add-on-blur="true" ng-model="users" display-property="email" placeholder="Owners">\
                     </tags-input>\
                   </td>\
                   <td class="due-date" ng-show="note_type==1">\
                     <div class="dropdown">\
-                      <a class="dropdown-toggle" id="meeting-datetime" role="button" data-toggle="dropdown" data-target="#" href="#">\
-                        <div class="input-group">\
-                          <input type="date" placeholder="Due" class="form-control" ng-model="due_date">\
-                          <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>\
-                        </div>\
-                      </a>\
-                      <ul class="dropdown-menu" role="menu">\
-                          <datetimepicker ng-model="due_date" data-datetimepicker-config="{ minView: \'day\', dropdownSelector: \'#meeting-datetime\' }"/>\
-                      </ul>\
+                      <div class="input-group">\
+                        <input type="date" placeholder="Due" class="form-control" ng-model="due_date">\
+                      </div>\
                     </div>\
                   </td>\
-                  <td class="note-submit"><input type="submit" ng-click="createAgendaNote()" class="form-control" value="+"></td>\
                 <tr/></table>\
               </form>',
 
