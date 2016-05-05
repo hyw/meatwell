@@ -1,4 +1,4 @@
-angular.module('smartMeeting', ['ui.router', 'templates', 'Devise', 'ngTagsInput', "ui.calendar", "xeditable", "ui.bootstrap.datetimepicker", "ui.sortable", 'angular-clipboard', 'monospaced.elastic'])
+angular.module('smartMeeting', ['ui.router', 'templates', 'Devise', 'ngTagsInput', "xeditable", "ui.sortable", 'angular-clipboard', 'monospaced.elastic', '720kb.datepicker'])
 .config([
   '$stateProvider',
   '$urlRouterProvider',

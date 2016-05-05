@@ -17,19 +17,13 @@ angular.module('smartMeeting')
                     </tags-input>\
                   </td>\
                   <td class="due-date" ng-show="note_type==1">\
-                    <div class="dropdown">\
-                      <div class="input-group">\
-                        <input type="date" placeholder="Due" class="form-control" ng-model="due_date">\
-                      </div>\
-                    </div>\
+                    <datepicker date-format="shortDate">\
+                      <input class="form-contrl" ng-model="due_date" type="text"/>\
+                    </datepicker>\
                   </td>\
                 <tr/></table>\
               </form>',
-
-
-
     link: function ( scope, element, attrs ) {
-      scope.due_date = Date.now();
       scope.agendaItem.agenda_notes = scope.agendaItem.agenda_notes || [];
 
       scope.createAgendaNote = function () {
@@ -48,7 +42,7 @@ angular.module('smartMeeting')
           scope.agendaItem.agenda_notes.push(agendanote);
           scope.body = '';
           scope.users = '';
-          scope.due_date = Date.now();
+          scope.due_date = '';
         });
       };
 

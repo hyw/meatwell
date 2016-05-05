@@ -19,15 +19,12 @@
 //= require angular-ui-router
 //= require ng-tags-input
 //= require moment
-//= require moment-timezone
-//= require angular-ui-calendar
 //= require underscore
 //= require fullcalendar
 //= require angular-xeditable
-//= require angular-bootstrap-datetimepicker/src/js/datetimepicker
-//= require angular-bootstrap-datetimepicker/src/js/datetimepicker_templates
-//= require app.js
 //= require angular-ui-sortable
 //= require angular-clipboard
 //= require angular-elastic
+//= require angularjs-datepicker
+//= require app.js
 //= require_tree .

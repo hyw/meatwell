@@ -13,8 +13,7 @@
  *= require_self
  *= require_tree ./global
  *= require ng-tags-input
- *= require angular-datepicker
  *= require fullcalendar
  *= require angular-xeditable
- *= require angular-bootstrap-datetimepicker/src/css/datetimepicker
+ += require angularjs-datepicker
  */

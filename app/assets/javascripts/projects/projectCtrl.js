@@ -7,10 +7,9 @@ angular.module('smartMeeting')
   'meetings',
   'Auth',
   'projects',
-  'uiCalendarConfig',
   '$timeout',
   'meetingStatuses',
-  function($scope, $location, project, users, meetings, Auth, projects, uiCalendarConfig, $timeout, meetingStatuses){
+  function($scope, $location, project, users, meetings, Auth, projects, $timeout, meetingStatuses){
     $scope.meetingStatuses = meetingStatuses;
     $scope.project = project;
     setDefaults();
