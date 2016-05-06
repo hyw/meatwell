@@ -28,9 +28,7 @@ angular.module('smartMeeting')
 
     $scope.setDefaultMeeting = function(){
       return {
-        'title' : 'New Meeting Title',
         'duration' : 60,
-        'description' : 'What is the purpose of this meeting?'
       };
     };
 

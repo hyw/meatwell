@@ -14,12 +14,12 @@ angular.module('smartMeeting')
                         <a href="#" onaftersave="saveAgendaNote()" buttons="no" editable-select="agendaNote.note_type" e-ng-options="t.value as t.text for t in noteTypes">{{noteTypeLabel}}</a>\
                     </td>\
                     <td class="body">\
-                        <a href="#" style="white-space:pre" blur="submit" onaftersave="saveAgendaNote()" buttons="no" editable-textarea="agendaNote.body">{{agendaNote.body}}</a>\
+                        <a href="#" style="white-space:pre-line" blur="submit" onaftersave="saveAgendaNote()" buttons="no" editable-textarea="agendaNote.body">{{agendaNote.body}}</a>\
                     </td>\
-                    <td class="users" ng-show="agendaNote.note_type == 1">\
+                    <td class="users">\
                         <span ng-repeat="user in agendaNote.users">{{user.email}}, </span>\
                     </td>\
-                    <td class="due-date" ng-show="agendaNote.note_type == 1">\
+                    <td class="due-date">\
                         {{agendaNote.due_date | date:\'shortDate\'}}\
                     </td>',
 

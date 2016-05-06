@@ -13,12 +13,12 @@ angular.module('smartMeeting')
                   </td>\
                   <td><textarea msd-elastic class="form-control" ng-model="body" placeholder=""></textarea></td>\
                   <td class="users" ng-show="note_type==1">\
-                    <tags-input add-on-enter="true" add-on-space="true" add-on-comma="true" add-on-blur="true" ng-model="users" display-property="email" placeholder="Owners">\
+                    <tags-input add-on-enter="true" add-on-space="true" add-on-comma="true" add-on-blur="true" ng-model="users" display-property="email" placeholder="Owner(s) Email">\
                     </tags-input>\
                   </td>\
                   <td class="due-date" ng-show="note_type==1">\
                     <datepicker date-format="shortDate">\
-                      <input class="form-contrl" ng-model="due_date" type="text"/>\
+                      <input class="form-control" placeholder="Due Date" ng-model="due_date" type="text"/>\
                     </datepicker>\
                   </td>\
                 <tr/></table>\

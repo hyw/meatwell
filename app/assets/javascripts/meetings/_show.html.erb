@@ -2,8 +2,8 @@
 <h3 style="display:inline-block;">
 	<span ng-show="meeting.project"><a href="/a/projects/{{meeting.project.slug}}">{{meeting.project.title}}</a> ></span> 
 	<span>
-		<a href="#" blur="submit" onaftersave="saveMeeting()" buttons="no" editable-text="meeting.title">
-			{{meeting.title}}
+		<a href="#" blur="submit" onaftersave="saveMeeting()" buttons="no" e-placeholder="New Meeting Title" editable-text="meeting.title">
+			{{meeting.title || 'New Meeting Title'}}
 		</a>
 	</span> 
 </h3>
@@ -27,7 +27,11 @@
 	<span ng-hide="meeting.date">Meeting has not begun</span> 
 	<span>(<a href="#" blur="submit" onaftersave="saveMeeting()" buttons="no" editable-number="meeting.duration">{{meeting.duration}}</a> min.)</span><br/>
 </div>
-<div class="meeting-description-div"><a href="#" blur="submit" onaftersave="saveMeeting()" buttons="no" editable-text="meeting.description">{{meeting.description}}</a></div>
+<div class="meeting-description-div">
+	<a href="#" blur="submit" onaftersave="saveMeeting()" buttons="no" editable-text="meeting.description" e-placeholder="What is the purpose of this meeting?">
+		{{meeting.description || 'What is the purpose of this meeting?'}}
+	</a>
+</div>
 <div class="meeting-attendees-div"><tags-input ng-model="meeting.users" id="meeting-attendees" display-property="email" placeholder="Add more attendees" add-on-enter="true" add-on-space="true" add-on-comma="true" add-on-blur="true" on-tag-added="addAttendee($tag)"></tags-input></div>
 
 <div ng-show="meeting.previous_action_items.length > 1">
@@ -52,19 +56,21 @@
 	<li ng-repeat="item in meeting.agenda_items" class="agenda-item" ng-click="startItem(item)" ng-class="{ 'agenda-item-active': item.active }" >
 		<div class="agenda-item-progress-bar" ng-class="{'agenda-item-progress-overtime' : (item.countdown < 0) }" style="width: {{ item | secondsToWidthPercentage }}%"></div>
 		<div class="agenda-item-contents">
-			<span ng-show="meeting.status === meetingStatuses.unstarted" ng-click="removeAgendaItem(item)" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-			(<span ng-show="meeting.status === meetingStatuses.unstarted">
-				<a href="#" disabled="true" onaftersave="saveAgendaItem(item)" buttons="no" editable-number="item.duration">{{item.duration}}</a>
-			</span>
-			<span ng-show="meeting.status !== meetingStatuses.unstarted">{{item.duration}}</span> ) min.
-			<div style="display:inline-block; width: calc(100% - 140px)">
-				<a href="#" blur="submit" onaftersave="saveAgendaItem(item)" buttons="no" editable-text="item.title">
-					{{item.title}}
-				</a>
+			<div style="padding-bottom:20px;">
+				<span ng-show="meeting.status === meetingStatuses.unstarted" ng-click="removeAgendaItem(item)" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+				(<span ng-show="meeting.status === meetingStatuses.unstarted">
+					<a href="#" disabled="true" onaftersave="saveAgendaItem(item)" buttons="no" editable-number="item.duration">{{item.duration}}</a>
+				</span>
+				<span ng-show="meeting.status !== meetingStatuses.unstarted">{{item.duration}}</span> ) min.
+				<div style="display:inline-block; width: calc(100% - 140px)">
+					<a href="#" blur="submit" onaftersave="saveAgendaItem(item)" buttons="no" editable-text="item.title">
+						{{item.title}}
+					</a>
+				</div>
+				<span class="agenda-item-countdown" ng-class="{'agenda-item-countdown-overtime': (item.countdown < 0) }">
+					{{ item.countdown | secondsToTime }}
+				</span>
 			</div>
-			<span class="agenda-item-countdown" ng-class="{'agenda-item-countdown-overtime': (item.countdown < 0) }">
-				{{ item.countdown | secondsToTime }}
-			</span>
 			<table style="width:100%;" class="agenda-notes">
 				<tr agenda-note-list-item ng-repeat="note in item.agenda_notes" note-types="agendaNoteTypes" agenda-note="note" agenda-item="item"> 
 				</tr>

@@ -119,7 +119,7 @@ td{
 }
 
 .agenda-notes .body{
-	min-width:400px;
+	min-width:350px;
 }
 
 .agenda-notes form{
@@ -145,6 +145,11 @@ td{
 .agenda-notes td{
 	padding-left:10px;
 	padding-bottom:10px;
+}
+
+.agenda-notes .users{
+	max-width:150px;
+	word-wrap: break-word;
 }
 
 .agenda-items-title {
@@ -216,15 +221,13 @@ td{
 
 .new-agenda-note-form .users{
 	padding-left:10px; 
-	width:150px;
+	width:170px;
 }
 
 .new-agenda-note-form .due-date{
 	padding-left:10px;
-}
-
-.new-agenda-note-form .due-date input{
-	width:150px;
+	width:100px;
+	font-weight:400px;
 }
 
 .new-agenda-note-form .note-type-select .form-control{
@@ -292,4 +295,8 @@ td{
 
 .action-items-title {
 	margin-bottom: 20px;
+}
+
+.editable-empty, a.editable-empty{
+	color: #aaa;
 }
