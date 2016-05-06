@@ -1,0 +1,32 @@
+<link rel="stylesheet" media="screen" href="/assets/home/show-6f66844676769aa448c419e0bf6d5e30d816f9ae512210e64c2d240656732849.css" />
+<p ng-show="organization_name" class="organization-title lead">All of <strong>{{ organization_name }}</strong>'s meetings:</p>
+
+<table class="table table-hover meetings-table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Duration</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="meeting in meetings">
+            <td class="title-td">{{ meeting.title }} <a class="meeting-link" href="/meeting/{{ meeting.access_code }}"><span class="glyphicon glyphicon-link"></span></a></td>
+            <td class="duration-td">{{ meeting.duration }}</td>
+        </tr>
+        <tr ng-form>
+            <td class="title-form-td title-td">
+                <div class="form-group title-form-group">
+                    <input ng-enter="createMeeting()" type="text" class="form-control meeting-title" id="meeting-title" placeholder="Meeting title" ng-model="title" />
+                </div>
+            </td>
+            <td class="duration-form-td">
+                <div class="form-group duration-form-group">
+                    <div class="input-group">
+                        <input ng-enter="createMeeting()" input type="number" max="120" id="meeting-duration" class="form-control meeting-duration" placeholder="60" ng-model="duration">
+                        <div class="input-group-addon">mins.</div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,75 @@
+.meeting-link {
+	display: none;
+	color: #A9A9A9;
+}
+
+.meetings-table tr:hover .meeting-link {
+	display: inline-block;
+}
+
+.organization-title {
+	padding-left: 8px;
+}
+
+.meetings-table .duration-td {
+	border-left: 1px solid #ccc;
+}
+
+.meetings-table .title-td {
+	width: 558px;
+}
+
+.table > tbody > tr > td.title-form-td {
+	padding: 0;
+}
+
+.title-form-group {
+	margin: 0;
+}
+
+.title-form-group .meeting-title {
+	width: 100%;
+	border: 0;
+	border-radius: 0;
+	box-shadow: none;
+	height: 36px;
+	padding-left: 8px;
+}
+
+.table > tbody > tr > td.duration-form-td {
+	padding: 0;
+}
+
+.duration-form-group {
+	margin: 0;
+	width: 1px;
+}
+
+.duration-form-group .input-group {
+	width: 1px;
+}
+
+.duration-form-group .meeting-duration {
+	width: 115px;
+	border: 0;
+	border-left: 1px solid #ccc;
+	border-radius: 0;
+	box-shadow: none;
+	height: 36px;
+	padding-left: 8px;
+}
+
+.duration-form-group .input-group-addon {
+	border-left: 1px solid #ccc;
+	border-top: 0;
+	border-right: 0;
+	border-bottom: 0;
+	border-radius: 0;
+}
+
+input.meeting-title:focus,
+input.meeting-duration:focus,
+input.meeting-title:hover,
+input.meeting-duration:hover {
+	background-color: #FFC;
+}

@@ -1,0 +1,73 @@
+<link rel="stylesheet" media="screen" href="/assets/meetings/show-56db2270214e5fd69ff7b360bd772517d6409c50f005497f2ec9116b0a5cd3d8.css" />
+<div class="page-header">
+	<h3>{{meeting.project.title}} > {{meeting.title}}</h3>
+	<p class="text-muted">{{meeting.description}}</p>
+</div>
+
+<div>When: <span>{{meeting.date | date:'mediumDate'}} @ {{meeting.date | date:'shortTime'}}</span></div>
+<div>Duration: <span>{{meeting.duration}} mins.</span></div>
+<div>Location: <span>{{meeting.location}}</span></div>
+Attendees:
+<ul>
+	<li ng-repeat="attendee in meeting.users">{{attendee.username}}</li>
+</ul>
+
+<hr></hr>
+<div ng-show="meeting.previous_action_items">
+	<h3>Previous Action Items:</h3>
+	<table class="table table-striped table-hover">
+		<tr ng-repeat="item in meeting.previous_action_items">
+			<td><span class="glyphicon glyphicon-pushpin"></span> {{item.body}}</td>
+			<td class="users">
+	            Owners: <span ng-repeat="user in item.users">{{user.username}}, </span>
+	        </td>
+	        <td>
+	        	Due: {{item.due_date | date: 'shortDate'}}
+	        </td>
+		</tr>
+	</table>
+	<hr></hr>
+</div>
+
+
+<h3>Agenda:</h3>
+<ol class="agenda-items">
+	<li ng-repeat="item in meeting.agenda_items" class="agenda-item">
+		<div class="agenda-item-progress-bar" ng-class="{'agenda-item-progress-overtime' : (item.countdown < 0) }" style="width: {{ item | secondsToWidthPercentage }}%"></div>
+		<div class="agenda-item-contents">
+			({{item.duration}}) min.
+			{{item.title}}
+			<span class="agenda-item-countdown" ng-class="{'agenda-item-countdown-overtime': (item.countdown < 0) }">
+				{{ item.countdown | secondsToTime }}
+			</span>
+			<table style="width:100%;" class="agenda-notes">
+				<tr ng-repeat="note in item.agenda_notes">
+					<td>{{agendaNoteTypeMap[note.note_type]}}</td>
+					<td>{{note.body}}</td>
+					<td class="users" ng-show="note.note_type == 1">
+                        <span ng-repeat="user in note.users">{{user.username}}, </span>
+                    </td>
+                    <td class="due-date" ng-show="note.note_type == 1">
+                        {{note.due_date | date:'shortDate'}}
+                    </td>
+				</tr>
+			</table>
+		</div>
+	</li>
+</ol>
+
+<br/>
+<hr></hr>
+<h3>Action Items:</h3>
+<br/>
+<table class="table table-striped table-hover">
+	<tr ng-repeat="item in action_items">
+		<td><span class="glyphicon glyphicon-pushpin"></span> {{item.body}}</td>
+		<td class="users">
+            Owners: <span ng-repeat="user in item.users">{{user.username}}, </span>
+        </td>
+        <td>
+        	Due: {{item.due_date | date: 'shortDate'}}
+        </td>
+	</tr>
+</table>

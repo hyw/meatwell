@@ -1,0 +1,302 @@
+h3,
+h3 span {
+	margin: 0;
+	height: 34px;
+	line-height: 34px; /* same as .buttons-container's height */
+}
+
+h3 a.editable-click {
+	border-bottom: none;
+}
+
+.meeting-date-div {
+	margin-top: 20px;
+	height: 38px;
+	border-bottom: 1px solid #ccc;
+	padding-left: 8px;
+}
+
+.meeting-date-div span {
+	line-height: 38px;
+}
+
+.meeting-date-div a.editable-click {
+	border: 0;
+}
+
+.meeting-date-div .editable-input {
+	border: 0;
+	border-radius: 0;
+	box-shadow: none !important;
+	padding: 0;
+	background: none;
+	padding-left: 5px;
+	vertical-align: baseline;
+}
+
+.meeting-date-div:hover {
+	background-color: #f5f5f5;
+}
+
+.meeting-description-div {
+	height: 38px;
+	border-bottom: 1px solid #ccc;
+}
+
+.meeting-description-div a.editable-click {
+	line-height: 39px; /* 38 + 1 for the border */
+	padding-left: 8px;
+	border: 0;
+}
+
+.meeting-description-div a:hover {
+	color: #333333;;
+}
+
+.meeting-description-div .editable-input {
+	border: 0;
+	border-radius: 0;
+	box-shadow: none !important;
+	padding: 0;
+	background: none;
+	padding-left: 8px;
+	height: 38px;
+}
+
+.meeting-description-div:hover {
+	background-color: #f5f5f5;
+}
+
+.meeting-attendees-div .host {
+	margin: 0;
+}
+
+.meeting-attendees-div .tags {
+	border: 0;
+	border-radius: 0;
+	box-shadow: none !important;
+	padding: 0;
+}
+
+.meeting-attendees-div .tag-item {
+	height: 32px !important;
+	line-height: 29px !important;
+	background: #ffffff !important;
+	color: #333333;
+	font-weight: bold !important;
+}
+
+.meeting-attendees-div input {
+	background: none;
+	height: 38px !important;
+	margin: 0 !important;
+	padding-left: 8px;
+}
+
+.meeting-attendees-div .tags:hover {
+	background-color: #f5f5f5;
+}
+
+td{
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.buttons-container{
+	margin-left:10px; 
+	display:inline-block; 
+	vertical-align:super
+}
+
+.meeting-attendees {
+	display: inline-block;
+	margin-right: 10px;
+	width: 50%;
+}
+
+.agenda-notes{
+	width:100%;
+}
+
+.agenda-notes .body{
+	min-width:350px;
+}
+
+.agenda-notes form{
+	width:100%;
+}
+
+.agenda-notes .form-group{
+	width:100%;
+}
+
+.agenda-notes .editable-input{
+	width:100%;
+}
+
+.agenda-notes tr {
+	border-bottom: 1px solid #ccc;
+}
+
+.agenda-notes tr:last-child {
+	border-bottom: 0;
+}
+
+.agenda-notes td{
+	padding-left:10px;
+	padding-bottom:10px;
+}
+
+.agenda-notes .users{
+	max-width:150px;
+	word-wrap: break-word;
+}
+
+.agenda-items-title {
+	margin-top: 60px;
+}
+
+.agenda-items {
+	margin-top: 20px;
+	margin-bottom: 60px;
+}
+
+.agenda-item{
+	position: relative;
+	width: 100%;
+	border-bottom: 1px solid #ccc;
+	padding-top: 20px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.agenda-item-contents{
+	position: relative;
+}
+
+.agenda-item-active{
+	background: #f5f5f5;
+}
+
+.agenda-item-table{
+	margin-top:-29px;
+	width:100%;
+}
+
+.agenda-item-table .duration{
+	width:100px;
+}
+
+.agenda-item-form {
+	padding-bottom: 20px;
+	border-bottom: 0;
+}
+
+.agenda-item-form .title{
+	width:calc(100% - 80px); 
+	display:inline-block;
+}
+
+.agenda-item-form .duration{
+	width:43px; 
+	display:inline-block;
+}
+
+.delete-icon{
+	width:20px;
+	cursor:pointer;
+}
+
+.note-type-select{
+	width:100px;
+}
+
+.new-agenda-note-form {
+	border-top: 1px solid #ccc;
+}
+
+.new-agenda-note-form table{
+	width:100%;
+}
+
+.new-agenda-note-form .users{
+	padding-left:10px; 
+	width:170px;
+}
+
+.new-agenda-note-form .due-date{
+	padding-left:10px;
+	width:100px;
+	font-weight:400px;
+}
+
+.new-agenda-note-form .note-type-select .form-control{
+	width:91px;
+}
+
+.new-agenda-note-form .tag-item {
+	height: 32px !important;
+	line-height: 29px !important;
+	background: #ffffff !important;
+	color: #333333;
+	font-weight: bold !important;
+}
+
+.note-submit{
+	width:30px;
+	padding-left:10px;
+}
+
+.editable-number .form-control{
+    width:25px;
+}
+
+.editable-text .form-control{
+    width:100%;
+}
+
+.editable-text .editable-controls{
+	width:100%;
+}
+
+.editable-text{
+	width:100%;
+}
+
+.agenda-item-countdown {
+	position: absolute;
+	right: 0;
+	color: #A9A9A9;
+}
+
+.agenda-item-countdown-overtime {
+	color: red;
+}
+
+.agenda-item-progress-bar {
+	background: #e1ffe0;
+	position: absolute;
+	height: 100%;
+	top: 0;
+	left: 0;
+}
+
+.agenda-item-progress-overtime {
+	background: #ffe1e0;
+}
+
+.control-buttons{
+	display:inline-block;
+}
+
+.action-items {
+	margin-bottom: 60px;
+}
+
+.action-items-title {
+	margin-bottom: 20px;
+}
+
+.editable-empty, a.editable-empty{
+	color: #aaa;
+}
