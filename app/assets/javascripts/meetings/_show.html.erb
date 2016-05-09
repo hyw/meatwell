@@ -59,7 +59,7 @@
 			<div style="padding-bottom:20px;">
 				<span ng-show="meeting.status === meetingStatuses.unstarted" ng-click="removeAgendaItem(item)" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 				(<span ng-show="meeting.status === meetingStatuses.unstarted">
-					<a href="#" disabled="true" onaftersave="saveAgendaItem(item)" buttons="no" editable-number="item.duration">{{item.duration}}</a>
+					<a href="#" blur="submit" onaftersave="saveAgendaItem(item)" buttons="no" editable-number="item.duration">{{item.duration}}</a>
 				</span>
 				<span ng-show="meeting.status !== meetingStatuses.unstarted">{{item.duration}}</span> ) min.
 				<div style="display:inline-block; width: calc(100% - 140px)">

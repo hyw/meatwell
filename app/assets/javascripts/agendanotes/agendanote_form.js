@@ -7,11 +7,11 @@ angular.module('smartMeeting')
     },
     restrict: 'E',
     template: '<form class="new-agenda-note-form">\
-                <table click-off="createAgendaNote()"><tr>\
+                <table ng-click="dummyShow()" click-off="createAgendaNote()"><tr>\
                   <td class="note-type-select">\
                     <select class="form-control" ng-init="note_type = noteTypes[0].value" ng-model="note_type" ng-options="t.value as t.text for t in noteTypes"></select>\
                   </td>\
-                  <td><textarea msd-elastic class="form-control" ng-model="body" placeholder=""></textarea></td>\
+                  <td><textarea msd-elastic class="form-control body" ng-model="body" placeholder=""></textarea></td>\
                   <td class="users" ng-show="note_type==1">\
                     <tags-input add-on-enter="true" add-on-space="true" add-on-comma="true" add-on-blur="true" ng-model="users" display-property="email" placeholder="Owner(s) Email">\
                     </tags-input>\
@@ -21,6 +21,16 @@ angular.module('smartMeeting')
                       <input class="form-control" placeholder="Due Date" ng-model="due_date" type="text"/>\
                     </datepicker>\
                   </td>\
+                <tr/></table>\
+              </form>\
+              <form ng-show="dummyshow" class="dummy new-agenda-note-form">\
+                <table ng-click="focusActive()"><tr>\
+                  <td class="note-type-select">\
+                    <select class="form-control">\
+                      <option label="INFO" selected="true">INFO</option>\
+                    </select>\
+                  </td>\
+                  <td><textarea class="form-control" placeholder=""></textarea></td>\
                 <tr/></table>\
               </form>',
     link: function ( scope, element, attrs ) {
@@ -48,6 +58,14 @@ angular.module('smartMeeting')
 
       scope.autocompleteUsers = function (query) {
         return users.search(query);
+      };
+
+      scope.dummyShow = function(){
+        scope.dummyshow = true;
+      };
+
+      scope.focusActive = function(){
+        $('.new-agenda-note-form .body').focus();
       };
     }
   };
