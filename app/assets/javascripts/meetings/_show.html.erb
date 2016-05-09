@@ -19,7 +19,7 @@
 		</button>
 		<button ng-show="meeting.status === meetingStatuses.started" class="btn btn-primary" ng-click="finishMeeting(meeting)">End Meeting</button>
 	</div>
-	<button ng-show="meeting.status === meetingStatuses.finished" class="btn btn-primary">Email Minutes</button>
+	<button ng-click="sendMinutes()" ng-disabled="sentminutes" ng-show="meeting.status === meetingStatuses.finished" class="btn btn-primary">Email Minutes</button>
 </div>
 
 <div class="meeting-date-div">

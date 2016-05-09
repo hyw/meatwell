@@ -69,6 +69,12 @@ angular.module('smartMeeting')
             o.save(meeting);
         };
 
+        o.sendMinutes = function(meeting){
+            return $http.get('/meetings/' + meeting.id + '/sendminutes.json').success(function(res){
+                return res.data
+            });
+        }
+
         return o;
     }
 ]);

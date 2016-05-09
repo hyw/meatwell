@@ -36,6 +36,7 @@ Rails.application.routes.draw do
 
     member do
       post '/add_attendee' => 'meetings#addAttendee'
+      get '/sendminutes' => 'meetings#sendMinutes'
     end
   end
 

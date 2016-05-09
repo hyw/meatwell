@@ -160,6 +160,11 @@ angular.module('smartMeeting')
       }
     };
 
+    $scope.sendMinutes = function(){
+      meetings.sendMinutes($scope.meeting);
+      $scope.sentminutes = true;
+    };
+
     $scope.initialize();
   }
 ]);
