@@ -3,8 +3,8 @@
   <head>
     <base href="/">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:title) ? yield(:title) : "Smart Meetings" %></title>
-    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "My Application" %>">
+    <title><%= @title ? @title : "Meetings, well done." %></title>
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Quick and easy meeting agendas and minutes" %>">
 
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
