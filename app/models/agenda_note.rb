@@ -10,6 +10,15 @@ class AgendaNote < ActiveRecord::Base
   DECISION = 4
   QUESTION = 5
 
+  NOTE_MAP = {
+    0 => "",
+    1 => "ACTION",
+    2 => "INFO",
+    3 => "IDEA",
+    4 => "DECISION",
+    5 => "QUESTION"
+  }
+
     def as_json(options = {})
     	super(options.merge(include: [:users]))
   	end
