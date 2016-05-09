@@ -138,7 +138,7 @@
                             <td align='left'>
                               <div class="contentEditableContainer contentTextEditable">
                                 <div class="contentEditable" align='center'>
-                                  <ul style="text-align:left;">
+                                  <ul style="text-align:left; white-space:pre-line;">
                                   <% @meeting.agenda_notes.where(:note_type=>AgendaNote::ACTION_ITEM).each do |note| %>
 									<li><%= note.due_date.in_time_zone("Pacific Time (US & Canada)").strftime('%B %e, %Y')%> (<b><%=note.users.pluck(:email).join(", ")%></b>) - <%=note.body%></li>
                                   <% end %>
