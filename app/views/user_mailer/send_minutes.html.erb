@@ -177,7 +177,7 @@
                                     <li><h2><%=item.title%></h2></li>
                                     <ul style="text-align:left; white-space:pre-line;">
                                       <% item.agenda_notes.each do |note| %>
-                                        <li>(<%=AgendaNote::NOTE_MAP[note.note_type]%>) - <%=note.body%></li>
+                                        <li>(<%=AgendaNote::NOTE_MAP[note.note_type]%>) <%=note.names%> - <%=note.body%></li>
                                       <% end %>
                                     </ul>
                                   <% end %>
