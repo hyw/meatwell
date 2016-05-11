@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 20160511013829) do
     t.datetime "updated_at",                   null: false
     t.integer  "note_type",      limit: 4
     t.datetime "due_date"
+    t.string   "names",          limit: 255
   end
 
   add_index "agenda_notes", ["agenda_item_id"], name: "index_agenda_notes_on_agenda_item_id", using: :btree

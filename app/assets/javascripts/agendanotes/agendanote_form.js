@@ -12,6 +12,10 @@ angular.module('smartMeeting')
                     <select class="form-control" ng-init="note_type = noteTypes[0].value" ng-model="note_type" ng-options="t.value as t.text for t in noteTypes"></select>\
                   </td>\
                   <td><textarea msd-elastic class="form-control body" ng-model="body" placeholder=""></textarea></td>\
+                  <td class="users" ng-show="note_type!=1">\
+                    <tags-input add-on-enter="true" add-on-space="true" add-on-comma="true" add-on-blur="true" ng-model="names" placeholder="Owner(s) Name">\
+                    </tags-input>\
+                  </td>\
                   <td class="users" ng-show="note_type==1">\
                     <tags-input add-on-enter="true" add-on-space="true" add-on-comma="true" add-on-blur="true" ng-model="users" display-property="email" placeholder="Owner(s) Email">\
                     </tags-input>\
@@ -38,6 +42,7 @@ angular.module('smartMeeting')
 
       scope.createAgendaNote = function () {
         var users = scope.note_type == 1 ? scope.users : '';
+        var names = scope.note_type != 1 ? scope.names : '';
         var due_date = scope.note_type == 1 ? scope.due_date : '';
 
         if(!scope.body || scope.body === ''){ return; }
@@ -47,6 +52,7 @@ angular.module('smartMeeting')
           agenda_item_id: scope.agendaItem.id,
           note_type: scope.note_type,
           users: users,
+          names: names,
           due_date: due_date
         }).success(function(agendanote){
           scope.agendaItem.agenda_notes.push(agendanote);

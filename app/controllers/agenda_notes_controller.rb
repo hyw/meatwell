@@ -2,7 +2,9 @@ class AgendaNotesController < ApplicationController
 
 	def create
 		due_date = Date.strptime(params[:due_date], "%m/%d/%y") if !params[:due_date].blank?
-		agendanote = AgendaNote.create(agendanote_params.merge(:due_date => due_date))
+		names = !params[:names].blank? ? params[:names].map{|x| x["text"]} : []
+		names = names.join(", ")
+		agendanote = AgendaNote.create(agendanote_params.merge(:due_date => due_date, :names =>names))
 		users = !params[:users].blank? ? params[:users].map{|x| x[:email]} : []
 		users.each do |user_email|
 			user = User.find_by_email(user_email)
