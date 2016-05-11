@@ -5,7 +5,7 @@ class MeetingsController < ApplicationController
 	end
 
 	def create
-		new_access_code = ('a'..'z').to_a.shuffle[0,8].join
+		new_access_code = ReadableTokens.generate_readable_token
 		meeting = Meeting.create(meeting_params.merge({leader: current_user.id, access_code: new_access_code}))
 		attendees = params[:attendees].map{|x| x[:username]}
 		attendees.each do |attendee|
@@ -16,12 +16,17 @@ class MeetingsController < ApplicationController
 	end
 
 	def showPublic
-		meeting = Meeting.find_by access_code: params[:access_code]
+		meeting = Meeting.find_by_access_code(params[:access_code])
 		respond_with meeting
 	end
 
 	def createPublic
-		new_access_code = ('a'..'z').to_a.shuffle[0,8].join
+		new_access_code = ReadableTokens.generate_readable_token
+		access_code_exists = Meeting.find_by_access_code(new_access_code).present?
+		while access_code_exists
+			new_access_code = ReadableTokens.generate_readable_token
+			access_code_exists = Meeting.find_by_access_code(new_access_code).present?
+		end
 		meeting = Meeting.create(meeting_params.merge(access_code: new_access_code))
 		respond_with meeting
 	end
