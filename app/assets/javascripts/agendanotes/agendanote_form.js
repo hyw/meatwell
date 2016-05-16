@@ -58,6 +58,7 @@ angular.module('smartMeeting')
           scope.agendaItem.agenda_notes.push(agendanote);
           scope.body = '';
           scope.users = '';
+          scope.names = '';
           scope.due_date = '';
         });
       };
