@@ -5,6 +5,7 @@ class Meeting < ActiveRecord::Base
   has_and_belongs_to_many :users, join_table: "attendees"
   has_many :agenda_items
   has_many :agenda_notes, :through => :agenda_items
+  validates :access_code, uniqueness: true
 
   STATUS_LABELS = {
   	"0" => 'unstarted',
