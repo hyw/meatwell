@@ -30,7 +30,7 @@ angular.module('smartMeeting')
             agendaItem: '=agendaItem',
             noteTypes: '=noteTypes'
         },
-        templateUrl: '/assets/agendanotes/agendanote-item.html',
+        templateUrl: 'agendanotes/_agendanote_item.html',
         link: link
     };
 }]);
