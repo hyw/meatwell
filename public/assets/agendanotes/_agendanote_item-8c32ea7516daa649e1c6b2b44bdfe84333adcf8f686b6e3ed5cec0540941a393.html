@@ -1,0 +1,19 @@
+<td class="delete-icon">
+    <span ng-click="removeAgendaNote()" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+</td>
+<td class="note-type-select">
+    <a href="#" onaftersave="saveAgendaNote()" buttons="no" editable-select="agendaNote.note_type" e-ng-options="t.value as t.text for t in noteTypes">{{noteTypeLabel}}</a>
+</td>
+<td class="body">
+    <a href="#" style="white-space:pre-line" blur="submit" onaftersave="saveAgendaNote()" buttons="no" editable-textarea="agendaNote.body">{{agendaNote.body}}</a>
+</td>
+{{agendaNoteTypeReverseMap.ACTION}}
+<td ng-show="agendaNote.note_type!==1" class="names">
+    <a href="#" style="white-space:pre-line" blur="submit" onaftersave="saveAgendaNote()" buttons="no" editable-text="agendaNote.names">{{agendaNote.names || 'Enter Names'}}</a>
+</td>
+<td ng-show="agendaNote.note_type == 1" class="users">
+	<tags-input placeholder="Add Email" on-tag-removed="deleteAgendaNoteUser(agendaNote,$tag)" on-tag-added="addAgendaNoteUser(agendaNote, $tag)" ng-model="agendaNote.users" display-property="email" allowed-tags-pattern="^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$"></tags-input>
+</td>
+<td class="due-date">
+    {{agendaNote.due_date | date:'shortDate'}}
+</td>
