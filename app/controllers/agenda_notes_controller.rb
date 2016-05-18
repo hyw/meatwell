@@ -29,10 +29,19 @@ class AgendaNotesController < ApplicationController
 		note.destroy
 		respond_with "Deleted"
 	end
+
+	def deleteUser
+		user = User.find_by_email(params[:email])
+		if user
+			agenda_note_users = AgendaNoteUser.where('user_id'=>user.id, 'agenda_note_id' => params[:id])
+			agenda_note_users.destroy_all
+		end
+		respond_with 'Deleted'
+	end
 	
 	private
 
 	def agendanote_params 
-		params.require(:agenda_note).permit(:body, :agenda_item_id, :note_type) 
+		params.require(:agenda_note).permit(:body, :agenda_item_id, :note_type, :names) 
 	end
 end

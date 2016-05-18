@@ -20,8 +20,16 @@ angular.module('smartMeeting')
             });
         };
 
+        scope.addAgendaNoteUser = function(agendanote, user){
+            agendaNotes.addAgendaNoteUser(agendanote, user);
+        };
+
+        scope.deleteAgendaNoteUser = function(agendanote, user){
+            agendaNotes.deleteAgendaNoteUser(agendanote, user);
+        };
+
         scope.updateNoteLabel();
-    };
+    }
 
     return {
         restrict: 'A',

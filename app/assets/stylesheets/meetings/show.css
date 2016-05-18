@@ -148,8 +148,15 @@ td{
 }
 
 .agenda-notes .users{
-	max-width:150px;
 	word-wrap: break-word;
+}
+
+.agenda-notes .users span{
+	width:100px;
+	white-space: nowrap;
+  	overflow: hidden;
+  	text-overflow: ellipsis;
+  	display:block;
 }
 
 .agenda-items-title {

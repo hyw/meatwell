@@ -9,10 +9,10 @@
 </td>
 {{agendaNoteTypeReverseMap.ACTION}}
 <td ng-show="agendaNote.note_type!==1" class="names">
-    {{agendaNote.names}}
+    <a href="#" style="white-space:pre-line" blur="submit" onaftersave="saveAgendaNote()" buttons="no" editable-text="agendaNote.names">{{agendaNote.names || 'Enter Names'}}</a>
 </td>
-<td class="users">
-    <span ng-repeat="user in agendaNote.users">{{user.email}}, </span>
+<td ng-show="agendaNote.note_type == 1" class="users">
+	<tags-input placeholder="Add Email" on-tag-removed="deleteAgendaNoteUser(agendaNote,$tag)" on-tag-added="addAgendaNoteUser(agendaNote, $tag)" ng-model="agendaNote.users" display-property="email" allowed-tags-pattern="^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$"></tags-input>
 </td>
 <td class="due-date">
     {{agendaNote.due_date | date:'shortDate'}}
