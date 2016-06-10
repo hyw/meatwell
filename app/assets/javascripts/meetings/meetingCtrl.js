@@ -166,7 +166,17 @@ angular.module('smartMeeting')
     };
 
     $scope.createFollowupMeeting = function(){
-      meetings.createFollowupMeeting($scope.meeting);
+      meetings.createFollowupMeeting($scope.meeting).then(function(res){
+        $location.path('/meeting/' + res.data.access_code, false);
+      });
+    };
+
+    $scope.goToPreviousMeeting = function(){
+      $location.path('/meeting/' + meeting.previous_meeting_access_code, false);
+    }
+
+    $scope.goToFollowupMeeting = function(){
+      $location.path('/meeting/' + meeting.next_meeting_access_code, false);
     };
 
     $scope.initialize();

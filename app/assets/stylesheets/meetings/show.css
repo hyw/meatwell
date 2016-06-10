@@ -179,13 +179,16 @@ td{
 	word-wrap: break-word;
 }
 
-
 .agenda-notes .users span{
 	width:100px;
 	white-space: nowrap;
   	overflow: hidden;
   	text-overflow: ellipsis;
   	display:block;
+}
+
+.previous-action-items-container {
+	margin-top: 60px;
 }
 
 .agenda-items-title {
@@ -342,6 +345,7 @@ td{
 	margin-bottom: 20px;
 }
 
+
 .objective-label{
 	display:inline-block;
 }
@@ -353,4 +357,12 @@ td{
 
 .objective-field input{
 	margin-top:-4px;
+}
+
+.editable-empty, a.editable-empty{
+	color: #aaa;
+}
+
+.meeting-collection-navigation-container {
+	margin-top: 20px;
 }

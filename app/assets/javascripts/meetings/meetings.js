@@ -27,7 +27,7 @@ angular.module('smartMeeting')
             });
         };
         o.getPublic = function(access_code){
-            return $http.get('/meetings/showpublic.json?access_code='+access_code).then(function(res){
+            return $http.get('/meetings/show.json?access_code='+access_code).then(function(res){
                 return res.data;
             });
         };
@@ -77,7 +77,7 @@ angular.module('smartMeeting')
 
         o.createFollowupMeeting = function(meeting){
             return $http.post('/meetings/' + meeting.id + '/create_followup_meeting.json', null).success(function(res){
-                return res.data;
+                return res;
             });
         };
 
