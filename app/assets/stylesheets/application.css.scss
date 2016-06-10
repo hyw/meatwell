@@ -11,9 +11,9 @@
  * file per style scope.
  *
  *= require_self
+ *= require angular-xeditable
  *= require_tree ./global
  *= require ng-tags-input
  *= require fullcalendar
- *= require angular-xeditable
  += require angularjs-datepicker
  */
