@@ -43,7 +43,13 @@ Rails.application.routes.draw do
   end
 
   resources :agenda_items, only: [:create, :index, :show, :update, :destroy]
-  resources :agenda_notes, only: [:create, :update, :destroy]
+  resources :agenda_notes, only: [:create, :update, :destroy] do
+    member do
+      put '/delete_user' => 'agenda_notes#deleteUser'
+    end
+  end
+  
+  resources :agenda_note_users, only: [:create, :destroy]
 
   get '*path', :to => redirect('/#/%{path}')
 
