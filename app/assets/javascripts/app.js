@@ -6,18 +6,6 @@ angular.module('smartMeeting', ['ui.router', 'templates', 'Devise', 'ngTagsInput
   function($stateProvider, $urlRouterProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
     $stateProvider
-      // .state('logged-in', {
-      //   abstract: true,
-      //   template: '<div ui-view></div>',
-      //   data: {
-      //     requireLogin: true
-      //   },
-      //   resolve: {
-      //     currentUser: ['Auth', function(Auth){
-      //       return Auth.currentUser();
-      //     }]
-      //   }
-      // })
     .state('logged-out', {
       abstract: true,
       template: '<div ui-view></div>',
@@ -61,6 +49,14 @@ angular.module('smartMeeting', ['ui.router', 'templates', 'Devise', 'ngTagsInput
       resolve: {
         meeting: ['$stateParams', 'meetings', function($stateParams, meetings){
           return meetings.getPublic($stateParams.access_code);
+        }]
+      }
+    })
+    .state('neutral.project', {
+      url:'/project/{slug}',
+      resolve: {
+        project: ['$stateParams', 'projects', function($stateParams, projects){
+          return projects.redirectToMeeting($stateParams.slug);
         }]
       }
     });

@@ -1,7 +1,8 @@
 angular.module('smartMeeting')
 .factory('projects', [
     '$http',
-    function($http){
+    '$location',
+    function($http, $location){
         var o = {
             projects: [],
             memberprojects: [],
@@ -54,6 +55,12 @@ angular.module('smartMeeting')
 
         o.delete = function(id){
             return $http.delete('/projects/' + id + '.json');
+        };
+
+        o.redirectToMeeting = function(slug){
+            return $http.get('/projects/' + slug + '/latest_meeting.json').then(function(res){
+                $location.path("/meeting/" + res.data.access_code);
+            });
         };
 
         return o;

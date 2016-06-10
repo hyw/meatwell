@@ -71,9 +71,15 @@ angular.module('smartMeeting')
 
         o.sendMinutes = function(meeting){
             return $http.get('/meetings/' + meeting.id + '/sendminutes.json').success(function(res){
-                return res.data
+                return res.data;
             });
-        }
+        };
+
+        o.createFollowupMeeting = function(meeting){
+            return $http.post('/meetings/' + meeting.id + '/create_followup_meeting.json', null).success(function(res){
+                return res.data;
+            });
+        };
 
         return o;
     }

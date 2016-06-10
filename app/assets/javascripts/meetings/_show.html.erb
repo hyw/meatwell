@@ -1,6 +1,5 @@
 <%= stylesheet_link_tag "meetings/show.css"%>
 <h3 style="display:inline-block;">
-	<span ng-show="meeting.project"><a href="/a/projects/{{meeting.project.slug}}">{{meeting.project.title}}</a> ></span> 
 	<span>
 		<a href="#" blur="submit" onaftersave="saveMeeting()" buttons="no" e-placeholder="New Meeting Title" editable-text="meeting.title">
 			{{meeting.title || 'New Meeting Title'}}
@@ -20,6 +19,7 @@
 		<button ng-show="meeting.status === meetingStatuses.started" class="btn btn-primary" ng-click="finishMeeting(meeting)">End Meeting</button>
 	</div>
 	<button ng-click="sendMinutes()" ng-disabled="sentminutes" ng-show="meeting.status === meetingStatuses.finished" class="btn btn-primary">Email Minutes</button>
+	<button ng-click="createFollowupMeeting()" ng-show="meeting.status === meetingStatuses.finished" class="btn btn-primary">Create Follow-up Meeting</button>
 </div>
 
 <div class="meeting-date-div">

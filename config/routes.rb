@@ -22,6 +22,7 @@ Rails.application.routes.draw do
 
   resources :projects, only: [:create, :index, :show, :destroy] do
     member do
+      get '/latest_meeting' => 'projects#latestMeeting'
       put '/join' => 'projects#join'
       put '/leave' => 'projects#leave'
     end
@@ -35,6 +36,7 @@ Rails.application.routes.draw do
     end
 
     member do
+      post '/create_followup_meeting' => 'meetings#createFollowupMeeting'
       post '/add_attendee' => 'meetings#addAttendee'
       get '/sendminutes' => 'meetings#sendMinutes'
     end

@@ -7,6 +7,8 @@ class Meeting < ActiveRecord::Base
   has_many :agenda_notes, :through => :agenda_items
   validates :access_code, uniqueness: true
 
+  before_create :generate_access_code
+
   STATUS_LABELS = {
   	"0" => 'unstarted',
   	"1" => 'started',
@@ -19,6 +21,18 @@ class Meeting < ActiveRecord::Base
 
   def action_items
     self.agenda_notes.where(:note_type => AgendaNote::ACTION_ITEM)
+  end
+
+  private
+
+  def generate_access_code
+    new_access_code = ReadableTokens.generate_readable_token
+    access_code_exists = Meeting.find_by_access_code(new_access_code).present?
+    while access_code_exists
+      new_access_code = ReadableTokens.generate_readable_token
+      access_code_exists = Meeting.find_by_access_code(new_access_code).present?
+    end
+    self.access_code = new_access_code
   end
 
 end

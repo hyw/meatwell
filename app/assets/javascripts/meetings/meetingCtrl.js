@@ -165,6 +165,10 @@ angular.module('smartMeeting')
       $scope.sentminutes = true;
     };
 
+    $scope.createFollowupMeeting = function(){
+      meetings.createFollowupMeeting($scope.meeting);
+    };
+
     $scope.initialize();
   }
 ]);

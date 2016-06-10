@@ -4,30 +4,13 @@ class MeetingsController < ApplicationController
 		respond_with Meeting.all
 	end
 
-	def create
-		new_access_code = ReadableTokens.generate_readable_token
-		meeting = Meeting.create(meeting_params.merge({leader: current_user.id, access_code: new_access_code}))
-		attendees = params[:attendees].map{|x| x[:username]}
-		attendees.each do |attendee|
-			user = User.find_by_username(attendee)
-			Attendee.create('user_id'=>user.id, 'meeting_id'=>meeting.id)
-		end
-		respond_with meeting
-	end
-
 	def showPublic
 		meeting = Meeting.find_by_access_code(params[:access_code])
 		respond_with meeting
 	end
 
 	def createPublic
-		new_access_code = ReadableTokens.generate_readable_token
-		access_code_exists = Meeting.find_by_access_code(new_access_code).present?
-		while access_code_exists
-			new_access_code = ReadableTokens.generate_readable_token
-			access_code_exists = Meeting.find_by_access_code(new_access_code).present?
-		end
-		meeting = Meeting.create(meeting_params.merge(access_code: new_access_code))
+		meeting = Meeting.create(meeting_params)
 		respond_with meeting
 	end
 
@@ -78,6 +61,29 @@ class MeetingsController < ApplicationController
 			UserMailer.send_minutes(user.id, meeting).deliver
 		end
 		render :json => meeting
+	end
+
+	def createFollowupMeeting
+		meeting = Meeting.find(params[:id])
+		project = Project.find_or_create_by(id: meeting.project_id)
+		meeting.update_attributes(project_id: project.id)
+		new_meeting = Meeting.create(project_id: project.id, duration: meeting.duration)
+		meeting.agenda_items.each do |item|
+			new_item = item.dup
+			new_item.update_attributes({
+				:meeting_id => new_meeting.id,
+				:countdown => new_item.duration * 60,
+				:started_at => nil,
+				:ended_at => nil,
+				:status => 0,
+			})
+		end
+
+		meeting.users.each do |user|
+			Attendee.create(:user_id => user.id, :meeting_id => new_meeting.id)
+		end
+
+		render :json => new_meeting
 	end
 
 	private

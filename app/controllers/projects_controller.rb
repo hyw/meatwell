@@ -41,6 +41,11 @@ class ProjectsController < ApplicationController
 		respond_with "Deleted"
 	end
 
+	def latestMeeting
+		project = Project.friendly.find(params[:id])
+		respond_with project.meetings.last
+	end
+
 	private
 
 	def project_params 
