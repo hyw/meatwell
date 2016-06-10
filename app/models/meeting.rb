@@ -20,7 +20,7 @@ class Meeting < ActiveRecord::Base
   end
 
   def action_items
-    self.agenda_notes.where(:note_type => AgendaNote::ACTION_ITEM)
+    self.agenda_notes.where(:note_type => AgendaNote::ACTION_ITEM).as_json
   end
 
   private

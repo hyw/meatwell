@@ -4,24 +4,28 @@ class MeetingsController < ApplicationController
 		respond_with Meeting.all
 	end
 
-	def showPublic
+	def show
 		meeting = Meeting.find_by_access_code(params[:access_code])
-		respond_with meeting
+		meeting_json = meeting.as_json
+		meeting_json["has_previous_meeting"] = meeting.project_id? && meeting.project.meetings.first.id < meeting_json["id"] ? true : false
+		meeting_json["has_followup_meeting"] = meeting.project_id? && meeting.project.meetings.last.id > meeting_json["id"] ? true : false
+
+		previous_meeting = meeting.project.meetings.where('id < ?', meeting.id).last if meeting.project_id?
+		if previous_meeting
+			meeting_json["previous_action_items"] =  previous_meeting.action_items
+			meeting_json["previous_meeting_access_code"] = previous_meeting.access_code
+		end
+
+		next_meeting = meeting.project.meetings.where('id > ?', meeting.id).first if meeting.project_id?
+		if next_meeting
+			meeting_json["next_meeting_access_code"] = next_meeting.access_code
+		end
+
+		respond_with meeting_json
 	end
 
 	def createPublic
 		meeting = Meeting.create(meeting_params)
-		respond_with meeting
-	end
-
-	def show
-		meeting = Meeting.friendly.find(params[:id])
-		previous_meeting = meeting.project.meetings.where('id < ?', meeting.id).last if meeting.project
-		if previous_meeting
-			meeting = meeting.as_json
-			meeting["previous_action_items"] =  previous_meeting.action_items
-		end
-
 		respond_with meeting
 	end
 

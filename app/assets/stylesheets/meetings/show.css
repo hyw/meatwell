@@ -152,6 +152,10 @@ td{
 	word-wrap: break-word;
 }
 
+.previous-action-items-container {
+	margin-top: 60px;
+}
+
 .agenda-items-title {
 	margin-top: 60px;
 }
@@ -299,4 +303,8 @@ td{
 
 .editable-empty, a.editable-empty{
 	color: #aaa;
+}
+
+.meeting-collection-navigation-container {
+	margin-top: 20px;
 }
