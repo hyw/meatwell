@@ -1,9 +1,5 @@
 class MeetingsController < ApplicationController
 
-	def index
-		respond_with Meeting.all
-	end
-
 	def show
 		meeting = Meeting.find_by_access_code(params[:access_code])
 		meeting_json = meeting.as_json

@@ -8,24 +8,6 @@
 				</a>
 			</span> 
 		</h3>
-		<div ng-show="meeting.agenda_items.length > 0" class="buttons-container">
-			<div ng-show="meeting.status !== meetingStatuses.finished" class="control-buttons">
-				<button class="btn" ng-class="{
-					'disabled': meeting.status === meetingStatuses.finished, 
-					'btn-success': !meeting.playing, 
-					'btn-danger': meeting.playing === true 
-					}" ng-click="meeting.playing? pauseMeeting(meeting) : startMeeting(meeting)">
-						{{ meeting.playing? 'Pause' : meeting.status === meetingStatuses.started ? 'Resume' : 'Start Meeting' }}
-				</button>
-				<button ng-show="meeting.status === meetingStatuses.started" class="btn btn-primary" ng-click="finishMeeting(meeting)">End Meeting</button>
-			</div>
-			<button ng-click="sendMinutes()" ng-disabled="sentminutes" ng-show="meeting.status === meetingStatuses.finished" class="btn btn-primary">Email Minutes</button>
-			<button ng-click="createFollowupMeeting()" ng-show="meeting.status === meetingStatuses.finished" class="btn btn-primary">Create Follow-up Meeting</button>
-			<div class="meeting-collection-navigation-container">
-				<button ng-click="goToPreviousMeeting()" ng-show="meeting.status === meetingStatuses.finished && meeting.has_previous_meeting" class="btn btn-primary">Go To Previous Meeting</button>
-				<button ng-click="goToFollowupMeeting()" ng-show="meeting.status === meetingStatuses.finished && meeting.has_followup_meeting" class="btn btn-primary">Go To Follow-up Meeting</button>
-			</div>
-		</div>
 		<div class="meeting-date-div">
 			<span ng-show="meeting.date">{{meeting.date | date:'mediumDate'}} @ {{meeting.date | date:'shortTime'}}</span>
 			<span ng-hide="meeting.date">Meeting has not begun</span> 
@@ -64,6 +46,25 @@
 			<hr></hr>
 		</div>
 
+		<div ng-show="meeting.agenda_items.length > 0" class="buttons-container">
+			<div ng-show="meeting.status !== meetingStatuses.finished" class="control-buttons">
+				<button class="btn" ng-class="{
+					'disabled': meeting.status === meetingStatuses.finished, 
+					'btn-success': !meeting.playing, 
+					'btn-danger': meeting.playing === true 
+					}" ng-click="meeting.playing? pauseMeeting(meeting) : startMeeting(meeting)">
+						{{ meeting.playing? 'Pause' : meeting.status === meetingStatuses.started ? 'Resume' : 'Start Meeting' }}
+				</button>
+				<button ng-show="meeting.status === meetingStatuses.started" class="btn btn-primary" ng-click="finishMeeting(meeting)">End Meeting</button>
+			</div>
+			<button ng-click="sendMinutes()" ng-disabled="sentminutes" ng-show="meeting.status === meetingStatuses.finished" class="btn btn-primary">Email Minutes</button>
+			<button ng-click="createFollowupMeeting()" ng-show="meeting.status === meetingStatuses.finished" class="btn btn-primary">Create Follow-up Meeting</button>
+			<div class="meeting-collection-navigation-container">
+				<button ng-click="goToPreviousMeeting()" ng-show="meeting.status === meetingStatuses.finished && meeting.has_previous_meeting" class="btn btn-primary">Go To Previous Meeting</button>
+				<button ng-click="goToFollowupMeeting()" ng-show="meeting.status === meetingStatuses.finished && meeting.has_followup_meeting" class="btn btn-primary">Go To Follow-up Meeting</button>
+			</div>
+		</div>
+
 		<h3 class="agenda-items-title">Agenda</h3>
 		<ol class="agenda-items" ui-sortable="sortableOption" ng-model="meeting.agenda_items">
 			<li ng-repeat="item in meeting.agenda_items" class="agenda-item" ng-click="startItem(item)" ng-class="{ 'agenda-item-active': item.active }" >
@@ -100,6 +101,25 @@
 				</form>
 			</li>
 		</ol>
+
+		<div ng-show="meeting.agenda_items.length > 5" class="buttons-container">
+			<div ng-show="meeting.status !== meetingStatuses.finished" class="control-buttons">
+				<button class="btn" ng-class="{
+					'disabled': meeting.status === meetingStatuses.finished, 
+					'btn-success': !meeting.playing, 
+					'btn-danger': meeting.playing === true 
+					}" ng-click="meeting.playing? pauseMeeting(meeting) : startMeeting(meeting)">
+						{{ meeting.playing? 'Pause' : meeting.status === meetingStatuses.started ? 'Resume' : 'Start Meeting' }}
+				</button>
+				<button ng-show="meeting.status === meetingStatuses.started" class="btn btn-primary" ng-click="finishMeeting(meeting)">End Meeting</button>
+			</div>
+			<button ng-click="sendMinutes()" ng-disabled="sentminutes" ng-show="meeting.status === meetingStatuses.finished" class="btn btn-primary">Email Minutes</button>
+			<button ng-click="createFollowupMeeting()" ng-show="meeting.status === meetingStatuses.finished" class="btn btn-primary">Create Follow-up Meeting</button>
+			<div class="meeting-collection-navigation-container">
+				<button ng-click="goToPreviousMeeting()" ng-show="meeting.status === meetingStatuses.finished && meeting.has_previous_meeting" class="btn btn-primary">Go To Previous Meeting</button>
+				<button ng-click="goToFollowupMeeting()" ng-show="meeting.status === meetingStatuses.finished && meeting.has_followup_meeting" class="btn btn-primary">Go To Follow-up Meeting</button>
+			</div>
+		</div>
 
 		<div ng-show="action_items.length > 0" class="action-items">
 			<h3 class="action-items-title">Action Items</h3>

@@ -48,7 +48,7 @@ html {
     background-color: #4454B2;
     padding-bottom:180px;
     color:white;
-    font-size:1.3em;
+    font-size:1.3rem;
 }
 
 #header-content{
@@ -64,11 +64,6 @@ html {
 #content{
     padding-bottom:50px;
     margin-top:-90px;
-}
-
-#content h3{
-    font-size:2em;
-    color: #4454B2;
 }
 
 #content-card{
@@ -97,9 +92,7 @@ h6 {
 h3,
 h3 span {
     margin: 0;
-    height: 34px;
-    line-height: 34px; /* same as .buttons-container's height */
-    font-size: 1.5em;
+    font-size: 3rem;
 }
 
 
@@ -115,7 +108,7 @@ tags-input .tags{
     width: 100%;
     height: 34px;
     padding: 6px 12px;
-    font-size: 1em;
+    font-size: 1rem;
     line-height: 1.42857143;
     color: #555555;
     background-color: #fff;
@@ -134,3 +127,6 @@ tags-input .tags{
     margin-bottom:0px;
 }
 
+#content h3{
+    font-size:2rem;
+}

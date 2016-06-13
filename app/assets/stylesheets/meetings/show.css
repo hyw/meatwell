@@ -15,6 +15,22 @@ a.editable-empty:focus {
 .meeting-title{
 	display:inline-block;
 	color:white;
+	width:100%;
+}
+
+.meeting-title .editable-controls{
+	margin-top:-14px;
+}
+
+.meeting-title .editable-input{
+	margin-top:-4px;
+	border: 0;
+	border-radius: 0;
+	box-shadow: none !important;
+	padding: 0;
+	background: none;
+	vertical-align: baseline;
+	height:3.3rem;
 }
 
 .meeting-date-div {
@@ -30,8 +46,11 @@ a.editable-empty:focus {
 	text-decoration:underline;
 }
 
+.meeting-date-div .editable-controls{
+	margin-top:-6px;
+}
+
 .meeting-date-div .editable-input {
-	margin-top:-4px;
 	border: 0;
 	border-radius: 0;
 	box-shadow: none !important;
@@ -51,7 +70,11 @@ a.editable-empty:focus {
 	box-shadow: none !important;
 	padding: 0;
 	background: none;
-	padding-left: 8px;
+}
+
+.meeting-description-div .editable-controls{
+	height:20px;
+	margin-top:-10px;
 }
 
 .meeting-attendees-div .tags {
@@ -133,7 +156,8 @@ td{
 .buttons-container{
 	margin-left:10px; 
 	display:inline-block; 
-	vertical-align:super
+	vertical-align:super;
+	float:right;
 }
 
 .meeting-attendees {
@@ -192,12 +216,12 @@ td{
 }
 
 .agenda-items-title {
-	margin-top: 60px;
+	margin-top: 30px;
 }
 
 .agenda-items {
 	margin-top: 20px;
-	margin-bottom: 60px;
+	margin-bottom: 40px;
 }
 
 .agenda-item{
@@ -343,11 +367,13 @@ td{
 
 .action-items-title {
 	margin-bottom: 20px;
+	padding-top:40px;
 }
 
 
 .objective-label{
 	display:inline-block;
+	vertical-align: top;
 }
 
 .objective-field{
@@ -356,7 +382,7 @@ td{
 }
 
 .objective-field input{
-	margin-top:-4px;
+	margin-top:-14px;
 }
 
 .editable-empty, a.editable-empty{
