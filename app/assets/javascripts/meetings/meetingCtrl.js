@@ -171,12 +171,9 @@ angular.module('smartMeeting')
       });
     };
 
-    $scope.goToPreviousMeeting = function(){
-      $location.path('/meeting/' + meeting.previous_meeting_access_code, false);
-    }
-
-    $scope.goToFollowupMeeting = function(){
-      $location.path('/meeting/' + meeting.next_meeting_access_code, false);
+    $scope.goToMeeting = function(meeting) {
+      var meetingUrl = "/meeting/" + meeting.access_code;
+      $location.url(meetingUrl);
     };
 
     $scope.initialize();

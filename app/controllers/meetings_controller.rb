@@ -3,20 +3,14 @@ class MeetingsController < ApplicationController
 	def show
 		meeting = Meeting.find_by_access_code(params[:access_code])
 		meeting_json = meeting.as_json
-		meeting_json["has_previous_meeting"] = meeting.project_id? && meeting.project.meetings.first.id < meeting_json["id"] ? true : false
-		meeting_json["has_followup_meeting"] = meeting.project_id? && meeting.project.meetings.last.id > meeting_json["id"] ? true : false
+		meeting_json["meeting_history"] = meeting.project.meetings.order('id desc') if meeting.project
 
 		previous_meeting = meeting.project.meetings.where('id < ?', meeting.id).last if meeting.project_id?
 		if previous_meeting
 			meeting_json["previous_action_items"] =  previous_meeting.action_items
 			meeting_json["previous_meeting_access_code"] = previous_meeting.access_code
 		end
-
-		next_meeting = meeting.project.meetings.where('id > ?', meeting.id).first if meeting.project_id?
-		if next_meeting
-			meeting_json["next_meeting_access_code"] = next_meeting.access_code
-		end
-
+		
 		respond_with meeting_json
 	end
 

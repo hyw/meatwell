@@ -211,10 +211,6 @@ td{
   	display:block;
 }
 
-.previous-action-items-container {
-	margin-top: 60px;
-}
-
 .agenda-items-title {
 	margin-top: 30px;
 }
@@ -370,6 +366,14 @@ td{
 	padding-top:40px;
 }
 
+.previous-action-items-container{
+	margin-top:30px;
+}
+
+.previous-action-items-container h3{
+	margin-bottom:20px;
+}
+
 
 .objective-label{
 	display:inline-block;
@@ -391,4 +395,18 @@ td{
 
 .meeting-collection-navigation-container {
 	margin-top: 20px;
+}
+
+.meeting-history-list{
+	padding-left:2px;
+	padding-top:20px;
+}
+
+.meeting-history-list li{
+	margin-bottom: 20px;
+    list-style: none;
+}
+
+.meeting-history-list li a{
+	color: #4454B2;
 }
