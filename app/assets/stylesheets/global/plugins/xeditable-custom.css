@@ -1,0 +1,15 @@
+
+.editable-click:hover, 
+a.editable-click:hover,
+.editable-empty:hover, 
+.editable-empty:focus, 
+a.editable-empty:hover, 
+a.editable-empty:focus {
+  font-style: normal; 
+  text-decoration: underline;
+}
+
+
+.editable-click, a.editable-click{
+	color:inherit;
+}

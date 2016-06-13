@@ -6,28 +6,17 @@ Rails.application.routes.draw do
 
 	root to: 'application#angular'
 
-	resources :posts, only: [:create, :index, :show] do
-  	resources :comments, only: [:show, :create] do
-    		member do
-      		put '/upvote' => 'comments#upvote'
-    		end
-  	end
-
-  	member do
-    		put '/upvote' => 'posts#upvote'
-  	end
-	end
-
   get "/auth/:provider/callback" => "users#auth_calendar"
 
-  resources :projects, only: [:create, :index, :show, :destroy] do
+  resources :projects, only: [:create, :show, :destroy] do
     member do
+      get '/latest_meeting' => 'projects#latestMeeting'
       put '/join' => 'projects#join'
       put '/leave' => 'projects#leave'
     end
   end
 
-  resources :meetings, only: [:create, :index, :show, :update, :destroy] do
+  resources :meetings, only: [:create, :show, :update, :destroy] do
     collection do
       post '/createpublic' => 'meetings#createPublic'
       get '/showorg' => 'meetings#showOrg'
@@ -35,12 +24,13 @@ Rails.application.routes.draw do
     end
 
     member do
+      post '/create_followup_meeting' => 'meetings#createFollowupMeeting'
       post '/add_attendee' => 'meetings#addAttendee'
       get '/sendminutes' => 'meetings#sendMinutes'
     end
   end
 
-  resources :agenda_items, only: [:create, :index, :show, :update, :destroy]
+  resources :agenda_items, only: [:create, :show, :update, :destroy]
   resources :agenda_notes, only: [:create, :update, :destroy] do
     member do
       put '/delete_user' => 'agenda_notes#deleteUser'
