@@ -85,34 +85,27 @@ angular.module('smartMeeting')
     $scope.createAgendaItem = function(){
       if($scope.itemtitle && $scope.itemtitle !== ''){
         if(!$scope.meeting.id){
-          $scope.saveMeeting().then(function(){
-            return agendaItems.create({
-              meeting_id: $scope.meeting.id,
-              title: $scope.itemtitle,
-              duration: $scope.itemduration || 15
-            }).success(function(agendaitem){
-              $scope.meeting.agenda_items.push(agendaitem);
-              $('.agenda-item-form .title').focus();
-              $scope.checkIfAgendaIsTooLong();
-              $scope.itemtitle = '';
-              $scope.itemduration = '';
-            });
+          $scope.saveMeeting().success(function(){
+            return $scope.actuallyCreateAgendaItem();
           });
         }else{
-          agendaItems.create({
-            meeting_id: $scope.meeting.id,
-            title: $scope.itemtitle,
-            duration: $scope.itemduration || 15
-          }).success(function(agendaitem){
-            $scope.meeting.agenda_items.push(agendaitem);
-            $('.agenda-item-form .title').focus();
-            $scope.checkIfAgendaIsTooLong();
-            $scope.itemtitle = '';
-            $scope.itemduration = '';
-          });
-
+          return $scope.actuallyCreateAgendaItem();
         }
       }
+    };
+
+    $scope.actuallyCreateAgendaItem = function(){
+      return agendaItems.create({
+        meeting_id: $scope.meeting.id,
+        title: $scope.itemtitle,
+        duration: $scope.itemduration || 15
+      }).success(function(agendaitem){
+        $scope.meeting.agenda_items.push(agendaitem);
+        $('.agenda-item-form .title').focus();
+        $scope.checkIfAgendaIsTooLong();
+        $scope.itemtitle = '';
+        $scope.itemduration = '';
+      });
     };
 
     $scope.saveAgendaItem = function(item){
