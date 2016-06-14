@@ -38,7 +38,7 @@ angular.module('smartMeeting')
       }else{
         return meetings.createPublic($scope.meeting).success(function(meeting){
           $scope.meeting = meeting;
-          return $location.path('/meeting/' + meeting.access_code);
+          return $location.path('/meeting/' + meeting.access_code).replace();
         });
       }
     };
