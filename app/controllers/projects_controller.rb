@@ -43,7 +43,17 @@ class ProjectsController < ApplicationController
 
 	def latestMeeting
 		project = Project.friendly.find(params[:id])
-		respond_with project.meetings.last
+		meeting = project.meetings.last
+		meeting_json = meeting.as_json
+		meeting_json["meeting_history"] = meeting.project.meetings.order('id desc') if meeting.project
+
+		previous_meeting = meeting.project.meetings.where('id < ?', meeting.id).last if meeting.project_id?
+		if previous_meeting
+			meeting_json["previous_action_items"] =  previous_meeting.action_items
+			meeting_json["previous_meeting_access_code"] = previous_meeting.access_code
+		end
+
+		respond_with meeting_json
 	end
 
 	private

@@ -54,8 +54,10 @@ angular.module('smartMeeting', ['ui.router', 'templates', 'Devise', 'ngTagsInput
     })
     .state('neutral.project', {
       url:'/project/{slug}',
+      templateUrl: 'meetings/_show.html',
+      controller: 'MeetingCtrl',
       resolve: {
-        project: ['$stateParams', 'projects', function($stateParams, projects){
+        meeting: ['$stateParams', 'projects', function($stateParams, projects){
           return projects.redirectToMeeting($stateParams.slug);
         }]
       }
