@@ -17,7 +17,7 @@ angular.module('smartMeeting')
       $scope.$watch("meeting", function(newValue, oldValue) {$scope.refreshActionItems();}, true);
       $scope.sortableOption = {
         stop: function(e, ui) {
-          $scope.pauseMeeting($scope.meeting);
+          $scope.pauseMeeting();
           _.each($scope.meeting.agenda_items, function(item, index, list){
             list[index].ordering = index;
             agendaItems.save(list[index]);
@@ -44,24 +44,24 @@ angular.module('smartMeeting')
       }
     };
 
-    $scope.startMeeting = function(meeting){
-      meetings.start(meeting);
-      var unfinishedItems = _.filter(meeting.agenda_items, function(item){ if (item.countdown > 0) return item; });
+    $scope.startMeeting = function(){
+      meetings.start($scope.meeting);
+      var unfinishedItems = _.filter($scope.meeting.agenda_items, function(item){ if (item.countdown > 0) return item; });
       $scope.startItem(_.first(unfinishedItems));
     };
 
-    $scope.pauseMeeting = function(meeting){
+    $scope.pauseMeeting = function(){
       $scope.meeting.playing = false;
       $scope.makeAllInactiveAndStop();
     };
 
-    $scope.finishMeeting = function(meeting){
-      if(meeting.status == meetingStatuses.finished) {
+    $scope.finishMeeting = function(){
+      if($scope.meeting.status == meetingStatuses.finished) {
         return;
       }
-      meetings.finish(meeting);
+      meetings.finish($scope.meeting);
       $scope.makeAllInactiveAndStop();
-      _.each(meeting.agenda_items, function(item) {
+      _.each($scope.meeting.agenda_items, function(item) {
         agendaItems.finishItem(item);
       });
     };
@@ -70,14 +70,14 @@ angular.module('smartMeeting')
       $scope.makeAllInactiveAndStop(item);
       item.active = true;
 
-      if(meeting.status === meetingStatuses.started) {
-        meeting.playing = true;
+      if($scope.meeting.status === meetingStatuses.started) {
+        $scope.meeting.playing = true;
         agendaItems.startItem(item);
       }
     };
 
     $scope.makeAllInactiveAndStop = function(except){
-      _.each(_.without(meeting.agenda_items, except), function(item){
+      _.each(_.without($scope.meeting.agenda_items, except), function(item){
         item.active = false;
         agendaItems.stopItem(item);
       });
