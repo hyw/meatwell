@@ -1,0 +1,412 @@
+.editable-empty, a.editable-empty{
+	color:white;
+	font-style:normal;
+}
+
+.editable-click:hover, 
+a.editable-click:hover,
+.editable-empty:hover, 
+.editable-empty:focus, 
+a.editable-empty:hover, 
+a.editable-empty:focus {
+  color: goldenrod;  
+}
+
+.meeting-title{
+	display:inline-block;
+	color:white;
+	width:100%;
+}
+
+.meeting-title .editable-controls{
+	margin-top:-14px;
+}
+
+.meeting-title .editable-input{
+	margin-top:-4px;
+	border: 0;
+	border-radius: 0;
+	box-shadow: none !important;
+	padding: 0;
+	background: none;
+	vertical-align: baseline;
+	height:3.3rem;
+}
+
+.meeting-date-div {
+	margin-top: 5px;
+	height: 40px;
+	border-bottom: 1px solid #ccc;
+}
+
+.meeting-date-div a.editable-click {
+	border: 0;
+	color:goldenrod;
+	font-weight:normal;
+	text-decoration:underline;
+}
+
+.meeting-date-div .editable-controls{
+	margin-top:-6px;
+}
+
+.meeting-date-div .editable-input {
+	border: 0;
+	border-radius: 0;
+	box-shadow: none !important;
+	padding: 0;
+	background: none;
+	padding-left: 5px;
+	vertical-align: baseline;
+}
+
+.meeting-description-div{
+	padding:10px 0px;
+}
+
+.meeting-description-div .editable-input {
+	border: 0;
+	border-radius: 0;
+	box-shadow: none !important;
+	padding: 0;
+	background: none;
+}
+
+.meeting-description-div .editable-controls{
+	height:20px;
+	margin-top:-10px;
+}
+
+.meeting-attendees-div .tags {
+	border: 0;
+	border-radius: 0;
+	box-shadow: none !important;
+	background:transparent;
+	padding: 0;
+}
+
+.meeting-attendees-div .tag-item {
+	height: 32px !important;
+	line-height: 29px !important;
+	background: #ffffff !important;
+	color: #333333;
+	font-weight: bold !important;
+	margin-right:10px !important;
+}
+
+.meeting-attendees-div input {
+	background: none;
+	color:white;
+	margin: 0 !important;
+	padding-left: 0px !important;
+	width: 200px !important;
+	font-family:inherit !important;
+	font-size:inherit !important;
+	font-weight:inherit !important;
+	margin-top: 3px !important;
+}
+
+.meeting-attendees-div input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: goldenrod;
+  font-weight:normal;
+}
+
+.meeting-attendees-div input::-moz-placeholder { /* Firefox 19+ */
+  color: goldenrod;
+  font-weight:normal;
+}
+
+.meeting-attendees-div input:-ms-input-placeholder { /* IE 10+ */
+  color: goldenrod;
+  font-weight:normal;
+}
+
+.meeting-attendees-div input:-moz-placeholder { /* Firefox 18- */
+  color: goldenrod;
+  font-weight:normal;
+}
+
+.meeting-attendees-div .focused input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: transparent;
+  font-weight:normal;
+}
+
+.meeting-attendees-div .focused input::-moz-placeholder { /* Firefox 19+ */
+  color: transparent;
+  font-weight:normal;
+}
+
+.meeting-attendees-div .focused input:-ms-input-placeholder { /* IE 10+ */
+  color: transparent;
+  font-weight:normal;
+}
+
+.meeting-attendees-div .focused input:-moz-placeholder { /* Firefox 18- */
+  color: transparent;
+  font-weight:normal;
+}
+
+
+
+td{
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.buttons-container{
+	margin-left:10px; 
+	display:inline-block; 
+	vertical-align:super;
+	float:right;
+}
+
+.meeting-attendees {
+	display: inline-block;
+	margin-right: 10px;
+	width: 50%;
+}
+
+.agenda-notes{
+	width:100%;
+}
+
+.agenda-notes .body{
+	min-width:350px;
+}
+
+.agenda-notes form{
+	width:100%;
+}
+
+.agenda-notes .form-group{
+	width:100%;
+}
+
+.agenda-notes .editable-input{
+	width:100%;
+}
+
+.agenda-notes tr {
+	border-bottom: 1px solid #ccc;
+}
+
+.agenda-notes tr:last-child {
+	border-bottom: 0;
+}
+
+.agenda-notes td{
+	padding-left:10px;
+	padding-bottom:10px;
+}
+
+.agenda-notes .users{
+	word-wrap: break-word;
+}
+
+.agenda-notes .users span{
+	width:100px;
+	white-space: nowrap;
+  	overflow: hidden;
+  	text-overflow: ellipsis;
+  	display:block;
+}
+
+.agenda-items-title {
+	margin-top: 30px;
+}
+
+.agenda-items {
+	margin-top: 20px;
+	margin-bottom: 40px;
+}
+
+.agenda-item{
+	position: relative;
+	width: 100%;
+	border-bottom: 1px solid #ccc;
+	padding-top: 20px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.agenda-item-contents{
+	position: relative;
+}
+
+.agenda-item-active{
+	background: #f5f5f5;
+}
+
+.agenda-item-table{
+	margin-top:-29px;
+	width:100%;
+}
+
+.agenda-item-table .duration{
+	width:100px;
+}
+
+.agenda-item-form {
+	padding-bottom: 20px;
+	border-bottom: 0;
+}
+
+.agenda-item-form .title{
+	width:calc(100% - 90px); 
+	display:inline-block;
+}
+
+.agenda-item-form .duration{
+	width:55px; 
+	display:inline-block;
+}
+
+.agenda-item .header{
+	padding-bottom:20px;
+}
+
+.agenda-item .header .title{
+	display:inline-block; 
+	width: calc(100% - 160px);
+}
+
+.delete-icon{
+	width:20px;
+	cursor:pointer;
+}
+
+.note-type-select{
+	width:100px;
+}
+
+.new-agenda-note-form {
+	border-top: 1px solid #ccc;
+}
+
+.new-agenda-note-form table{
+	width:100%;
+}
+
+.new-agenda-note-form .users{
+	padding-left:10px; 
+	width:170px;
+}
+
+.new-agenda-note-form .due-date{
+	padding-left:10px;
+	width:100px;
+	font-weight:400px;
+}
+
+.new-agenda-note-form .note-type-select .form-control{
+	width:91px;
+}
+
+.new-agenda-note-form .tag-item {
+	height: 32px !important;
+	line-height: 29px !important;
+	background: #ffffff !important;
+	color: #333333;
+	font-weight: bold !important;
+}
+
+.note-submit{
+	width:30px;
+	padding-left:10px;
+}
+
+.editable-number .form-control{
+    width:50px;
+}
+
+.editable-text .form-control{
+    width:100%;
+}
+
+.editable-text .editable-controls{
+	width:100%;
+}
+
+.editable-text{
+	width:100%;
+}
+
+.agenda-item-countdown {
+	position: absolute;
+	right: 0;
+	color: #A9A9A9;
+}
+
+.agenda-item-countdown-overtime {
+	color: red;
+}
+
+.agenda-item-progress-bar {
+	background: #e1ffe0;
+	position: absolute;
+	height: 100%;
+	top: 0;
+	left: 0;
+}
+
+.agenda-item-progress-overtime {
+	background: #ffe1e0;
+}
+
+.control-buttons{
+	display:inline-block;
+}
+
+.action-items {
+	margin-bottom: 60px;
+}
+
+.action-items-title {
+	margin-bottom: 20px;
+	padding-top:40px;
+}
+
+.previous-action-items-container{
+	margin-top:30px;
+}
+
+.previous-action-items-container h3{
+	margin-bottom:20px;
+}
+
+
+.objective-label{
+	display:inline-block;
+	vertical-align: top;
+}
+
+.objective-field{
+	width:calc(100% - 100px);
+	display:inline-block;
+}
+
+.objective-field input{
+	margin-top:-14px;
+}
+
+.editable-empty, a.editable-empty{
+	color: #aaa;
+}
+
+.meeting-collection-navigation-container {
+	margin-top: 20px;
+}
+
+.meeting-history-list{
+	padding-left:2px;
+	padding-top:20px;
+}
+
+.meeting-history-list li{
+	margin-bottom: 20px;
+    list-style: none;
+}
+
+.meeting-history-list li a{
+	color: #4454B2;
+}
