@@ -10,7 +10,7 @@ angular.module('smartMeeting')
         $scope.createMeeting = function(){
             if (validateCreateMeetingForm()) {
                 console.log('should submit');
-                meetings.createPublic({
+                meetings.create({
                     title: $scope.title,
                     duration: $scope.duration
                 }).success(function(meeting){

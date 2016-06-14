@@ -14,7 +14,7 @@ class MeetingsController < ApplicationController
 		respond_with meeting_json
 	end
 
-	def createPublic
+	def create
 		meeting = Meeting.create(meeting_params)
 		respond_with meeting
 	end

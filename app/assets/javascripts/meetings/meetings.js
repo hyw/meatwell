@@ -16,17 +16,7 @@ angular.module('smartMeeting')
                 o.meetings.push(data);
             });
         };
-        o.createPublic = function(meeting){
-            return $http.post('/meetings/createpublic.json', meeting).success(function(data){
-                o.meetings.push(data);
-            });
-        };
-        o.get = function(id){
-            return $http.get('/meetings/' + id + '.json').then(function(res){
-                return res.data;
-            });
-        };
-        o.getPublic = function(access_code){
+        o.get = function(access_code){
             return $http.get('/meetings/show.json?access_code='+access_code).then(function(res){
                 return res.data;
             });

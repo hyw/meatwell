@@ -6,21 +6,9 @@ angular.module('smartMeeting', ['ui.router', 'templates', 'Devise', 'ngTagsInput
   function($stateProvider, $urlRouterProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
     $stateProvider
-    .state('logged-out', {
-      abstract: true,
-      template: '<div ui-view></div>',
-      data: {
-        requireLogin: false,
-        requireLogout: true
-      }
-    })
     .state('neutral', {
       abstract: true,
-      template: '<div ui-view></div>',
-      data: {
-        requireLogin: false,
-        requireLogout: false
-      }
+      template: '<div ui-view></div>'
     })
     .state('neutral.home', {
       url: '/',
@@ -44,11 +32,14 @@ angular.module('smartMeeting', ['ui.router', 'templates', 'Devise', 'ngTagsInput
     })
     .state('neutral.meeting', {
       url:'/meeting/{access_code}',
+      params: { no_reload: false },
       templateUrl: 'meetings/_show.html',
       controller: 'MeetingCtrl',
       resolve: {
         meeting: ['$stateParams', 'meetings', function($stateParams, meetings){
-          return meetings.getPublic($stateParams.access_code);
+          if(!$stateParams.no_reload){
+            return meetings.get($stateParams.access_code);
+          }
         }]
       }
     })
@@ -64,21 +55,6 @@ angular.module('smartMeeting', ['ui.router', 'templates', 'Devise', 'ngTagsInput
     $urlRouterProvider.otherwise('home');
   }
 ])
-.run(['$rootScope', '$state', 'Auth', function($rootScope, $state, Auth) {
-  $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
-    var requireLogin = toState.data.requireLogin;
-    var requireLogout = toState.data.requireLogout;
-    if(requireLogin){
-      if(!Auth.isAuthenticated()){
-        $state.go('neutral.home');
-      }
-    }else if(requireLogout){
-      if(Auth.isAuthenticated()){
-        $state.go('logged-in.projects');
-      }
-    }
-  });
-}])
 .run(['editableOptions', function(editableOptions) {
   editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
 }]);

@@ -1,5 +1,6 @@
 angular.module('smartMeeting')
 .controller('MeetingCtrl', [
+  '$state',
   '$scope',
   '$location',
   'meetings',
@@ -8,7 +9,7 @@ angular.module('smartMeeting')
   'agendaItems',
   'meetingStatuses',
   'agendaNoteTypes',
-  function($scope, $location, meetings, meeting, users, agendaItems, meetingStatuses, agendaNoteTypes){
+  function($state, $scope, $location, meetings, meeting, users, agendaItems, meetingStatuses, agendaNoteTypes){
     $scope.initialize = function(){
       $scope.meetingStatuses = meetingStatuses;
       $scope.agendaNoteTypes = agendaNoteTypes;
@@ -36,9 +37,9 @@ angular.module('smartMeeting')
       if($scope.meeting.id){
         return meetings.save($scope.meeting);
       }else{
-        return meetings.createPublic($scope.meeting).success(function(meeting){
+        return meetings.create($scope.meeting).success(function(meeting){
+          $state.transitionTo('neutral.meeting', {'access_code' : meeting.access_code, 'no_reload':true}, {notify:false});
           $scope.meeting = meeting;
-          $location.path('/meeting/' + meeting.access_code, false);
         });
       }
     };

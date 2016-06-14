@@ -18,9 +18,7 @@ Rails.application.routes.draw do
 
   resources :meetings, only: [:create, :show, :update, :destroy] do
     collection do
-      post '/createpublic' => 'meetings#createPublic'
       get '/showorg' => 'meetings#showOrg'
-      get '/showpublic' => 'meetings#showPublic'
     end
 
     member do
