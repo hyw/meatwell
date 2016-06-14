@@ -59,7 +59,7 @@ angular.module('smartMeeting')
 
         o.redirectToMeeting = function(slug){
             return $http.get('/projects/' + slug + '/latest_meeting.json').then(function(res){
-                $location.path("/meeting/" + res.data.access_code);
+                return res.data;
             });
         };
 

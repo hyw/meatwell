@@ -13,7 +13,6 @@ class Project < ActiveRecord::Base
 
     private
 
-
     def generate_slug
         new_access_code = ReadableTokens.generate_readable_token
         access_code_exists = Project.find_by_slug(new_access_code).present?
