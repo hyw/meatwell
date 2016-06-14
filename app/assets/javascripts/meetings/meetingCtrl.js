@@ -161,13 +161,12 @@ angular.module('smartMeeting')
 
     $scope.createFollowupMeeting = function(){
       meetings.createFollowupMeeting($scope.meeting).then(function(res){
-        $location.path('/meeting/' + res.data.access_code, false);
+        $state.transitionTo('neutral.meeting', {'access_code' : res.data.access_code, 'no_reload':false});
       });
     };
 
     $scope.goToMeeting = function(meeting) {
-      var meetingUrl = "/meeting/" + meeting.access_code;
-      $location.url(meetingUrl);
+      $state.transitionTo('neutral.meeting', {'access_code' : meeting.access_code, 'no_reload':false});
     };
 
     $scope.initialize();
