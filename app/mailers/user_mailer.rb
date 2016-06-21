@@ -1,7 +1,6 @@
 class UserMailer < ApplicationMailer
 	default :from => 'minutes@meatwell.io'
 
-
 	def send_minutes(user_id, meeting)
 		user = User.find(user_id)
 		@meeting = meeting
